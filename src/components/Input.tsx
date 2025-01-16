@@ -21,7 +21,7 @@ export default function Input({
 }: Props) {
   return (
     <>
-      <label htmlFor={label}></label>
+      <label htmlFor={inputId}>{label}</label>
       <input
         type={type}
         id={inputId}
