@@ -1,9 +1,8 @@
 :root {
-  --background: #F2F1F0;
+  --background: #f2f1f0;
   --foreground: #434343;
-  --blueColor:#4788DF;
-  --whiteColor:#fff;
-
+  --blueColor: #4788df;
+  --whiteColor: #fff;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -37,8 +36,14 @@ a {
   color: var(--background);
   text-decoration: none;
 }
-a:hover{
+
+a:hover {
   color: var(--blueColor);
+}
+
+.link {
+  color: var(--blueColor);
+  text-decoration: underline;
 }
 
 @media (prefers-color-scheme: dark) {
