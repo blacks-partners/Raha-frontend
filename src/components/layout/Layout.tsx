@@ -1,5 +1,6 @@
 import Head from "next/head";
-import Header from "./Header";
+import Header from "../header/Header";
+import LayoutStyle from "../layout/layout.module.css";
 
 interface Props {
   headTitle: string;
@@ -25,10 +26,11 @@ export default function Layout({
         <link rel="icon" href="/common/favicon.png" />
       </Head>
       <div>
-        <Header />
-        <main>
-          <section>
-            <p>{pageTitle}</p>
+        <main className={LayoutStyle.layout}>
+          <Header />
+
+          <section className={LayoutStyle.sectionLayout}>
+            <h1 className={LayoutStyle.title}>{pageTitle}</h1>
             {children}
           </section>
         </main>

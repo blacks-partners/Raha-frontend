@@ -2,6 +2,7 @@
   --background: #F2F1F0;
   --foreground: #434343;
   --blueColor:#4788DF;
+  --whiteColor:#fff;
 
 }
 
@@ -33,7 +34,7 @@ body {
 }
 
 a {
-  color: var(--foreground);
+  color: var(--background);
   text-decoration: none;
 }
 a:hover{
