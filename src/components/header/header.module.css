@@ -1,0 +1,19 @@
+.header{
+    width: 200px;
+    height:200vh;
+    background-color: var(--foreground);
+    color:var(--background)
+}
+
+.headerContents{
+    padding: 70px 50px;
+}
+
+
+.navUl{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    list-style: none;
+
+}

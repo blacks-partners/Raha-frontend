@@ -1,0 +1,14 @@
+.layout{
+    display: flex;
+}
+
+.title{
+    font-size: 36px;
+    font-weight: normal;
+}
+
+.sectionLayout{
+    padding: 80px;
+    justify-content: center;
+    align-items: center;
+}

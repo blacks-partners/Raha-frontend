@@ -1,0 +1,7 @@
+.frame{
+    width: 600px;
+    background-color: var(--whiteColor);
+    border-radius: 30px;
+    padding: 50px;
+    line-height: 200%;
+}
