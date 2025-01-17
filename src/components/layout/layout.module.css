@@ -1,14 +1,17 @@
-.layout{
-    display: flex;
+.layout {
+  display: flex;
 }
 
-.title{
-    font-size: 36px;
-    font-weight: normal;
+.title {
+  font-size: 36px;
+  font-weight: normal;
 }
 
-.sectionLayout{
-    padding: 80px;
-    justify-content: center;
-    align-items: center;
+.sectionLayout {
+  max-width: 1000px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 80px;
+  justify-content: center;
+  align-items: center;
 }
