@@ -1,0 +1,25 @@
+/* スマホ */
+.inputAreaWrap {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+.inputAreaWrap input {
+  width: 100%;
+  padding: 5px;
+}
+.inputAreaWrap label {
+  font-weight: bold;
+  font-size: 1.125rem;
+}
+
+/* PC */
+@media screen and (min-width: 768px) {
+  .inputAreaWrap {
+    flex-direction: row;
+    align-items: center;
+  }
+  .inputAreaWrap label {
+    width: 210px;
+  }
+}

@@ -1,3 +1,5 @@
+import inputStyle from "@/components/input/input.module.css";
+
 interface Props {
   label: string;
   type: "email" | "password" | "date" | "number";
@@ -21,15 +23,17 @@ export default function Input({
 }: Props) {
   return (
     <>
-      <label htmlFor={inputId}>{label}</label>
-      <input
-        type={type}
-        id={inputId}
-        name={inputName}
-        onChange={handleChange}
-        value={value}
-        placeholder={placeholder}
-      />
+      <div className={inputStyle.inputAreaWrap}>
+        <label htmlFor={inputId}>{label}</label>
+        <input
+          type={type}
+          id={inputId}
+          name={inputName}
+          onChange={handleChange}
+          value={value}
+          placeholder={placeholder}
+        />
+      </div>
     </>
   );
 }
