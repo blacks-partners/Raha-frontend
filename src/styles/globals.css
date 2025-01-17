@@ -1,6 +1,9 @@
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #F2F1F0;
+  --foreground: #434343;
+  --blueColor:#4788DF;
+  --whiteColor:#fff;
+
 }
 
 @media (prefers-color-scheme: dark) {
@@ -31,8 +34,11 @@ body {
 }
 
 a {
-  color: inherit;
+  color: var(--background);
   text-decoration: none;
+}
+a:hover{
+  color: var(--blueColor);
 }
 
 @media (prefers-color-scheme: dark) {
