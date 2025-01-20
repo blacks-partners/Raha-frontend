@@ -2,7 +2,7 @@ import inputStyle from "@/components/input/input.module.css";
 
 interface Props {
   label: string;
-  type: "email" | "password" | "date" | "number";
+  type: "email" | "password" | "date" | "number" | "text";
   inputId: string;
   placeholder?: string;
   value?: string | number;
