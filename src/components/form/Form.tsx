@@ -1,3 +1,5 @@
+import styles from "./form.module.css";
+
 interface Props {
   action?: string;
   method?: string;
@@ -12,7 +14,12 @@ export default function Form({
   handleSubmit,
 }: Props) {
   return (
-    <form onSubmit={handleSubmit} action={action} method={method}>
+    <form
+      className={styles.container}
+      onSubmit={handleSubmit}
+      action={action}
+      method={method}
+    >
       {children}
     </form>
   );
