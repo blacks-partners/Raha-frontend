@@ -1,8 +1,6 @@
 import EditRoundFrame from "@/components/editRoundFrame/EditRoundFrame";
-import Input from "@/components/input/Input";
 import Layout from "@/components/layout/Layout";
 import RoundFrame from "@/components/roundFrame/RoundFrame";
-import inputStyle from "@/components/input/input.module.css";
 
 export default function Home() {
   return (
