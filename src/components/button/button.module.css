@@ -1,0 +1,61 @@
+.M{
+
+    width: 180px;
+    height: 30px;
+    background-color:transparent;
+    border-radius: 25px;
+}
+
+.M:hover{
+    background-color: var(--foreground);
+    color: var(--whiteColor);
+}
+
+.S{
+    width: 100px;
+    height: 20px;
+    background-color: transparent;
+    border-radius: 25px;
+    font-size: 12px;
+
+}
+
+.S:hover{
+    background-color: var(--foreground);
+    color: var(--whiteColor);
+
+
+}
+
+@media screen and (min-width: 600px) {
+    .M{
+
+        width: 200px;
+        height: 60px;
+        background-color:transparent;
+        border-radius: 25px;
+        font-size: 20px;
+    }
+    
+    .M:hover{
+        background-color: var(--foreground);
+        color: var(--whiteColor);
+    }
+    
+    .S{
+        width: 120px;
+        height: 40px;
+        background-color: transparent;
+        border-radius: 25px;
+        font-size: 12px;
+    
+    }
+    
+    .S:hover{
+        background-color: var(--foreground);
+        color: var(--whiteColor);
+    
+    
+    }
+  
+}
