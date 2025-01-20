@@ -1,4 +1,4 @@
-import Button from "@/components/Button";
+import Button from "@/components/button/Button";
 import EditRoundFrame from "@/components/editRoundFrame/EditRoundFrame";
 import Form from "@/components/form/Form";
 import Layout from "@/components/layout/Layout";
@@ -19,16 +19,36 @@ export default function PostDetails() {
               throw new Error("Function not implemented.");
             }}
           >
-            <EditRoundFrame>{"記事"}</EditRoundFrame>
-          </Form>
+            <EditRoundFrame>
+              <label htmlFor="date">作成日：</label>
+              2025-01-07
+              <br />
+              <label htmlFor="name">作成者：</label>
+              らは太郎
+              <br />
+              <label htmlFor="title"></label>
+              「Javaの基礎をまとめました」
+              <label htmlFor="details"></label>
+              <br /># はじめに
+              <br />- Java初学者です！
+              <br />- メモ程度にまとめます。
+              <br /># 対象者
+              <br />
+              - Java初学者。
+              <br /># 開発環境
+              <br />
+              - Java17
+              <br /># javaの基礎
+              <br />
+              ~~~
+              <br />
+              ## サンプルコード
+              <br />
+              ~~~
+            </EditRoundFrame>
 
-          <h1>{"コメント"}</h1>
+            <h1>{"コメント"}</h1>
 
-          <Form
-            handleSubmit={function (): void {
-              throw new Error("Function not implemented.");
-            }}
-          >
             <EditRoundFrame>
               <form action="" method="post">
                 2025-01-07 09:50
@@ -36,16 +56,24 @@ export default function PostDetails() {
                 <label htmlFor="name">コメント者:</label>
                 らは太郎
                 <br />
-                <input type="text" name="comment" id="comment"></input>
+                <label htmlFor="comment"></label>
+                <input
+                  type="text"
+                  name="comment"
+                  id="comment"
+                  value="参考になります"
+                />
               </form>
             </EditRoundFrame>
+
+            <RoundFrame>
+              <form action="" method="post">
+                <label htmlFor="comment"></label>
+                <input type="text" name="post_comment" id="post_comment" />
+                <Button type={"submit"} buttonText={"投稿"} size={"S"}></Button>
+              </form>
+            </RoundFrame>
           </Form>
-          <RoundFrame>
-            <form action="" method="post">
-              <input type="text" name="comment" id="comment"></input>
-              <Button type={"submit"} buttonText={"投稿"}></Button>
-            </form>
-          </RoundFrame>
         </Layout>
       </div>
     </>
