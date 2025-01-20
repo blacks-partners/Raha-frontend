@@ -41,12 +41,6 @@ a:hover {
   color: var(--blueColor);
 }
 
-.link {
-  color: var(--blueColor);
-  text-decoration: underline;
-  margin: 0 auto 20px;
-}
-
 ::placeholder {
   color: #bfbfbf;
 }

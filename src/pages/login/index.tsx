@@ -71,10 +71,7 @@ export default function Login() {
             inputClass={inputPassArea}
             errorMessage={passError}
           />
-          <div></div>
-          <Link href="/" className="link">
-            ユーザー登録はこちら
-          </Link>
+          {/* colorLinkコンポーネント */}
           <div className={loginStyle.btnWrap}>
             <Button type={"submit"} buttonText={"ログイン"} size={"M"} />
           </div>
