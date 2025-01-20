@@ -6,6 +6,7 @@ import Input from "@/components/input/Input";
 import Button from "@/components/button/Button";
 import inputStyle from "@/components/input/input.module.css";
 import loginStyle from "@/styles/Login.module.css";
+import ColorLink from "@/components/ColorLink/ColorLink";
 
 export default function Login() {
   // メールアドレス、パスワード 初期値
@@ -71,7 +72,12 @@ export default function Login() {
             inputClass={inputPassArea}
             errorMessage={passError}
           />
-          {/* colorLinkコンポーネント */}
+          <div className={loginStyle.linkWrap}>
+            <ColorLink
+              colorLinkText={"ユーザー登録はこちら"}
+              url={"/register"}
+            />
+          </div>
           <div className={loginStyle.btnWrap}>
             <Button type={"submit"} buttonText={"ログイン"} size={"M"} />
           </div>
