@@ -52,16 +52,16 @@ export default function Header() {
             <li>
               {text && (
                 <p>
-                  <a href="#" onClick={handleClick}>
+                  <Link href="#" onClick={handleClick}>
                     ログイン
-                  </a>
+                  </Link>
                 </p>
               )}
               {!text && (
                 <p>
-                  <a href="#" onClick={handleClick}>
+                  <Link href="#" onClick={handleClick}>
                     ログアウト
-                  </a>
+                  </Link>
                 </p>
               )}
             </li>
@@ -79,9 +79,9 @@ export default function Header() {
             <li>
               {!text && (
                 <p>
-                  <a href="#" onClick={handleClick}>
+                  <Link href="#" onClick={handleClick}>
                     マイページ
-                  </a>
+                  </Link>
                 </p>
               )}
             </li>
@@ -91,16 +91,16 @@ export default function Header() {
           <li>
             {text && (
               <p>
-                <a href="#" onClick={handleClick}>
+                <Link href="#" onClick={handleClick}>
                   ログイン
-                </a>
+                </Link>
               </p>
             )}
             {!text && (
               <p>
-                <a href="#" onClick={handleClick}>
+                <Link href="#" onClick={handleClick}>
                   ログアウト
-                </a>
+                </Link>
               </p>
             )}
           </li>
@@ -118,9 +118,9 @@ export default function Header() {
           <li>
             {!text && (
               <p>
-                <a href="#" onClick={handleClick}>
+                <Link href="#" onClick={handleClick}>
                   マイページ
-                </a>
+                </Link>
               </p>
             )}
           </li>
