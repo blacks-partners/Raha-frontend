@@ -1,36 +1,33 @@
 
-
-
-@media screen and (min-width: 1080px) {
-  .layout {
-    display: flex;
-  }
-  
+/* スマホ */
+.layout {
+  display: flex;
 }
-
-
 .title {
   font-size: 24px;
   font-weight: normal;
+  margin-bottom: 40px;
 }
-
-@media screen and (min-width: 600px) {
-  
-.title {
-  font-size: 36px;
-}
-  
-}
-
-
-
-
 
 .sectionLayout {
   max-width: 1000px;
   margin: 0 auto;
   width: 100%;
-  padding: 80px;
+  padding: 80px 20px;
   justify-content: center;
   align-items: center;
+}
+
+/* PC */
+@media screen and (min-width: 600px) {
+  .title {
+    margin-bottom: 60px;
+      font-size: 36px;
+
+  }
+  
+  
+  .sectionLayout {
+    padding: 80px;
+  }
 }
