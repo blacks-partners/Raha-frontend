@@ -29,7 +29,6 @@ export default function Login() {
     } else {
       setEmailError("");
       setInputEmailArea(inputStyle.usualInput);
-      return;
     }
 
     if (password.trim() === "") {
@@ -39,7 +38,6 @@ export default function Login() {
     } else {
       setPassError("");
       setInputPassArea(inputStyle.usualInput);
-      return;
     }
   };
 
@@ -51,7 +49,12 @@ export default function Login() {
         headContent="rahaログインページ"
         pageTitle="ログイン"
       >
-        <Form handleSubmit={handleSubmit}>
+        <Form
+          action=""
+          method="POST"
+          handleSubmit={handleSubmit}
+          noValidate={true}
+        >
           <Input
             label={"メールアドレス"}
             type={"email"}
