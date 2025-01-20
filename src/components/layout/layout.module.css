@@ -1,17 +1,23 @@
+/* スマホ */
 .layout {
   display: flex;
 }
-
 .title {
   font-size: 36px;
   font-weight: normal;
 }
-
 .sectionLayout {
   max-width: 1000px;
   margin: 0 auto;
   width: 100%;
-  padding: 80px;
+  padding: 80px 20px;
   justify-content: center;
   align-items: center;
+}
+
+/* PC */
+@media screen and (min-width: 600px) {
+  .sectionLayout {
+    padding: 80px;
+  }
 }

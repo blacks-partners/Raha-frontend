@@ -1,25 +1,47 @@
 /* スマホ */
+.wrap {
+  margin-bottom: 20px;
+}
 .inputAreaWrap {
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px;
 }
 .inputAreaWrap input {
   width: 100%;
   padding: 5px;
+  border-radius: 3px;
 }
 .inputAreaWrap label {
   font-weight: bold;
   font-size: 1.125rem;
 }
+/* 通常時とエラー時でInput枠のスタイル変更 ↓ */
+.usualInput {
+  border: solid 1px #333;
+}
+.errorInput {
+  border: solid 2px #da0000;
+  background-color: rgba(255, 0, 0, 0.1);
+}
+.errorMessage {
+  color: #da0000;
+  font-weight: bold;
+}
 
 /* PC */
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 800px) {
+  .wrap {
+    margin-bottom: 30px;
+  }
   .inputAreaWrap {
     flex-direction: row;
     align-items: center;
   }
   .inputAreaWrap label {
-    width: 210px;
+    max-width: 200px;
+    width: 100%;
+  }
+  .errorMessage {
+    margin-left: 200px;
   }
 }
