@@ -1,20 +1,44 @@
 import Link from "next/link";
 import { useState } from "react";
 import Layout from "@/components/layout/Layout";
-import Form from "@/components/Form";
-import Input from "@/components/Input";
+import Form from "@/components/form/Form";
+import Input from "@/components/input/Input";
 import Button from "@/components/Button";
-import liginStyle from "@/styles/Login.module.css";
-import LayoutStyle from "../../components/layout/layout.module.css";
+import inputStyle from "@/components/input/input.module.css";
 
 export default function Login() {
-  // メールアドレス、パスワード初期値
+  // メールアドレス、パスワード 初期値
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  // 入力欄 初期値
+  const [inputEmailArea, setInputEmailArea] = useState(inputStyle.usualInput);
+  const [inputPassArea, setInputPassArea] = useState(inputStyle.usualInput);
+
+  // エラーメッセージ 初期値
+  const [emailError, setEmailError] = useState("");
+  const [passError, setPassError] = useState("");
+
   // 「ログイン」を押下した時
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    if (email.trim() === "") {
+      e.preventDefault();
+      setEmailError("メールアドレスを入力してください");
+      setInputEmailArea(inputStyle.errorInput);
+    } else {
+      setEmailError("");
+      setInputEmailArea(inputStyle.usualInput);
+    }
+    if (password.trim() === "") {
+      e.preventDefault();
+      setPassError("パスワードを入力してください");
+      setInputPassArea(inputStyle.errorInput);
+    } else {
+      setPassError("");
+      setInputPassArea(inputStyle.usualInput);
+    }
   };
+
   return (
     <>
       <Layout
@@ -24,7 +48,6 @@ export default function Login() {
         pageTitle="ログイン"
       >
         <Form handleSubmit={handleSubmit}>
-          {/* inputコンポーネント？ */}
           <Input
             label={"メールアドレス"}
             type={"email"}
@@ -32,6 +55,8 @@ export default function Login() {
             inputName={"email"}
             value={email}
             handleChange={(e) => setEmail(e.target.value)}
+            inputClass={inputEmailArea}
+            errorMessage={emailError}
           />
           <Input
             label={"パスワード"}
@@ -40,11 +65,12 @@ export default function Login() {
             inputName={"password"}
             value={password}
             handleChange={(e) => setPassword(e.target.value)}
+            inputClass={inputPassArea}
+            errorMessage={passError}
           />
           <Link href="/" className="link">
             ユーザー登録はこちら
           </Link>
-
           <Button type={"submit"} buttonText={"ログイン"} />
         </Form>
       </Layout>

@@ -4,7 +4,7 @@ interface Props {
   action?: string;
   method?: string;
   children: React.ReactNode;
-  handleSubmit: () => void;
+  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
 export default function Form({
