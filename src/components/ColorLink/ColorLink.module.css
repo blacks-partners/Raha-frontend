@@ -1,0 +1,8 @@
+.LinkText {
+  color: var(--blueColor);
+  text-decoration: underline;
+}
+
+.LinkText:hover {
+  font-weight: bold;
+}
