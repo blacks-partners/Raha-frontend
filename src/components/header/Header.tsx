@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { useState } from "react";
 import HeaderStyle from "../header/header.module.css";
+import Image from "next/image";
 
 export default function Header() {
   const [text, setText] = useState(true);
+  const [hamburger, setHamburger] = useState(false);
   //   const {
   //     data: res,
   //     error,
@@ -16,24 +18,89 @@ export default function Header() {
   const handleClick = () => {
     setText(!text);
   };
+  const changeShape = () => {
+    setHamburger(!hamburger);
+  };
 
   return (
     <div className={HeaderStyle.header}>
       <div className={HeaderStyle.headerContents}>
-        <ul className={HeaderStyle.navUl}>
+        <div className={HeaderStyle.headerIcons} onClick={changeShape}>
+          {hamburger ? (
+            <div className={HeaderStyle.hamburger}>
+              <Image
+                src="/common/hamburger02.png"
+                alt="close"
+                width={40}
+                height={40}
+              />
+            </div>
+          ) : (
+            <div className={HeaderStyle.hamburger}>
+              <Image
+                src="/common/hamburger01.png"
+                alt="open"
+                width={40}
+                height={40}
+                className={HeaderStyle.hamburger}
+              />
+            </div>
+          )}
+        </div>
+        {hamburger && (
+          <ul className={HeaderStyle.mobileUl}>
+            <li>
+              {text && (
+                <p>
+                  <Link href="#" onClick={handleClick}>
+                    ログイン
+                  </Link>
+                </p>
+              )}
+              {!text && (
+                <p>
+                  <Link href="#" onClick={handleClick}>
+                    ログアウト
+                  </Link>
+                </p>
+              )}
+            </li>
+
+            <li>
+              <p>
+                <Link href="/newPost">新規投稿</Link>
+              </p>
+            </li>
+            <li>
+              <p>
+                <Link href="/list">投稿一覧</Link>
+              </p>
+            </li>
+            <li>
+              {!text && (
+                <p>
+                  <Link href="#" onClick={handleClick}>
+                    マイページ
+                  </Link>
+                </p>
+              )}
+            </li>
+          </ul>
+        )}
+        <ul className={HeaderStyle.pcUl}>
           <li>
             {text && (
               <p>
-                <a href="#" onClick={handleClick}>
+                <Link href="#" onClick={handleClick}>
                   ログイン
-                </a>
+                </Link>
               </p>
             )}
             {!text && (
               <p>
-                <a href="#" onClick={handleClick}>
+                <Link href="#" onClick={handleClick}>
                   ログアウト
-                </a>
+                </Link>
               </p>
             )}
           </li>
@@ -51,9 +118,9 @@ export default function Header() {
           <li>
             {!text && (
               <p>
-                <a href="#" onClick={handleClick}>
+                <Link href="#" onClick={handleClick}>
                   マイページ
-                </a>
+                </Link>
               </p>
             )}
           </li>

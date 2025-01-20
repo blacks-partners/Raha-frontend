@@ -1,12 +1,14 @@
+
 /* スマホ */
 .layout {
   display: flex;
 }
 .title {
-  font-size: 36px;
+  font-size: 24px;
   font-weight: normal;
   margin-bottom: 40px;
 }
+
 .sectionLayout {
   max-width: 1000px;
   margin: 0 auto;
@@ -20,7 +22,11 @@
 @media screen and (min-width: 600px) {
   .title {
     margin-bottom: 60px;
+      font-size: 36px;
+
   }
+  
+  
   .sectionLayout {
     padding: 80px;
   }
