@@ -52,6 +52,7 @@ export default function Login() {
             label={"メールアドレス"}
             type={"email"}
             inputId={"email"}
+            placeholder={"メールアドレスを入力してください"}
             inputName={"email"}
             value={email}
             handleChange={(e) => setEmail(e.target.value)}
@@ -62,6 +63,7 @@ export default function Login() {
             label={"パスワード"}
             type={"password"}
             inputId={"password"}
+            placeholder={"パスワードを入力してください"}
             inputName={"password"}
             value={password}
             handleChange={(e) => setPassword(e.target.value)}

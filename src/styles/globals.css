@@ -44,10 +44,9 @@ a:hover {
 .link {
   color: var(--blueColor);
   text-decoration: underline;
+  width: 180px;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+::placeholder {
+  color: #bfbfbf;
 }
