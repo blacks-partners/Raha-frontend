@@ -29,7 +29,9 @@ export default function Login() {
     } else {
       setEmailError("");
       setInputEmailArea(inputStyle.usualInput);
+      return;
     }
+
     if (password.trim() === "") {
       e.preventDefault();
       setPassError("パスワードを入力してください");
@@ -37,6 +39,7 @@ export default function Login() {
     } else {
       setPassError("");
       setInputPassArea(inputStyle.usualInput);
+      return;
     }
   };
 
