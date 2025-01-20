@@ -44,7 +44,7 @@ a:hover {
 .link {
   color: var(--blueColor);
   text-decoration: underline;
-  width: 180px;
+  margin: 0 auto 20px;
 }
 
 ::placeholder {

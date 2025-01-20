@@ -3,8 +3,9 @@ import { useState } from "react";
 import Layout from "@/components/layout/Layout";
 import Form from "@/components/form/Form";
 import Input from "@/components/input/Input";
-import Button from "@/components/Button";
+import Button from "@/components/button/Button";
 import inputStyle from "@/components/input/input.module.css";
+import loginStyle from "@/styles/Login.module.css";
 
 export default function Login() {
   // メールアドレス、パスワード 初期値
@@ -70,10 +71,13 @@ export default function Login() {
             inputClass={inputPassArea}
             errorMessage={passError}
           />
+          <div></div>
           <Link href="/" className="link">
             ユーザー登録はこちら
           </Link>
-          <Button type={"submit"} buttonText={"ログイン"} />
+          <div className={loginStyle.btnWrap}>
+            <Button type={"submit"} buttonText={"ログイン"} size={"M"} />
+          </div>
         </Form>
       </Layout>
     </>
