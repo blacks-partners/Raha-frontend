@@ -83,7 +83,6 @@ export default function MarkDown({ buttonText, title, textarea }: Props) {
                 </ReactMarkdown>
               )}
             </div>
-            
           </div>
 
           <Button buttonText={buttonText} size="M" type="submit"></Button>
