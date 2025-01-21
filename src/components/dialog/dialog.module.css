@@ -1,0 +1,37 @@
+.buttonWrap{
+    display: flex;
+    gap: 1rem;
+}
+
+.dialog{
+    width: 300px;
+    height: 150px;
+    background-color: var(--background);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border: 1px solid var(--foreground); */
+    border-radius: 30px;
+    position: absolute;
+    top:40%;
+    left: 10%;    
+    text-align: center;
+    box-shadow: 0.5px 4px 2px 2px #7d8597; /* 影の太さ・色 */
+
+}
+
+.text{
+    margin: 30px;
+
+}
+
+@media screen and (min-width: 600px) {
+
+    .dialog{
+        width:  300px;
+        height: 150px;
+        left: 45%;
+        
+    }
+  
+}

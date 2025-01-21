@@ -2,7 +2,7 @@ import inputStyle from "@/components/input/input.module.css";
 
 interface Props {
   label: string;
-  type: "email" | "password" | "date" | "number";
+  type: "email" | "password" | "date" | "number" | "text";
   inputId: string;
   placeholder?: string;
   value?: string | number;
@@ -10,7 +10,7 @@ interface Props {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
   inputName: string;
-  inputClass: string;
+  inputClass?: string;
   errorMessage?: string;
 }
 
@@ -37,7 +37,6 @@ export default function Input({
             onChange={handleChange}
             value={value}
             placeholder={placeholder}
-            className={inputClass}
           />
         </div>
         <p className={inputStyle.errorMessage}>{errorMessage}</p>
