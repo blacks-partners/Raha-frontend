@@ -1,0 +1,46 @@
+@keyframes fadeOut {
+  0% {
+    display: block;
+    opacity: 0;
+    bottom: -30px;
+  }
+  30% {
+    opacity: 1;
+    bottom: 30px;
+  }
+  80% {
+    opacity: 1;
+    bottom: 30px;
+  }
+  100% {
+    opacity: 0;
+    bottom: -30px;
+  }
+}
+.toastArea {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.toastSuccess {
+  border-radius: 10px;
+  width: max-content;
+  border: 3px solid var(--foreground);
+  animation: fadeOut 3s;
+  /* display: none; */
+  position: fixed;
+  background-color: var(--background);
+}
+
+.toastSuccess p {
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 10px;
+}
+
+@media screen and (min-width: 600px) {
+  .toastSuccess {
+    right: 10%;
+  }
+}
