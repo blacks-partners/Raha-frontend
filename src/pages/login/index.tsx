@@ -13,7 +13,7 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // 入力欄 初期値
+  // 入力欄スタイル 初期値
   const [inputEmailArea, setInputEmailArea] = useState(inputStyle.usualInput);
   const [inputPassArea, setInputPassArea] = useState(inputStyle.usualInput);
 
@@ -25,15 +25,25 @@ export default function Login() {
   const [isValid, setIsValid] = useState(true);
   const router = useRouter();
 
+  // メールアドレスバリデーション
+  const validateEmail = (value: string) => {
+    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return regex.test(value);
+  };
+
   // 「ログイン」を押下した時
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     let hasError = false;
 
+    // エラー
     if (email.trim() === "") {
       setEmailError("メールアドレスを入力してください");
       setInputEmailArea(inputStyle.errorInput);
       hasError = true;
+    } else if (!validateEmail(email)) {
+      setEmailError("正しいメールアドレス形式で入力してください");
+      setInputEmailArea(inputStyle.errorInput);
     } else {
       setEmailError("");
       setInputEmailArea(inputStyle.usualInput);
