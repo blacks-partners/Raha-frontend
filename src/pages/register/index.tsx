@@ -26,8 +26,57 @@ export default function Register() {
   const [inputPassError, setInputPassError] = useState("");
   const [inputPass2Error, setInputPass2Error] = useState("");
 
-  const handleSubmit = () => {
-    console.log("aaa");
+  // Input入力エラー
+  const validateInput = (
+    value: string,
+    setError: (error: string) => void,
+    setStyle: (style: string) => void,
+    errorMessage: string
+  ) => {
+    if (value.toString().trim() === "") {
+      setError(errorMessage);
+      setStyle(inputStyle.errorInput);
+    } else {
+      setError("");
+      setStyle(inputStyle.usualInput);
+    }
+  };
+
+  const validateForm = () => {
+    validateInput(
+      name,
+      setInputNameError,
+      setInputNameStyle,
+      "この項目は必須です"
+    );
+    validateInput(
+      email,
+      setInputEmailError,
+      setInputEmailStyle,
+      "この項目は必須です"
+    );
+    validateInput(
+      password,
+      setInputPassError,
+      setInputPassStyle,
+      "この項目は必須です"
+    );
+
+    if (password2 === "") {
+      setInputPass2Error("この項目は必須です");
+      setInputPass2Style(inputStyle.errorInput);
+    } else if (password !== password2) {
+      setInputPass2Error("パスワードが一致しません");
+      setInputPass2Style(inputStyle.errorInput);
+    } else {
+      setInputPass2Error("");
+      setInputPass2Style(inputStyle.usualInput);
+    }
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    validateForm();
   };
   return (
     <>
@@ -97,7 +146,7 @@ export default function Register() {
             ></textarea>
           </div>
           <div className={registerStyle.btnWrap}>
-            <Button type="button" buttonText="登録" size="M" />
+            <Button type="submit" buttonText="登録" size="M" />
           </div>
         </Form>
       </Layout>
