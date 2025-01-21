@@ -39,7 +39,7 @@
   padding: 10px;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 600px) {
   .toastSuccess {
     right: 10%;
   }
