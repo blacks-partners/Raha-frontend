@@ -1,3 +1,4 @@
+import Dialog from "@/components/dialog/Dialog";
 import EditRoundFrame from "@/components/editRoundFrame/EditRoundFrame";
 import Layout from "@/components/layout/Layout";
 import MarkDown from "@/components/markDown/MarkDown";
@@ -12,8 +13,7 @@ export default function Home() {
         headTitle="Raha"
         pageTitle="投稿一覧"
       >
-        <MarkDown buttonText="投稿" />
-        {/* <EditRoundFrame>
+        <EditRoundFrame>
           <p>作成日：2025-1-7</p>
           <p>作成者：山竹森楓奏</p>
           <p>「javaの基礎をまとめました」</p>
@@ -21,7 +21,12 @@ export default function Home() {
           <p>　　- Java初学者です</p>
           <p>#Javaの基礎</p>
           <p>　　- Java初学者です</p>
-        </EditRoundFrame>{" "} */}
+        </EditRoundFrame>{" "}
+        <Dialog
+          dialogText="本当に削除しますか？"
+          noButtonText="いいえ"
+          yesButtonText="はい"
+        />
       </Layout>
     </>
   );
