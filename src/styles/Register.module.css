@@ -1,0 +1,27 @@
+/* スマホ */
+.textAreaWrap {
+  display: flex;
+  flex-direction: column;
+}
+.textAreaWrap label {
+  min-width: 200px;
+  font-weight: bold;
+  font-size: 1.125rem;
+}
+.textAreaWrap textarea {
+  width: 100%;
+  padding: 5px;
+  border-radius: solid 1px #333;
+  height: 200px;
+  margin-bottom: 60px;
+}
+.btnWrap {
+  margin: 0 auto;
+}
+
+/* PC */
+@media screen and (min-width: 800px) {
+  .textAreaWrap {
+    flex-direction: row;
+  }
+}
