@@ -1,0 +1,65 @@
+.textarea{
+    display: flex;
+    width: 100%;
+    padding: 5px;
+    border-radius: 3px;
+    height: 300px;
+
+}
+
+
+.label{
+    border: 1px solid var(--foreground);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--foreground);
+    opacity: 50%;
+    color: var(--whiteColor);
+    font-weight: normal
+
+
+}
+.labelColor{
+    border: 1px solid var(--foreground);
+    display: flex;
+    justify-content: center;
+    font-weight: normal;
+    align-items: center;
+
+   
+
+}
+
+
+.html{
+    display: flex;
+    width: 100%;
+    padding: 5px;
+    border-radius: 3px;
+    height: 300px;
+    border: 1px solid var(--foreground);
+
+}
+@media screen and (min-width: 600px) {
+    .formContent{
+        display: flex;
+        height: 45px;
+    }
+    .label{
+        width: 50%;
+
+    }
+
+    .labelColor{
+        width: 50%;
+
+    }
+
+
+    .textarea{
+        font-size: 16px;
+        
+    }
+  
+}
