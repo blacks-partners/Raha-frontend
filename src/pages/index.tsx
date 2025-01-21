@@ -1,5 +1,6 @@
 import EditRoundFrame from "@/components/editRoundFrame/EditRoundFrame";
 import Layout from "@/components/layout/Layout";
+import MarkDown from "@/components/markDown/MarkDown";
 import RoundFrame from "@/components/roundFrame/RoundFrame";
 
 export default function Home() {
@@ -11,6 +12,7 @@ export default function Home() {
         headTitle="Raha"
         pageTitle="投稿一覧"
       >
+        <MarkDown buttonText="投稿" />
         {/* <EditRoundFrame>
           <p>作成日：2025-1-7</p>
           <p>作成者：山竹森楓奏</p>
