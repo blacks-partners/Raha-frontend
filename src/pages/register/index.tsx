@@ -14,12 +14,11 @@ export default function Register() {
   const [password2, setpassword2] = useState("");
   const [introduction, setIntroduction] = useState("");
 
-  // 入力欄 初期値
-  const [inputNameArea, setInputNameArea] = useState(inputStyle.usualInput);
-  const [inputEmailArea, setInputEmailArea] = useState(inputStyle.usualInput);
-  const [inputPassArea, setInputPassArea] = useState(inputStyle.usualInput);
-  const [inputPass2Area, setInputPass2Area] = useState(inputStyle.usualInput);
-  const [textArea, setTextArea] = useState(inputStyle.usualInput);
+  // スタイル 初期値
+  const [inputNameStyle, setInputNameStyle] = useState(inputStyle.usualInput);
+  const [inputEmailStyle, setInputEmailStyle] = useState(inputStyle.usualInput);
+  const [inputPassStyle, setInputPassStyle] = useState(inputStyle.usualInput);
+  const [inputPass2Style, setInputPass2Style] = useState(inputStyle.usualInput);
 
   // エラー 初期値
   const [inputNameError, setInputNameError] = useState("");
@@ -40,44 +39,48 @@ export default function Register() {
       >
         <Form handleSubmit={handleSubmit}>
           <Input
-            label="名前"
+            label={<>名前{<span className={inputStyle.span}> *</span>}</>}
             type="text"
             inputId="name"
             inputName="name"
-            inputClass={inputNameArea}
+            inputClass={inputNameStyle}
             errorMessage={inputNameError}
             value={name}
             handleChange={(e) => setName(e.target.value)}
             placeholder="例）山田太郎"
           />
           <Input
-            label="メールアドレス"
+            label={
+              <>メールアドレス{<span className={inputStyle.span}> *</span>}</>
+            }
             type="email"
             inputId="email"
             inputName="email"
-            inputClass={inputNameArea}
+            inputClass={inputEmailStyle}
             errorMessage={inputEmailError}
             value={email}
             handleChange={(e) => setEmail(e.target.value)}
             placeholder="例）example@example.com"
           />
           <Input
-            label="パスワード"
+            label={<>パスワード{<span className={inputStyle.span}> *</span>}</>}
             type="password"
             inputId="password"
             inputName="password"
-            inputClass={inputPassArea}
+            inputClass={inputPassStyle}
             errorMessage={inputPassError}
             value={password}
             handleChange={(e) => setPassword(e.target.value)}
             placeholder="8文字以上16文字以内"
           />
           <Input
-            label="確認用パスワード"
+            label={
+              <>確認用パスワード{<span className={inputStyle.span}> *</span>}</>
+            }
             type="password"
             inputId="password2"
             inputName="password2"
-            inputClass={inputPass2Area}
+            inputClass={inputPass2Style}
             errorMessage={inputPass2Error}
             value={password2}
             handleChange={(e) => setpassword2(e.target.value)}
@@ -88,7 +91,9 @@ export default function Register() {
             <textarea
               name="introduction"
               id="introduction"
-              placeholder="例）エンジニア初心者です"
+              value={introduction}
+              onChange={(e) => setIntroduction(e.target.value)}
+              placeholder={"例）よろしくお願いします"}
             ></textarea>
           </div>
           <div className={registerStyle.btnWrap}>
