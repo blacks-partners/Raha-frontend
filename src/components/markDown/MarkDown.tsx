@@ -83,11 +83,7 @@ export default function MarkDown({ buttonText, title, textarea }: Props) {
                 </ReactMarkdown>
               )}
             </div>
-            <div>
-              <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                {preview}
-              </ReactMarkdown>
-            </div>
+            
           </div>
 
           <Button buttonText={buttonText} size="M" type="submit"></Button>
