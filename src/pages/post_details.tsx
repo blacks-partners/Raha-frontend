@@ -3,6 +3,7 @@ import EditRoundFrame from "@/components/editRoundFrame/EditRoundFrame";
 import Form from "@/components/form/Form";
 import Layout from "@/components/layout/Layout";
 import RoundFrame from "@/components/roundFrame/RoundFrame";
+import styles from "@/styles/post_details.module.css";
 
 export default function PostDetails() {
   return (
@@ -47,10 +48,10 @@ export default function PostDetails() {
               ~~~
             </EditRoundFrame>
 
-            <h1>{"コメント"}</h1>
+            <h1 className={styles.comment_title}>{"コメント"}</h1>
 
             <EditRoundFrame>
-              <form action="" method="post">
+              <div>
                 2025-01-07 09:50
                 <br />
                 <label htmlFor="name">コメント者:</label>
@@ -58,20 +59,26 @@ export default function PostDetails() {
                 <br />
                 <label htmlFor="comment"></label>
                 <input
+                  className={styles.input}
                   type="text"
                   name="comment"
                   id="comment"
-                  value="参考になります"
+                  value="参考になりますssssssssssssssssssssssssswwwww"
                 />
-              </form>
+              </div>
             </EditRoundFrame>
 
             <RoundFrame>
-              <form action="" method="post">
+              <div>
                 <label htmlFor="comment"></label>
-                <input type="text" name="post_comment" id="post_comment" />
+                <input
+                  className={styles.input}
+                  type="text"
+                  name="post_comment"
+                  id="post_comment"
+                />
                 <Button type={"submit"} buttonText={"投稿"} size={"S"}></Button>
-              </form>
+              </div>
             </RoundFrame>
           </Form>
         </Layout>
