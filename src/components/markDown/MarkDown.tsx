@@ -5,11 +5,14 @@ import Button from "../button/Button";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import Style from "../markDown/markDown.module.css";
+import Input from "../input/Input";
 interface Props {
   buttonText: string;
+  title: string;
+  textarea: string;
 }
 
-export default function MarkDown({ buttonText }: Props) {
+export default function MarkDown({ buttonText, title, textarea }: Props) {
   const { register, handleSubmit, reset } = useForm();
   const [preview, setPreview] = useState("");
   const [touch, setTouch] = useState(false);
@@ -32,8 +35,16 @@ export default function MarkDown({ buttonText }: Props) {
     <>
       <div>
         <Form handleSubmit={handleSubmit(onSubmit)}>
+          <Input
+            label="タイトル"
+            type="text"
+            inputName="title"
+            inputId="title"
+            value={title}
+          ></Input>
           <div>
             <div>
+              <h3>内容</h3>
               <div className={Style.formContent}>
                 {touch ? (
                   <h3 onClick={formatChange} className={Style.label}>
@@ -61,6 +72,7 @@ export default function MarkDown({ buttonText }: Props) {
                   onChange={textChange}
                   className={Style.textarea}
                   placeholder="### はじめに"
+                  value={textarea}
                 />
               ) : (
                 <ReactMarkdown
