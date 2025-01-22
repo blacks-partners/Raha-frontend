@@ -2,3 +2,21 @@
   margin: 50px 0px;
   text-align: center;
 }
+
+.buttonArea button {
+  margin-bottom: 20px;
+}
+
+.buttonArea {
+  margin: 0 auto;
+}
+
+@media screen and (min-width: 600px) {
+  .buttonArea {
+    display: flex;
+  }
+
+  .buttonArea button {
+    margin: 40px 20px;
+  }
+}
