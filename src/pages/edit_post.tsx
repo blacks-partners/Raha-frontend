@@ -1,5 +1,7 @@
+import Form from "@/components/form/Form";
 import Input from "@/components/input/Input";
 import Layout from "@/components/layout/Layout";
+import MarkDown from "@/components/markDown/MarkDown";
 
 export default function EdidPost() {
   return (
@@ -10,12 +12,11 @@ export default function EdidPost() {
         headContent={"投稿編集"}
         pageTitle={"投稿編集画面"}
       >
-        <Input
-          label={"タイトル"}
-          type={"text"}
-          inputId={"title"}
-          inputName={"title"}
-        ></Input>
+        <MarkDown
+          buttonText={"完了"}
+          title={"Javaの基礎"}
+          textarea={"あいう"}
+        ></MarkDown>
       </Layout>
     </>
   );
