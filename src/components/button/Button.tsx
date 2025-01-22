@@ -16,7 +16,7 @@ export default function Button({
   size,
 }: Props) {
   return (
-    <div>
+    <div className={Style.btnWrap}>
       <button onClick={buttonClick} id={id} type={type} className={Style[size]}>
         {buttonText}
       </button>
