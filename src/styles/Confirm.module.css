@@ -1,0 +1,15 @@
+.btnWrap {
+  margin-top: 30px;
+}
+.btnWrap button {
+  margin-bottom: 20px;
+}
+@media screen and (min-width: 600px) {
+  .btnWrap {
+    display: flex;
+    justify-content: center;
+  }
+  .btnWrap button {
+    margin: 40px 20px;
+  }
+}

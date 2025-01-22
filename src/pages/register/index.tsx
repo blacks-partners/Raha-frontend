@@ -47,7 +47,8 @@ export default function Register() {
     }
   };
 
-  const validateForm = () => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     let hasError = false;
 
     validateInput(
@@ -109,14 +110,13 @@ export default function Register() {
     }
     setIsValid(!hasError);
     if (!hasError) {
-      router.push("/comfirm");
+      router.push({
+        pathname: "/register/confirm",
+        query: { name, email, password },
+      });
     }
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    validateForm();
-  };
   return (
     <>
       <Layout
