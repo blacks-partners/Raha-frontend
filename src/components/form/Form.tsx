@@ -4,7 +4,8 @@ interface Props {
   action?: string;
   method?: string;
   children: React.ReactNode;
-  handleSubmit: () => void;
+  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  noValidate: boolean;
 }
 
 export default function Form({
@@ -12,6 +13,7 @@ export default function Form({
   method,
   children,
   handleSubmit,
+  noValidate,
 }: Props) {
   return (
     <form
@@ -19,6 +21,7 @@ export default function Form({
       onSubmit={handleSubmit}
       action={action}
       method={method}
+      noValidate={noValidate}
     >
       {children}
     </form>

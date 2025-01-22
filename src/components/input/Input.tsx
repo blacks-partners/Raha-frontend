@@ -37,6 +37,7 @@ export default function Input({
             onChange={handleChange}
             value={value}
             placeholder={placeholder}
+            className={inputClass}
           />
         </div>
         <p className={inputStyle.errorMessage}>{errorMessage}</p>
