@@ -26,7 +26,7 @@ export default function Register() {
   const [inputPassError, setInputPassError] = useState("");
   const [inputPass2Error, setInputPass2Error] = useState("");
 
-  // Input入力エラー
+  // エラー
   const validateInput = (
     value: string,
     setError: (error: string) => void,
@@ -49,19 +49,18 @@ export default function Register() {
       setInputNameStyle,
       "この項目は必須です"
     );
-    validateInput(
-      email,
-      setInputEmailError,
-      setInputEmailStyle,
-      "この項目は必須です"
-    );
-    validateInput(
-      password,
-      setInputPassError,
-      setInputPassStyle,
-      "この項目は必須です"
-    );
 
+    // パスワード
+    if (password === "") {
+      setInputPassError("この項目は必須です");
+      setInputPassStyle(inputStyle.errorInput);
+    } else if (password.length < 8 || password.length > 16) {
+      setInputPassError("パスワードは8文字以上16文字以下で入力してください");
+      setInputPassStyle(inputStyle.errorInput);
+    } else {
+      setInputPassError("");
+      setInputPassStyle(inputStyle.usualInput);
+    }
     if (password2 === "") {
       setInputPass2Error("この項目は必須です");
       setInputPass2Style(inputStyle.errorInput);
@@ -71,6 +70,23 @@ export default function Register() {
     } else {
       setInputPass2Error("");
       setInputPass2Style(inputStyle.usualInput);
+    }
+
+    // メールアドレス
+    const validateEmail = (value: string) => {
+      const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      return regex.test(value);
+    };
+
+    if (email === "") {
+      setInputEmailError("この項目は必須です");
+      setInputEmailStyle(inputStyle.errorInput);
+    } else if (!validateEmail(email)) {
+      setInputEmailError("正しいアドレス形式で入力してください");
+      setInputEmailStyle(inputStyle.errorInput);
+    } else {
+      setInputEmailError("");
+      setInputEmailStyle(inputStyle.errorInput);
     }
   };
 
@@ -86,7 +102,7 @@ export default function Register() {
         headContent={"rahaユーザー登録"}
         pageTitle={"ユーザー登録"}
       >
-        <Form handleSubmit={handleSubmit}>
+        <Form handleSubmit={handleSubmit} noValidate={true}>
           <Input
             label={<>名前{<span className={inputStyle.span}> *</span>}</>}
             type="text"
