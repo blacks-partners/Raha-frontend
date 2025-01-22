@@ -20,7 +20,7 @@ export default function Dialog({
 }: Props) {
   return (
     <div className={Style.dialog}>
-      <Form handleSubmit={handleSubmit}>
+      <Form handleSubmit={handleSubmit} noValidate={false}>
         <div>
           <p className={Style.text}>{dialogText}</p>
           <div className={Style.buttonWrap}>
