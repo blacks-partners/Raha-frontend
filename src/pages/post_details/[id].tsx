@@ -4,21 +4,33 @@ import EditRoundFrame from "@/components/editRoundFrame/EditRoundFrame";
 import Form from "@/components/form/Form";
 import Layout from "@/components/layout/Layout";
 import RoundFrame from "@/components/roundFrame/RoundFrame";
+import Toast from "@/components/toast/Toast";
 import styles from "@/styles/post_details.module.css";
 import { useRouter } from "next/router";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
-export default function PostDetails() {
+interface PostDetailsProps {
+  postDate: string;
+  postName: string;
+  postTitle: string;
+  article: string;
+  commentDate: string;
+  commenterName: string;
+  comment: string;
+}
+
+export default function PostDetails(props: PostDetailsProps) {
   const router = useRouter();
+  const postDate = "2025-01-07 09:50";
+  const posterName = "らは太郎";
+  const postTitle = "Javaの基礎";
+  const article = "#はじめに";
+  const commentDate = "2025-01-07 12:00";
+  const commenterName = "山田花子";
 
-  const [postDate, setPostDate] = useState("");
-  const [posterName, setPosterName] = useState("");
-  const [postTitle, setPostTitle] = useState("");
-  const [article, setArticle] = useState("");
-  const [commentDate, setCommentDate] = useState("");
-  const [commenterName, setCommenterName] = useState("");
-  const [comment, setComment] = useState("");
-  const [newComment, setNewComment] = useState("");
+  const [comment, setComment] = useState("参考になります");
+
+  const [newComment, setNewComment] = useState("いいね");
 
   // ダイアログ表示管理
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
@@ -26,36 +38,29 @@ export default function PostDetails() {
   // コメントの編集可否を管理するステート
   const [isCommentEditing, setIsCommentEditing] = useState(false);
 
-  useEffect(() => {
-    setPostDate("2025-01-07 09:50");
-    setPosterName("らは太郎");
-    setPostTitle("Javaの基礎");
-    setArticle("#はじめに");
-    setCommentDate("2025-01-07 12:00");
-    setCommenterName("山田花子");
-    setComment("参考になります");
-    setNewComment("いいね");
-  }, []);
-
   // メインフォーム送信時
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    console.log("handleSubmitが呼ばれました！");
+
     // ボタン押下時に指定のページに遷移
-    router.push("/post_details");
   };
 
   //   記事削除アイコン押下時の処理
 
-  const handleDeleteClick = () => {
+  const handleDeleteClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    console.log("handleDeleteClick called");
     setShowDeleteDialog(true);
+    console.log("setShowDeleteDialog(true) done");
   };
 
   // 「はい」ボタン押下時 (削除実行)
   const confirmDelete = () => {
-    alert("削除しました");
     setShowDeleteDialog(false);
-    // 実際は削除API呼び出し後、一覧ページへ遷移など
-    // router.push("/list");
+
+    showToasts();
   };
 
   // 「いいえ」ボタン押下時 (ダイアログを閉じる)
@@ -72,7 +77,7 @@ export default function PostDetails() {
 
   //  コメント削除アイコン押下時
 
-  const commentDeleteClick = () => {
+  const commentDeleteClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     setShowDeleteDialog(true);
   };
 
@@ -85,7 +90,18 @@ export default function PostDetails() {
 
   // 編集完了ボタン押下時
   const handleCommentEditComplete = () => {
-    router.push("/edit_post");
+    router.push("#");
+  };
+
+  const [showToast, setShowToast] = useState(false);
+
+  const showToasts = () => {
+    setShowToast(true);
+    const timer = setTimeout(() => {
+      setShowToast(false);
+    }, 3000);
+    // 再度トーストを表示するタイミングなどでタイマーが重複しないようにクリーンアップ
+    return () => clearTimeout(timer);
   };
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -98,6 +114,7 @@ export default function PostDetails() {
         headContent="投稿詳細"
         pageTitle="投稿詳細画面"
       >
+        {showToast && <Toast toastText="削除しました" />}
         {/* 削除ダイアログ */}
         {showDeleteDialog && (
           <Dialog

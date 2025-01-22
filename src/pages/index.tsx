@@ -22,11 +22,6 @@ export default function Home() {
           <p>#Javaの基礎</p>
           <p>　　- Java初学者です</p>
         </EditRoundFrame>{" "}
-        <Dialog
-          dialogText="本当に削除しますか？"
-          noButtonText="いいえ"
-          yesButtonText="はい"
-        />
       </Layout>
     </>
   );
