@@ -13,7 +13,6 @@ export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setpassword2] = useState("");
-  const [introduction, setIntroduction] = useState("");
 
   // スタイル 初期値
   const [inputNameStyle, setInputNameStyle] = useState(inputStyle.usualInput);
