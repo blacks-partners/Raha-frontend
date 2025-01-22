@@ -63,7 +63,7 @@ export default function PostDetails() {
                   type="text"
                   name="comment"
                   id="comment"
-                  value="参考になりますssssssssssssssssssssssssswwwww"
+                  value="参考になります"
                 />
               </div>
             </EditRoundFrame>
@@ -77,7 +77,13 @@ export default function PostDetails() {
                   name="post_comment"
                   id="post_comment"
                 />
-                <Button type={"submit"} buttonText={"投稿"} size={"S"}></Button>
+                <div className={styles.button}>
+                  <Button
+                    type={"submit"}
+                    buttonText={"投稿"}
+                    size={"S"}
+                  ></Button>
+                </div>
               </div>
             </RoundFrame>
           </Form>

@@ -1,21 +1,30 @@
 .comment_title {
-  font-size: 24px;
-  font-weight: normal;
+  font-size: 30px;
+  font-weight: bold;
   margin-top: 30px;
   margin-bottom: 10px;
 }
 
 .input {
-  /* border: none;
-  outline: none; */
+  border: none;
+  outline: none;
   padding: 1em 0.5em;
   line-height: 5;
+  width: 100%;
+  box-sizing: border-box;
+}
+.button {
+  margin-top: 20px;
+  text-align: center;
 }
 
 @media (min-width: 600px) {
   .comment_title {
     margin-top: 60px;
     margin-bottom: 20px;
-    font-size: 36px;
+    font-size: 40px;
+  }
+  .button {
+    text-align: right;
   }
 }
