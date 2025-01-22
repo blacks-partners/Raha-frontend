@@ -12,6 +12,7 @@ interface Props {
   inputName: string;
   inputClass?: string;
   errorMessage?: string;
+  passMessage?: string;
 }
 
 export default function Input({
@@ -24,6 +25,7 @@ export default function Input({
   placeholder,
   errorMessage,
   inputClass,
+  passMessage,
 }: Props) {
   return (
     <>
@@ -37,10 +39,11 @@ export default function Input({
             onChange={handleChange}
             value={value}
             placeholder={placeholder}
-            className={inputClass}
+            className={`${inputClass} ${passMessage}`}
           />
         </div>
         <p className={inputStyle.errorMessage}>{errorMessage}</p>
+        <p className={inputStyle.passMessage}>{passMessage}</p>
       </div>
     </>
   );

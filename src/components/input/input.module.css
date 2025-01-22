@@ -26,9 +26,13 @@
 .errorMessage {
   color: #da0000;
   font-weight: bold;
+  font-size: 0.875rem;
 }
 .span {
   color: #da0000;
+}
+.passMessage {
+  font-size: 0.8rem;
 }
 
 /* PC */
@@ -44,7 +48,8 @@
     max-width: 200px;
     width: 100%;
   }
-  .errorMessage {
+  .errorMessage,
+  .passMessage {
     margin-left: 200px;
   }
 }
