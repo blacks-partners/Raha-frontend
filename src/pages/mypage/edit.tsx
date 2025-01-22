@@ -1,8 +1,5 @@
 import Layout from "@/components/layout/Layout";
 import { useState } from "react";
-import EditRoundFrame from "@/components/editRoundFrame/EditRoundFrame";
-import ColorLink from "@/components/colorLink/ColorLink";
-import Dialog from "@/components/dialog/Dialog";
 import Form from "@/components/form/Form";
 import Input from "@/components/input/Input";
 import inputStyle from "@/components/input/input.module.css";
