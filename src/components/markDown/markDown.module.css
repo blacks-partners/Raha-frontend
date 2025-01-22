@@ -41,6 +41,10 @@
     border: 1px solid var(--foreground);
 
 }
+
+.pcUl{
+    display: none;
+}
 @media screen and (min-width: 600px) {
     .formContent{
         display: flex;
@@ -59,7 +63,18 @@
 
     .textarea{
         font-size: 16px;
+        width: 50%;
         
+    }
+    .html{
+        width: 50%;
+    }
+    .spUI{
+        display: none;
+    }
+    .pcUl{
+        display:contents;
+        display: flex;
     }
   
 }

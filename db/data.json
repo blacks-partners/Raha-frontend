@@ -1,0 +1,58 @@
+{
+  "comments": [
+    {
+      "id": 1,
+      "user_id": 101,
+      "article_id": 1001,
+      "content": "この記事はとても参考になりました！",
+      "created_at": "2025-01-22T10:00:00Z",
+      "updated_at": "2025-01-22T10:00:00Z"
+    },
+    {
+      "id": 2,
+      "user_id": 102,
+      "article_id": 1002,
+      "content": "素晴らしい内容ですね。感謝します！",
+      "created_at": "2025-01-22T11:00:00Z",
+      "updated_at": "2025-01-22T11:00:00Z"
+    }
+  ],
+  "articles": [
+    {
+      "id": 1001,
+      "title": "JSONの基礎知識",
+      "content": "この記事では、JSONについて詳しく解説します。",
+      "user_id": 101,
+      "created_at": "2025-01-21T09:00:00Z",
+      "updated_at": "2025-01-21T10:00:00Z"
+    },
+    {
+      "id": 1002,
+      "title": "プログラミング初心者ガイド",
+      "content": "プログラミングを始めるための基本ステップを紹介します。",
+      "user_id": 102,
+      "created_at": "2025-01-22T08:00:00Z",
+      "updated_at": "2025-01-22T09:00:00Z"
+    }
+  ],
+  "users": [
+    {
+      "id": 101,
+      "name": "山田 太郎",
+      "email": "yamada.taro@example.com",
+      "password": "hashed_password_123",
+      "introduction": "Webエンジニアとして活動しています。",
+      "created_at": "2025-01-20T08:00:00Z",
+      "updated_at": "2025-01-20T08:00:00Z"
+    },
+    {
+      "id": 102,
+      "name": "佐藤 花子",
+      "email": "sato.hanako@example.com",
+      "password": "hashed_password_456",
+      "introduction": "趣味でプログラミングをしています。",
+      "created_at": "2025-01-21T09:00:00Z",
+      "updated_at": "2025-01-21T09:00:00Z"
+    }
+  ]
+}

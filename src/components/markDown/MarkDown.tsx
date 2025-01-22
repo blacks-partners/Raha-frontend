@@ -66,22 +66,37 @@ export default function MarkDown({ buttonText, title, textarea }: Props) {
                 )}
               </div>
 
-              {touch ? (
-                <textarea
-                  {...register("content", { required: true })}
-                  onChange={textChange}
-                  className={Style.textarea}
-                  placeholder="### はじめに"
-                  value={textarea}
-                />
-              ) : (
-                <ReactMarkdown
-                  remarkPlugins={[remarkGfm]}
-                  className={Style.html}
-                >
-                  {preview}
-                </ReactMarkdown>
-              )}
+              <div className={Style.spUI}>
+                {touch ? (
+                  <textarea
+                    {...register("content", { required: true })}
+                    onChange={textChange}
+                    className={Style.textarea}
+                    placeholder="### はじめに"
+                    value={textarea}
+                  />
+                ) : (
+                  <ReactMarkdown
+                    remarkPlugins={[remarkGfm]}
+                    className={Style.html}
+                  >
+                    {preview}
+                  </ReactMarkdown>
+                )}
+              </div>
+            </div>
+            <div className={Style.pcUl}>
+              <textarea
+                {...register("content", { required: true })}
+                onChange={textChange}
+                className={Style.textarea}
+                placeholder="### はじめに"
+                value={textarea}
+              />
+
+              <ReactMarkdown remarkPlugins={[remarkGfm]} className={Style.html}>
+                {preview}
+              </ReactMarkdown>
             </div>
           </div>
 
