@@ -6,6 +6,7 @@ import inputStyle from "@/components/input/input.module.css";
 import Button from "@/components/button/Button";
 import registerStyle from "@/styles/Register.module.css";
 import ColorLink from "@/components/ColorLink/ColorLink";
+import { useRouter } from "next/router";
 
 export default function Register() {
   // 新規登録　初期値
@@ -19,6 +20,10 @@ export default function Register() {
   const [inputEmailStyle, setInputEmailStyle] = useState(inputStyle.usualInput);
   const [inputPassStyle, setInputPassStyle] = useState(inputStyle.usualInput);
   const [inputPass2Style, setInputPass2Style] = useState(inputStyle.usualInput);
+
+  // 画面遷移
+  const [isValid, setIsValid] = useState(true);
+  const router = useRouter();
 
   // エラー 初期値
   const [inputNameError, setInputNameError] = useState("");
@@ -42,7 +47,10 @@ export default function Register() {
     }
   };
 
-  const validateForm = () => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    let hasError = false;
+
     validateInput(
       name,
       setInputNameError,
@@ -65,9 +73,11 @@ export default function Register() {
     if (email.trim() === "") {
       setInputEmailError("この項目は必須です");
       setInputEmailStyle(inputStyle.errorInput);
+      hasError = true;
     } else if (!validateEmail(email)) {
       setInputEmailError("正しいメールアドレス形式で入力してください");
       setInputEmailStyle(inputStyle.errorInput);
+      hasError = true;
     } else {
       setInputEmailError("");
       setInputEmailStyle(inputStyle.usualInput);
@@ -77,9 +87,11 @@ export default function Register() {
     if (password.trim() === "") {
       setInputPassError("この項目は必須です");
       setInputPassStyle(inputStyle.errorInput);
+      hasError = true;
     } else if (!validatePass(password)) {
       setInputPassError("正しいパスワード形式で入力してください");
       setInputPassStyle(inputStyle.errorInput);
+      hasError = true;
     } else {
       setInputPassError("");
       setInputPassStyle(inputStyle.usualInput);
@@ -87,19 +99,24 @@ export default function Register() {
     if (password2.trim() === "") {
       setInputPass2Error("この項目は必須です");
       setInputPass2Style(inputStyle.errorInput);
+      hasError = true;
     } else if (password !== password2) {
       setInputPass2Error("パスワードが一致しません");
       setInputPass2Style(inputStyle.errorInput);
+      hasError = true;
     } else {
       setInputPass2Error("");
       setInputPass2Style(inputStyle.usualInput);
     }
+    setIsValid(!hasError);
+    if (!hasError) {
+      router.push({
+        pathname: "/register/confirm",
+        query: { name, email, password },
+      });
+    }
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    validateForm();
-  };
   return (
     <>
       <Layout
@@ -110,7 +127,7 @@ export default function Register() {
       >
         <Form handleSubmit={handleSubmit} noValidate={true}>
           <Input
-            label={<>名前{<span className={inputStyle.span}> *</span>}</>}
+            label="名前"
             type="text"
             inputId="name"
             inputName="name"
@@ -121,9 +138,7 @@ export default function Register() {
             placeholder="例）山田太郎"
           />
           <Input
-            label={
-              <>メールアドレス{<span className={inputStyle.span}> *</span>}</>
-            }
+            label="メールアドレス"
             type="email"
             inputId="email"
             inputName="email"
@@ -134,7 +149,7 @@ export default function Register() {
             placeholder="例）example@example.com"
           />
           <Input
-            label={<>パスワード{<span className={inputStyle.span}> *</span>}</>}
+            label="パスワード"
             type="password"
             inputId="password"
             inputName="password"
@@ -146,9 +161,7 @@ export default function Register() {
             passMessage="半角英数と記号を含む8文字以上16字以内"
           />
           <Input
-            label={
-              <>確認用パスワード{<span className={inputStyle.span}> *</span>}</>
-            }
+            label="確認用パスワード"
             type="password"
             inputId="password2"
             inputName="password2"
@@ -163,7 +176,7 @@ export default function Register() {
           </div>
 
           <div className={registerStyle.btnWrap}>
-            <Button type="submit" buttonText="登録" size="M" />
+            <Button type="submit" buttonText="登録確認へ" size="M" />
           </div>
         </Form>
       </Layout>
