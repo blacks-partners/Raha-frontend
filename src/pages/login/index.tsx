@@ -5,7 +5,7 @@ import Form from "@/components/form/Form";
 import Input from "@/components/input/Input";
 import Button from "@/components/button/Button";
 import inputStyle from "@/components/input/input.module.css";
-import ColorLink from "@/components/ColorLink/ColorLink";
+import ColorLink from "@/components/colorLink/ColorLink";
 import loginStyle from "@/styles/Login.module.css";
 
 export default function Login() {
