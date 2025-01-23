@@ -2,7 +2,7 @@ import Link from "next/link";
 import ColorLinkStyle from "@/components/ColorLink/ColorLink.module.css";
 
 interface Props {
-  colorLinkText: string;
+  colorLinkText: string | boolean;
   url: string;
   onClick?: () => void;
 }
