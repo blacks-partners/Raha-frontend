@@ -44,6 +44,7 @@ export default function Login() {
     } else if (!validateEmail(email)) {
       setEmailError("正しいメールアドレス形式で入力してください");
       setInputEmailArea(inputStyle.errorInput);
+      hasError = true;
     } else {
       setEmailError("");
       setInputEmailArea(inputStyle.usualInput);
