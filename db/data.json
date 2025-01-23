@@ -15,24 +15,180 @@
       "content": "素晴らしい内容ですね。感謝します！",
       "created_at": "2025-01-22T11:00:00Z",
       "updated_at": "2025-01-22T11:00:00Z"
+    },
+    {
+      "id": 3,
+      "user_id": 103,
+      "article_id": 1003,
+      "content": "とてもわかりやすい解説でした！",
+      "created_at": "2025-01-22T12:00:00Z",
+      "updated_at": "2025-01-22T12:00:00Z"
+    },
+    {
+      "id": 4,
+      "user_id": 104,
+      "article_id": 1004,
+      "content": "役立つ情報をありがとうございます。",
+      "created_at": "2025-01-22T13:00:00Z",
+      "updated_at": "2025-01-22T13:00:00Z"
+    },
+    {
+      "id": 5,
+      "user_id": 105,
+      "article_id": 1005,
+      "content": "また次の記事を楽しみにしています！",
+      "created_at": "2025-01-22T14:00:00Z",
+      "updated_at": "2025-01-22T14:00:00Z"
+    },
+    {
+      "id": 6,
+      "user_id": 101,
+      "article_id": 1006,
+      "content": "初心者にとって良いガイドでした。",
+      "created_at": "2025-01-22T15:00:00Z",
+      "updated_at": "2025-01-22T15:00:00Z"
+    },
+    {
+      "id": 7,
+      "user_id": 102,
+      "article_id": 1007,
+      "content": "具体的な例が助かります！",
+      "created_at": "2025-01-22T16:00:00Z",
+      "updated_at": "2025-01-22T16:00:00Z"
     }
   ],
   "articles": [
     {
-      "id": 1001,
+      "articleId": 1,
       "title": "JSONの基礎知識",
-      "content": "この記事では、JSONについて詳しく解説します。",
-      "user_id": 101,
-      "created_at": "2025-01-21T09:00:00Z",
-      "updated_at": "2025-01-21T10:00:00Z"
+      "content": "この記事では、JSONについて詳しく解説します。\n\n### JSONとは？\nJSONはデータ交換フォーマットの一つで、軽量かつ人間にとって読みやすい形式です。\n\n### 使用例\nたとえば、次のような形式でデータを表現できます：\n```json\n{\n  \"name\": \"太郎\",\n  \"age\": 25\n}\n```\n\nこのフォーマットは多くのプログラミング言語でサポートされています。",
+      "user": {
+        "userId": 1,
+        "name": "山田 太郎",
+        "email": "yamada.taro@example.com",
+        "password": null,
+        "introduction": "Webエンジニアとして活動しています。",
+        "created_at": "2025-01-20",
+        "updated_at": "2025-01-20"
+      },
+      "commentList": [
+        {
+          "commentId": 1,
+          "content": "この記事はとても参考になりました！",
+          "created_at": "2025-01-22",
+          "updated_at": "2025-01-22"
+        },
+        {
+          "commentId": 2,
+          "content": "非常にわかりやすかったです。",
+          "created_at": "2025-01-23",
+          "updated_at": "2025-01-23"
+        }
+      ],
+      "created_at": "2025-01-21",
+      "updated_at": "2025-01-21"
     },
     {
-      "id": 1002,
+      "articleId": 2,
       "title": "プログラミング初心者ガイド",
-      "content": "プログラミングを始めるための基本ステップを紹介します。",
-      "user_id": 102,
-      "created_at": "2025-01-22T08:00:00Z",
-      "updated_at": "2025-01-22T09:00:00Z"
+      "content": "プログラミングを始めるための基本ステップを紹介します。\n\n### はじめに\nプログラミングの第一歩は、適切な言語を選ぶことです。\n\n### 学習方法\n1. 書籍やオンライン教材を利用する。\n2. 実際にコードを書いてみる。\n\n### おすすめツール\n- VSCode\n- GitHub\n- Stack Overflow",
+      "user": {
+        "userId": 2,
+        "name": "佐藤 花子",
+        "email": "sato.hanako@example.com",
+        "password": null,
+        "introduction": "趣味でプログラミングをしています。",
+        "created_at": "2025-01-21",
+        "updated_at": "2025-01-21"
+      },
+      "commentList": [
+        {
+          "commentId": 3,
+          "content": "役に立つ情報をありがとうございます。",
+          "created_at": "2025-01-22",
+          "updated_at": "2025-01-22"
+        }
+      ],
+      "created_at": "2025-01-22",
+      "updated_at": "2025-01-22"
+    },
+    {
+      "articleId": 3,
+      "title": "Gitの基礎知識",
+      "content": "Pythonを初めて学ぶ人のためのガイドです。\n\n### 特徴\nPythonはシンプルな構文で、多くの初心者に最適です。\n\n### インストール\n公式サイトからPythonをダウンロードしてインストールしましょう。\n\n### 基本文法\n以下は、Hello Worldを表示するコード例です：\n```python\nprint(\"Hello, World!\")\n```",
+      "user": {
+        "userId": 3,
+        "name": "高橋 一郎",
+        "email": "takahashi.ichiro@example.com",
+        "password": null,
+        "introduction": "フリーランスのプログラマーです。",
+        "created_at": "2025-01-20",
+        "updated_at": "2025-01-20"
+      },
+      "commentList": [
+        {
+          "commentId": 4,
+          "content": "Gitの初歩が理解できました。",
+          "created_at": "2025-01-23",
+          "updated_at": "2025-01-23"
+        },
+        {
+          "commentId": 5,
+          "content": "次の記事も楽しみです！",
+          "created_at": "2025-01-24",
+          "updated_at": "2025-01-24"
+        }
+      ],
+      "created_at": "2025-01-22",
+      "updated_at": "2025-01-23"
+    },
+    {
+      "articleId": 4,
+      "title": "HTMLとCSSの基本",
+      "content": "HTMLとCSSを学び、ウェブサイトを作成する基本を説明します。\n\n### HTMLとは？\nHTMLはウェブページの骨組みを作るための言語です。\n\n### CSSとは？\nCSSはウェブページの見た目を装飾するためのスタイルシート言語です。\n\n### 実例\n以下はシンプルなHTMLとCSSの例です：\n```html\n<!DOCTYPE html>\n<html>\n<head>\n  <style>\n    body { font-family: Arial; }\n  </style>\n</head>\n<body>\n  <h1>Hello, World!</h1>\n</body>\n</html>\n```",
+      "user": {
+        "userId": 4,
+        "name": "中村 京子",
+        "email": "nakamura.kyoko@example.com",
+        "password": null,
+        "introduction": "デザインとフロントエンド開発に興味があります。",
+        "created_at": "2025-01-21",
+        "updated_at": "2025-01-21"
+      },
+      "commentList": [
+        {
+          "commentId": 6,
+          "content": "CSSの例が役立ちました。",
+          "created_at": "2025-01-24",
+          "updated_at": "2025-01-24"
+        }
+      ],
+      "created_at": "2025-01-23",
+      "updated_at": "2025-01-24"
+    },
+    {
+      "articleId": 5,
+      "title": "JavaScript入門",
+      "content": "バージョン管理システムGitの基本を学びましょう。\n\n### Gitとは？\nGitはコードの履歴を管理するための分散型バージョン管理システムです。\n\n### 基本コマンド\n- `git init` : リポジトリの初期化\n- `git add` : ファイルをステージング\n\n### チュートリアル\n以下のコマンドでリポジトリを作成してみましょう：\n```bash\ngit init my-project\ncd my-project\ngit add .\n```",
+      "user": {
+        "userId": 5,
+        "name": "鈴木 次郎",
+        "email": "suzuki.jiro@example.com",
+        "password": null,
+        "introduction": "バックエンドエンジニアとして活動中。",
+        "created_at": "2025-01-22",
+        "updated_at": "2025-01-22"
+      },
+      "commentList": [
+        {
+          "commentId": 7,
+          "content": "サンプルコードが分かりやすかったです。",
+          "created_at": "2025-01-25",
+          "updated_at": "2025-01-25"
+        }
+      ],
+      "created_at": "2025-01-23",
+      "updated_at": "2025-01-25"
     }
   ],
   "users": [
@@ -53,6 +209,43 @@
       "introduction": "趣味でプログラミングをしています。",
       "created_at": "2025-01-21T09:00:00Z",
       "updated_at": "2025-01-21T09:00:00Z"
+    },
+    {
+      "id": 103,
+      "name": "高橋 一郎",
+      "email": "takahashi.ichiro@example.com",
+      "password": "hashed_password_789",
+      "introduction": "フリーランスのプログラマーです。",
+      "created_at": "2025-01-20T10:00:00Z",
+      "updated_at": "2025-01-20T10:00:00Z"
+    },
+
+    {
+      "id": 104,
+      "name": "中村 京子",
+      "email": "nakamura.kyoko@example.com",
+      "password": "hashed_password_111",
+      "introduction": "デザインとフロントエンド開発に興味があります。",
+      "created_at": "2025-01-21T10:00:00Z",
+      "updated_at": "2025-01-21T10:00:00Z"
+    },
+    {
+      "id": 105,
+      "name": "鈴木 次郎",
+      "email": "suzuki.jiro@example.com",
+      "password": "hashed_password_222",
+      "introduction": "バックエンドエンジニアとして活動中。",
+      "created_at": "2025-01-22T11:00:00Z",
+      "updated_at": "2025-01-22T11:00:00Z"
+    },
+    {
+      "id": 106,
+      "name": "田中 美咲",
+      "email": "tanaka.misaki@example.com",
+      "password": "hashed_password_333",
+      "introduction": "趣味でアプリ開発を行っています。",
+      "created_at": "2025-01-23T12:00:00Z",
+      "updated_at": "2025-01-23T12:00:00Z"
     }
   ]
 }

@@ -15,6 +15,14 @@
   font-weight: bold;
   font-size: 1.125rem;
 }
+/* 自己紹介用テキストエリア */
+.introduction {
+  border: solid 1px #333;
+  height: 5em;
+  width: 100%;
+  padding: 5px;
+  border-radius: 3px;
+}
 /* 通常時とエラー時でInput枠のスタイル変更 ↓ */
 .usualInput {
   border: solid 1px #333;

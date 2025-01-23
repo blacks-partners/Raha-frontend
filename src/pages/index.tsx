@@ -22,6 +22,9 @@ export default function Home() {
           <p>#Javaの基礎</p>
           <p>　　- Java初学者です</p>
         </EditRoundFrame>{" "}
+
+        <MarkDown buttonText="投稿" textarea="" title=""></MarkDown>
+
       </Layout>
     </>
   );
