@@ -1,9 +1,13 @@
-import Form from "@/components/form/Form";
-import Input from "@/components/input/Input";
 import Layout from "@/components/layout/Layout";
 import MarkDown from "@/components/markDown/MarkDown";
+import { useState } from "react";
 
 export default function EdidPost() {
+  const [title, setTitle] = useState("Javaの基礎");
+  const [content, setContent] = useState("あいう");
+
+  const button = "投稿";
+
   return (
     <>
       <Layout
@@ -13,9 +17,9 @@ export default function EdidPost() {
         pageTitle={"投稿編集画面"}
       >
         <MarkDown
-          buttonText={"完了"}
-          title={"Javaの基礎"}
-          textarea={"あいう"}
+          buttonText={button}
+          title={title}
+          textarea={content}
         ></MarkDown>
       </Layout>
     </>

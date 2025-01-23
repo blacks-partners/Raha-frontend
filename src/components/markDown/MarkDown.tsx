@@ -34,7 +34,7 @@ export default function MarkDown({ buttonText, title, textarea }: Props) {
   return (
     <>
       <div>
-        <Form handleSubmit={handleSubmit(onSubmit)}>
+        <Form handleSubmit={handleSubmit(onSubmit)} noValidate={false}>
           <Input
             label="タイトル"
             type="text"
