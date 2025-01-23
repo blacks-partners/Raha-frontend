@@ -23,11 +23,11 @@ export default function MarkDown({
   onContentChange,
   onPost,
 }: Props) {
-  // プレビュー用ローカルステート
+  // プレビュー用
   const [preview, setPreview] = useState(textarea);
   const [touch, setTouch] = useState(false);
 
-  // エラーメッセージ用ステート
+  // エラーメッセージ用
   const [errorTitle, setErrorTitle] = useState("");
   const [errorContent, setErrorContent] = useState("");
 
@@ -36,11 +36,8 @@ export default function MarkDown({
     e.preventDefault();
 
     // タイトル/本文の文字数チェック
-    // 親から渡された title / textarea が最新か？
-    // → 親がリアルタイム更新する or 子が独自管理するかによる
-    // ここでは "親がリアルタイム更新した" と仮定
     const titleLen = title.trim().length;
-    const contentLen = preview.trim().length; // or use "textarea.trim().length" if we want to validate parent's state
+    const contentLen = preview.trim().length;
 
     let hasError = false;
     // タイトル: 1~50文字
@@ -102,6 +99,7 @@ export default function MarkDown({
           value={title}
           // 親に変更を通知
           handleChange={handleTitleChangeLocal}
+          inputClass={errorTitle ? Style.inputError : ""}
         />
         {/* タイトルエラー表示 */}
         {errorTitle && <p className={Style.error}>{errorTitle}</p>}
@@ -152,7 +150,11 @@ export default function MarkDown({
 
           <div className={Style.pcUl}>
             <textarea
-              className={Style.textarea}
+              className={
+                errorContent
+                  ? `${Style.textarea} ${Style.inputError}`
+                  : Style.textarea
+              }
               placeholder="### はじめに"
               value={preview}
               onChange={textChange}
