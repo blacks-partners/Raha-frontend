@@ -1,80 +1,77 @@
-.textarea{
-    display: flex;
-    width: 100%;
-    padding: 5px;
-    border-radius: 3px;
-    height: 300px;
-
+.textarea {
+  display: flex;
+  width: 100%;
+  padding: 5px;
+  border-radius: 3px;
+  height: 300px;
 }
 
-
-.label{
-    border: 1px solid var(--foreground);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--foreground);
-    opacity: 50%;
-    color: var(--whiteColor);
-    font-weight: normal
-
-
+.label {
+  border: 1px solid var(--foreground);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--foreground);
+  opacity: 50%;
+  color: var(--whiteColor);
+  font-weight: normal;
 }
-.labelColor{
-    border: 1px solid var(--foreground);
-    display: flex;
-    justify-content: center;
-    font-weight: normal;
-    align-items: center;
-
-   
-
+.labelColor {
+  border: 1px solid var(--foreground);
+  display: flex;
+  justify-content: center;
+  font-weight: normal;
+  align-items: center;
 }
 
-
-.html{
-    display: flex;
-    width: 100%;
-    padding: 5px;
-    border-radius: 3px;
-    height: 300px;
-    border: 1px solid var(--foreground);
-
+.html {
+  display: flex;
+  width: 100%;
+  padding: 5px;
+  border-radius: 3px;
+  height: 300px;
+  border: 1px solid var(--foreground);
 }
 
-.pcUl{
-    display: none;
+.pcUl {
+  display: none;
+}
+
+.error {
+  color: #da0000;
+  font-weight: bold;
+  font-size: 0.875rem;
+}
+
+.inputError {
+  border: solid 2px #da0000;
+  background-color: rgba(255, 0, 0, 0.1);
 }
 @media screen and (min-width: 600px) {
-    .formContent{
-        display: flex;
-        height: 45px;
-    }
-    .label{
-        width: 50%;
+  .formContent {
+    display: flex;
+    height: 45px;
+  }
+  .label {
+    width: 50%;
+  }
 
-    }
+  .labelColor {
+    width: 50%;
+  }
 
-    .labelColor{
-        width: 50%;
-
-    }
-
-
-    .textarea{
-        font-size: 16px;
-        width: 50%;
-        
-    }
-    .html{
-        width: 50%;
-    }
-    .spUI{
-        display: none;
-    }
-    .pcUl{
-        display:contents;
-        display: flex;
-    }
-  
+  .textarea {
+    font-size: 16px;
+    width: 50%;
+  }
+  .html {
+    width: 50%;
+  }
+  .spUI {
+    display: none;
+  }
+  .pcUl {
+    display: contents;
+    display: flex;
+  }
 }
