@@ -12,7 +12,7 @@ export default function NewPost() {
   const handlePost = () => {
     // ここでAPIリクエストなど実行してもOK
     // 最終的にページ遷移:
-    router.push("/post_details/1");
+    router.push("/post_details");
   };
   return (
     <Layout
