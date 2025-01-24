@@ -1,8 +1,9 @@
 import RoundFrame from "@/components/roundFrame/RoundFrame";
 import Link from "next/link";
 import ColorLink from "@/components/colorLink/ColorLink";
-import Style from "../lists/lists.module.css";
+import Style from "../UsersArticleList/UsersArticleList.module.css";
 import { JSX } from "react";
+import EditRoundFrame from "../editRoundFrame/EditRoundFrame";
 
 // 日付をスラッシュ形式にフォーマットする関数
 const formatDate = (dateString: string): string => {
@@ -40,7 +41,7 @@ interface Props {
   }[];
 }
 
-export default function Lists({ pagedata }: Props) {
+export default function UsersArticleList({ pagedata }: Props) {
   const splitAndLimitByHeadings = (content: string): JSX.Element[] => {
     // ### ごとに分割して配列化
     const sections = content.split("###");
@@ -62,7 +63,7 @@ export default function Lists({ pagedata }: Props) {
       {sortedData.map((post) => (
         <li key={post.articleId}>
           <Link href="#">
-            <RoundFrame>
+            <EditRoundFrame>
               <div>
                 <p>作成日: {formatDate(post.created_at)}</p>
               </div>
@@ -74,7 +75,7 @@ export default function Lists({ pagedata }: Props) {
 
               <h3>「{post.title}」</h3>
               <p>{splitAndLimitByHeadings(post.content)}</p>
-            </RoundFrame>
+            </EditRoundFrame>
           </Link>
         </li>
       ))}
