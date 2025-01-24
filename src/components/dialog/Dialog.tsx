@@ -19,26 +19,28 @@ export default function Dialog({
   handleSubmit,
 }: Props) {
   return (
-    <div className={Style.dialog}>
-      <Form handleSubmit={handleSubmit} noValidate={false}>
-        <div>
-          <p className={Style.text}>{dialogText}</p>
-          <div className={Style.buttonWrap}>
-            <Button
-              buttonText={yesButtonText}
-              size="S"
-              type="submit"
-              buttonClick={okButton}
-            ></Button>
-            <Button
-              buttonText={noButtonText}
-              size="S"
-              type="submit"
-              buttonClick={noButton}
-            ></Button>
+    <div className={Style.overlay}>
+      <div className={Style.dialog}>
+        <Form handleSubmit={handleSubmit} noValidate={false}>
+          <div>
+            <p className={Style.text}>{dialogText}</p>
+            <div className={Style.buttonWrap}>
+              <Button
+                buttonText={noButtonText}
+                size="S"
+                type="submit"
+                buttonClick={noButton}
+              ></Button>
+              <Button
+                buttonText={yesButtonText}
+                size="S"
+                type="submit"
+                buttonClick={okButton}
+              ></Button>
+            </div>
           </div>
-        </div>
-      </Form>
+        </Form>
+      </div>
     </div>
   );
 }
