@@ -50,7 +50,7 @@ export default function MarkDown({
 
     // 本文: 1~10000文字
     if (contentLen < 1 || contentLen > 10000) {
-      setErrorContent("本文は1～10000文字で入力してください");
+      setErrorContent("記事内容は1～10000文字で入力してください");
       hasError = true;
     } else {
       setErrorContent("");
@@ -95,6 +95,7 @@ export default function MarkDown({
           type="text"
           inputName="title"
           inputId="title"
+          placeholder="タイトルを入力してください"
           // 親のtitleを表示 (可変)
           value={title}
           // 親に変更を通知
@@ -131,8 +132,12 @@ export default function MarkDown({
             <div className={Style.spUI}>
               {touch ? (
                 <textarea
-                  className={Style.textarea}
-                  placeholder="### はじめに"
+                  className={
+                    errorContent
+                      ? `${Style.textarea} ${Style.inputError}`
+                      : Style.textarea
+                  }
+                  placeholder="記事内容を入力してください"
                   // ローカルプレビューと親のcontentを同期
                   value={preview}
                   onChange={textChange}
@@ -155,7 +160,7 @@ export default function MarkDown({
                   ? `${Style.textarea} ${Style.inputError}`
                   : Style.textarea
               }
-              placeholder="### はじめに"
+              placeholder="記事内容を入力してください"
               value={preview}
               onChange={textChange}
             />

@@ -15,7 +15,7 @@ export default function EdidPost() {
   const handlePost = () => {
     // ここでAPIリクエストなど実行してもOK
     // 最終的にページ遷移:
-    router.push("/");
+    router.push("/post_details");
   };
 
   const button = "投稿";
