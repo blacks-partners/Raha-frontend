@@ -19,8 +19,8 @@ export default function PostDetails() {
   const commentDate = "2025-01-07 12:00";
   const commenterName = "山田花子";
 
-  const [comment, setComment] = useState("参考になります");
-  const [newComment, setNewComment] = useState("いいね");
+  const [comment, setComment] = useState("");
+  const [newComment, setNewComment] = useState("");
 
   // 記事削除用ダイアログ
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
@@ -113,9 +113,9 @@ export default function PostDetails() {
       {/* 削除ダイアログ（記事用） */}
       {showDeleteDialog && (
         <Dialog
-          dialogText="本当に削除しますか？"
-          yesButtonText="はい"
-          noButtonText="いいえ"
+          dialogText="記事を削除してもよろしいですか？"
+          yesButtonText="削除"
+          noButtonText="キャンセル"
           okButton={confirmDelete}
           noButton={closeDialog}
           handleSubmit={function (): void {
@@ -127,9 +127,9 @@ export default function PostDetails() {
       {/* 削除ダイアログ（コメント用） */}
       {showDeleteCommentDialog && (
         <Dialog
-          dialogText="本当に削除しますか？"
-          yesButtonText="はい"
-          noButtonText="いいえ"
+          dialogText="コメントを削除してもよろしいですか？"
+          yesButtonText="削除"
+          noButtonText="キャンセル"
           okButton={deleteComment}
           noButton={closeCommentDialog}
           handleSubmit={function (): void {
