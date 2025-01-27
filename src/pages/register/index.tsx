@@ -5,7 +5,7 @@ import { useState } from "react";
 import inputStyle from "@/components/input/input.module.css";
 import Button from "@/components/button/Button";
 import registerStyle from "@/styles/Register.module.css";
-import ColorLink from "@/components/ColorLink/ColorLink";
+import ColorLink from "@/components/colorLink/ColorLink";
 import { useRouter } from "next/router";
 
 export default function Register() {
