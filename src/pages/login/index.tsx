@@ -5,7 +5,7 @@ import Form from "@/components/form/Form";
 import Input from "@/components/input/Input";
 import Button from "@/components/button/Button";
 import inputStyle from "@/components/input/input.module.css";
-import ColorLink from "@/components/colorLink/ColorLink";
+import ColorLink from "@/components/ColorLink/ColorLink";
 import loginStyle from "@/styles/Login.module.css";
 
 export default function Login() {
@@ -32,11 +32,11 @@ export default function Login() {
   };
 
   // 「ログイン」を押下した時
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     let hasError = false;
 
-    // エラー
+    // アドレスエラー
     if (email.trim() === "") {
       setEmailError("メールアドレスを入力してください");
       setInputEmailArea(inputStyle.errorInput);
@@ -50,6 +50,7 @@ export default function Login() {
       setInputEmailArea(inputStyle.usualInput);
     }
 
+    // パスワードエラー
     if (password.trim() === "") {
       setPassError("パスワードを入力してください");
       setInputPassArea(inputStyle.errorInput);
@@ -58,6 +59,29 @@ export default function Login() {
       setPassError("");
       setInputPassArea(inputStyle.usualInput);
     }
+
+    // fetchでユーザー情報取得
+    if (email.trim() !== "" && password.trim() !== "") {
+      try {
+        const res = await fetch(
+          `http://localhost:8000/users?email=${email}&password=${password}`
+        );
+        const users = await res.json();
+
+        if (users.length > 0) {
+          console.log("ログイン成功");
+        } else {
+          setPassError("メールアドレスまたはパスワードが間違っています");
+          setInputEmailArea(inputStyle.errorInput);
+          setInputPassArea(inputStyle.errorInput);
+          hasError = true;
+        }
+      } catch {
+        console.log("ログインエラー");
+      }
+    }
+
+    // エラーではない場合にホームへ遷移
     setIsValid(!hasError);
     if (!hasError) {
       router.push("/");
