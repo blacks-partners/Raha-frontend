@@ -250,12 +250,6 @@
       "introduction": "趣味でアプリ開発を行っています。",
       "created_at": "2025-01-23T12:00:00Z",
       "updated_at": "2025-01-23T12:00:00Z"
-    },
-    {
-      "id": "a341",
-      "name": "楽々らくた",
-      "email": "example@example.com",
-      "password": "aaaa1111!"
     }
   ]
 }
