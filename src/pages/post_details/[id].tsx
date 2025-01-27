@@ -95,7 +95,10 @@ export default function PostDetails() {
     setIsCommentEditing(true);
   };
   const handleCommentEditComplete = () => {
-    router.push("#");
+    if (comment.trim()) {
+      // コメントが空でないことを確認
+      router.push("#");
+    }
   };
 
   // 入力欄フォーカス用
@@ -188,6 +191,7 @@ export default function PostDetails() {
                   buttonText="編集完了"
                   size="S"
                   buttonClick={handleCommentEditComplete}
+                  disabled={!comment.trim()}
                 />
               </div>
             )}
