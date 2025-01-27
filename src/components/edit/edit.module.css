@@ -1,12 +1,13 @@
-.icon{
-    border: 0;
+.icon {
+  border: 0;
+  background-color: white;
 }
-.icons{
-   display: flex;
-   gap: 15%;
+.icons {
+  display: flex;
+  gap: 15%;
 }
 
-.iconLayout{
-display: flex;
-justify-content: end;
+.iconLayout {
+  display: flex;
+  justify-content: end;
 }

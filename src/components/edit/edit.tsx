@@ -2,8 +2,8 @@ import Image from "next/image";
 import Style from "../edit/edit.module.css";
 
 interface Props {
-  deleteClick: () => void;
-  editClick: () => void;
+  deleteClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  editClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 export default function Edit({ deleteClick, editClick }: Props) {

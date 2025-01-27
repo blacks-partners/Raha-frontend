@@ -1,6 +1,7 @@
 import Button from "@/components/button/Button";
 import Dialog from "@/components/dialog/Dialog";
-import EditRoundFrame from "@/components/editRoundFrame/EditRoundFrame";
+import Edit from "@/components/edit/edit";
+
 import Form from "@/components/form/Form";
 import Layout from "@/components/layout/Layout";
 import RoundFrame from "@/components/roundFrame/RoundFrame";
@@ -11,6 +12,13 @@ import { useRef, useState } from "react";
 
 export default function PostDetails() {
   const router = useRouter();
+
+  // ログインユーザーのID（仮置き）
+  const loggedInUserId = 1; // 本来は認証システムから取得
+
+  // 投稿とコメントのユーザーID（仮置き）
+  const postUserId = 1;
+  const commentUserId = 1;
 
   const postDate = "2025-01-07 09:50";
   const posterName = "らは太郎";
@@ -53,7 +61,7 @@ export default function PostDetails() {
 
   // 記事削除フロー
 
-  const handleDeleteClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handlePostDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setShowDeleteDialog(true);
   };
@@ -70,13 +78,13 @@ export default function PostDetails() {
 
   // 記事編集
 
-  const handleEditClick = () => {
+  const handlePostEdit = () => {
     router.push("/edit_post");
   };
 
   // コメント削除フロー
 
-  const commentDeleteClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleCommentDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setShowDeleteCommentDialog(true);
   };
@@ -91,7 +99,7 @@ export default function PostDetails() {
 
   // コメント編集
 
-  const commentEditClick = () => {
+  const handleCommentEdit = () => {
     setIsCommentEditing(true);
   };
   const handleCommentEditComplete = () => {
@@ -143,10 +151,10 @@ export default function PostDetails() {
 
       <Form handleSubmit={handleSubmit} noValidate={false}>
         {/* 記事の部分 */}
-        <EditRoundFrame
-          deleteClick={handleDeleteClick}
-          editClick={handleEditClick}
-        >
+        <RoundFrame>
+          {loggedInUserId === postUserId && (
+            <Edit deleteClick={handlePostDelete} editClick={handlePostEdit} />
+          )}
           <label htmlFor="date">作成日：</label>
           {postDate}
           <br />
@@ -158,15 +166,18 @@ export default function PostDetails() {
           <br />
           <label htmlFor="article"></label>
           {article}
-        </EditRoundFrame>
+        </RoundFrame>
 
         <h1 className={styles.comment_title}>コメント</h1>
 
         {/* コメントの部分 */}
-        <EditRoundFrame
-          deleteClick={commentDeleteClick}
-          editClick={commentEditClick}
-        >
+        <RoundFrame>
+          {loggedInUserId === commentUserId && (
+            <Edit
+              deleteClick={handleCommentDelete}
+              editClick={handleCommentEdit}
+            />
+          )}
           <div>
             {commentDate}
             <br />
@@ -196,7 +207,7 @@ export default function PostDetails() {
               </div>
             )}
           </div>
-        </EditRoundFrame>
+        </RoundFrame>
 
         <RoundFrame
           onFrameClick={() => {
