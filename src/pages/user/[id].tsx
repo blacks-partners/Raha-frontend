@@ -44,10 +44,10 @@ export default function PostList({
   const usersName = filteredData[0].user.name;
   return (
     <Layout
-      headContent={`${usersName}の投稿一覧`}
-      headName={`${usersName}の投稿一覧`}
-      pageTitle={`${usersName}の投稿一覧`}
-      headTitle={`${usersName}の投稿一覧`}
+      headContent={`${usersName}さんの投稿一覧`}
+      headName={`${usersName}さんの投稿一覧`}
+      pageTitle={`${usersName}さんの投稿一覧`}
+      headTitle={`${usersName}さんの投稿一覧`}
     >
       <Lists pagedata={filteredData}></Lists>
     </Layout>
