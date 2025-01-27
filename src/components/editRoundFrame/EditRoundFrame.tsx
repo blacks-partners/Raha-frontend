@@ -14,5 +14,41 @@ export default function EditRoundFrame({
 
   children,
 }: Props) {
-  return <RoundFrame>{children}</RoundFrame>;
+  return (
+    <RoundFrame>
+      <div className={EditRoundFrameStyle.iconLayout}>
+        <div className={EditRoundFrameStyle.icons}>
+          <button
+            onClick={deleteClick}
+            className={EditRoundFrameStyle.icon}
+            type="button"
+          >
+            <div>
+              <Image
+                src="/common/delete_icon.png"
+                alt="削除アイコン"
+                width={20}
+                height={20}
+              ></Image>
+            </div>
+          </button>
+          <button
+            onClick={editClick}
+            className={EditRoundFrameStyle.icon}
+            type="button"
+          >
+            <div>
+              <Image
+                src="/common/edit_icon.png"
+                alt="編集アイコン"
+                width={20}
+                height={20}
+              ></Image>
+            </div>
+          </button>
+        </div>
+      </div>
+      {children}
+    </RoundFrame>
+  );
 }
