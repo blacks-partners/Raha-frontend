@@ -42,7 +42,7 @@ export default function Login() {
       setInputEmailArea(inputStyle.errorInput);
       hasError = true;
     } else if (!validateEmail(email)) {
-      setEmailError("正しいメールアドレス形式で入力してください");
+      setEmailError("メールアドレスを正しく入力してください");
       setInputEmailArea(inputStyle.errorInput);
       hasError = true;
     } else {
@@ -71,7 +71,7 @@ export default function Login() {
         if (users.length > 0) {
           console.log("ログイン成功");
         } else {
-          setPassError("メールアドレスまたはパスワードが間違っています");
+          setPassError("メールアドレス又はパスワードが誤っています");
           setInputEmailArea(inputStyle.errorInput);
           setInputPassArea(inputStyle.errorInput);
           hasError = true;
