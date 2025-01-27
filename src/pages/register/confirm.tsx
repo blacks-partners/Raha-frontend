@@ -30,6 +30,10 @@ export default function Confirm() {
     }
   };
 
+  const returnBtn = () => {
+    router.push("/register");
+  };
+
   return (
     <>
       <Layout
@@ -46,7 +50,12 @@ export default function Confirm() {
             </div>
           </RoundFrame>
           <div className={confirmStyle.btnWrap}>
-            <Button type={"button"} buttonText={"戻る"} size={"M"} />
+            <Button
+              type={"button"}
+              buttonText={"戻る"}
+              size={"M"}
+              buttonClick={returnBtn}
+            />
             <Button type={"submit"} buttonText={"登録"} size={"M"} />
           </div>
         </Form>
