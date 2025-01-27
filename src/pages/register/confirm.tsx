@@ -5,13 +5,50 @@ import RoundFrame from "@/components/roundFrame/RoundFrame";
 import confirmStyle from "@/styles/Confirm.module.css";
 import { useRouter } from "next/router";
 
-const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
-};
-
 export default function Confirm() {
   const router = useRouter();
-  const { name, email, password } = router.query;
+  const { name, email, password, introduction, created_at, updated_at } =
+    router.query;
+
+  //登録を押下した時
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    try {
+      const userRes = await fetch("http://localhost:8000/users");
+      const users = await userRes.json();
+      const maxId =
+        users.length > 0 ? Math.max(...users.map((user: any) => user.id)) : 0;
+
+      const res = await fetch("http://localhost:8000/users", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          id: maxId + 1,
+          name: name,
+          email: email,
+          password: password,
+          introduction: "",
+          created_at: new Date().toISOString(),
+          updated_at: "",
+        }),
+      });
+      if (res.ok) {
+        console.log("登録成功");
+        setTimeout(() => {
+          router.push("/login");
+        }, 1000);
+      } else {
+        console.error("登録失敗");
+      }
+    } catch {
+      console.error("登録失敗");
+    }
+  };
+
+  const returnBtn = () => {
+    router.push("/register");
+  };
 
   return (
     <>
@@ -21,7 +58,7 @@ export default function Confirm() {
         headContent={"ユーザーの登録を確認する画面"}
         pageTitle={"ユーザー登録確認"}
       >
-        <Form method="POST" handleSubmit={handleSubmit} noValidate={false}>
+        <Form handleSubmit={handleSubmit} noValidate={false}>
           <RoundFrame>
             <div>
               <p>氏名：{name}</p>
@@ -29,7 +66,12 @@ export default function Confirm() {
             </div>
           </RoundFrame>
           <div className={confirmStyle.btnWrap}>
-            <Button type={"button"} buttonText={"戻る"} size={"M"} />
+            <Button
+              type={"button"}
+              buttonText={"戻る"}
+              size={"M"}
+              buttonClick={returnBtn}
+            />
             <Button type={"submit"} buttonText={"登録"} size={"M"} />
           </div>
         </Form>

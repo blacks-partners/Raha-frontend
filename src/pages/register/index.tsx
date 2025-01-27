@@ -47,7 +47,7 @@ export default function Register() {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     let hasError = false;
 
@@ -75,7 +75,7 @@ export default function Register() {
       setInputEmailStyle(inputStyle.errorInput);
       hasError = true;
     } else if (!validateEmail(email)) {
-      setInputEmailError("正しいメールアドレス形式で入力してください");
+      setInputEmailError("メールアドレスを正しく入力してください");
       setInputEmailStyle(inputStyle.errorInput);
       hasError = true;
     } else {
@@ -89,7 +89,7 @@ export default function Register() {
       setInputPassStyle(inputStyle.errorInput);
       hasError = true;
     } else if (!validatePass(password)) {
-      setInputPassError("正しいパスワード形式で入力してください");
+      setInputPassError("パスワードを正しく入力してください");
       setInputPassStyle(inputStyle.errorInput);
       hasError = true;
     } else {
@@ -108,11 +108,16 @@ export default function Register() {
       setInputPass2Error("");
       setInputPass2Style(inputStyle.usualInput);
     }
+
     setIsValid(!hasError);
     if (!hasError) {
       router.push({
         pathname: "/register/confirm",
-        query: { name, email, password },
+        query: {
+          name: name,
+          email: email,
+          password: password,
+        },
       });
     }
   };
@@ -135,7 +140,7 @@ export default function Register() {
             errorMessage={inputNameError}
             value={name}
             handleChange={(e) => setName(e.target.value)}
-            placeholder="例）山田太郎"
+            placeholder="（例）山田太郎"
           />
           <Input
             label="メールアドレス"
@@ -146,7 +151,7 @@ export default function Register() {
             errorMessage={inputEmailError}
             value={email}
             handleChange={(e) => setEmail(e.target.value)}
-            placeholder="例）example@example.com"
+            placeholder="（例）example@example.com"
           />
           <Input
             label="パスワード"
