@@ -84,7 +84,9 @@ export default function Login() {
     // エラーではない場合にホームへ遷移
     setIsValid(!hasError);
     if (!hasError) {
-      router.push("/");
+      setTimeout(() => {
+        router.push("/");
+      });
     }
   };
 

@@ -113,7 +113,11 @@ export default function Register() {
     if (!hasError) {
       router.push({
         pathname: "/register/confirm",
-        query: { name, email, password },
+        query: {
+          name: name,
+          email: email,
+          password: password,
+        },
       });
     }
   };

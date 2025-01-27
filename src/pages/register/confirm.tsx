@@ -7,21 +7,37 @@ import { useRouter } from "next/router";
 
 export default function Confirm() {
   const router = useRouter();
-  const { name, email, password } = router.query;
+  const { name, email, password, introduction, created_at, updated_at } =
+    router.query;
 
   //登録を押下した時
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
+      const userRes = await fetch("http://localhost:8000/users");
+      const users = await userRes.json();
+      const maxId =
+        users.length > 0 ? Math.max(...users.map((user: any) => user.id)) : 0;
+
       const res = await fetch("http://localhost:8000/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password }),
+        body: JSON.stringify({
+          id: String(maxId + 1),
+          name: name,
+          email: email,
+          password: password,
+          introduction: "",
+          created_at: new Date().toISOString(),
+          updated_at: "",
+        }),
       });
       if (res.ok) {
         console.log("登録成功");
-        router.push("/login");
+        setTimeout(() => {
+          router.push("/login");
+        }, 1000);
       } else {
         console.error("登録失敗");
       }
