@@ -24,7 +24,7 @@ export default function Confirm() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          id: String(maxId + 1),
+          id: maxId + 1,
           name: name,
           email: email,
           password: password,
