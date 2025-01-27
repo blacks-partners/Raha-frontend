@@ -52,7 +52,7 @@ export default function Header() {
             <li>
               {text && (
                 <p>
-                  <Link href="#" onClick={handleClick}>
+                  <Link href="/login" onClick={handleClick}>
                     ログイン
                   </Link>
                 </p>
