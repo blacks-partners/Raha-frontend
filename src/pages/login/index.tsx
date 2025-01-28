@@ -77,7 +77,7 @@ export default function Login() {
         if (users.length > 0) {
           console.log("ログイン成功");
 
-          // クライアント側でクッキーを設定
+          // 仮としてクライアント側でクッキーを設定（認証系はサーバ側で設定した方がセキュリティ的に良い）
           document.cookie = `loginID=${users[0].id}; path=/; max-age=3600; secure; samesite=strict`;
         } else {
           setPassError("メールアドレス又はパスワードが誤っています");
