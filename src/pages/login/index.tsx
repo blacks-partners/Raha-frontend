@@ -76,6 +76,9 @@ export default function Login() {
 
         if (users.length > 0) {
           console.log("ログイン成功");
+
+          // クライアント側でクッキーを設定
+          document.cookie = `loginID=${users[0].id}; path=/; max-age=3600; secure; samesite=strict`;
         } else {
           setPassError("メールアドレス又はパスワードが誤っています");
           setInputEmailArea(inputStyle.errorInput);
