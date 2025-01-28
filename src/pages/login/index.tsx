@@ -109,6 +109,7 @@ export default function Login() {
             handleChange={(e) => setEmail(e.target.value)}
             inputClass={inputEmailArea}
             errorMessage={emailError}
+            autocomplete="username"
           />
           <Input
             label="パスワード"
@@ -120,6 +121,7 @@ export default function Login() {
             handleChange={(e) => setPassword(e.target.value)}
             inputClass={inputPassArea}
             errorMessage={passError}
+            autocomplete="new-password"
           />
           <div className={loginStyle.linkWrap}>
             <ColorLink colorLinkText="ユーザー登録はこちら" url="/register" />

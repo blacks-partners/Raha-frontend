@@ -5,7 +5,7 @@ import { useState } from "react";
 import inputStyle from "@/components/input/input.module.css";
 import Button from "@/components/button/Button";
 import registerStyle from "@/styles/Register.module.css";
-import ColorLink from "@/components/colorLink/ColorLink";
+import ColorLink from "@/components/ColorLink/ColorLink";
 import { useRouter } from "next/router";
 
 export default function Register() {
@@ -164,6 +164,7 @@ export default function Register() {
             handleChange={(e) => setPassword(e.target.value)}
             placeholder="パスワードを入力"
             passMessage="半角英数と記号を含む8文字以上16字以内"
+            autocomplete="new-password"
           />
           <Input
             label="確認用パスワード"
@@ -175,6 +176,7 @@ export default function Register() {
             value={password2}
             handleChange={(e) => setpassword2(e.target.value)}
             placeholder="再度パスワードを入力"
+            autocomplete="new-password"
           />
           <div className={registerStyle.linkWrap}>
             <ColorLink colorLinkText="ログインはこちら" url="/login" />

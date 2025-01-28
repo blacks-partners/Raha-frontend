@@ -13,6 +13,7 @@ interface Props {
   inputClass?: string;
   errorMessage?: string;
   passMessage?: string;
+  autocomplete?: string;
 }
 
 export default function Input({
@@ -26,6 +27,7 @@ export default function Input({
   errorMessage,
   inputClass,
   passMessage,
+  autocomplete,
 }: Props) {
   return (
     <>
@@ -40,6 +42,7 @@ export default function Input({
             value={value}
             placeholder={placeholder}
             className={`${inputClass} ${passMessage}`}
+            autoComplete={autocomplete}
           />
         </div>
         <p className={inputStyle.errorMessage}>{errorMessage}</p>
