@@ -153,6 +153,7 @@ export default function Register() {
             value={name}
             handleChange={(e) => setName(e.target.value)}
             placeholder="（例）山田太郎"
+            autocomplete="off"
           />
           <Input
             label="メールアドレス"
@@ -164,6 +165,7 @@ export default function Register() {
             value={email}
             handleChange={(e) => setEmail(e.target.value)}
             placeholder="（例）example@example.com"
+            autocomplete="username"
           />
           <Input
             label="パスワード"
