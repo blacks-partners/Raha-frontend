@@ -31,6 +31,12 @@ export default function Login() {
     return regex.test(value);
   };
 
+  // パスワードを表示
+  const [passType, setPassType] = useState("password");
+  const iconClick = () => {
+    passType === "password" ? setPassType("text") : setPassType("password");
+  };
+
   // 「ログイン」を押下した時
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -113,7 +119,7 @@ export default function Login() {
           />
           <Input
             label="パスワード"
-            type="password"
+            type={passType}
             inputId="password"
             placeholder="パスワードを入力してください"
             inputName="password"
@@ -122,6 +128,7 @@ export default function Login() {
             inputClass={inputPassArea}
             errorMessage={passError}
             autocomplete="new-password"
+            iconClick={iconClick}
           />
           <div className={loginStyle.linkWrap}>
             <ColorLink colorLinkText="ユーザー登録はこちら" url="/register" />

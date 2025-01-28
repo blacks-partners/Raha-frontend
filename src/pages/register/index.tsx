@@ -25,6 +25,18 @@ export default function Register() {
   const [isValid, setIsValid] = useState(true);
   const router = useRouter();
 
+  // パスワードを表示
+  const [passType, setPassType] = useState("password");
+  const [confirmPassType, setconfirmPassType] = useState("password");
+  const iconClick1 = () => {
+    passType === "password" ? setPassType("text") : setPassType("password");
+  };
+  const iconClick2 = () => {
+    confirmPassType === "password"
+      ? setconfirmPassType("text")
+      : setconfirmPassType("password");
+  };
+
   // エラー 初期値
   const [inputNameError, setInputNameError] = useState("");
   const [inputEmailError, setInputEmailError] = useState("");
@@ -155,7 +167,7 @@ export default function Register() {
           />
           <Input
             label="パスワード"
-            type="password"
+            type={passType}
             inputId="password"
             inputName="password"
             inputClass={inputPassStyle}
@@ -165,10 +177,11 @@ export default function Register() {
             placeholder="パスワードを入力"
             passMessage="半角英数と記号を含む8文字以上16字以内"
             autocomplete="new-password"
+            iconClick={iconClick1}
           />
           <Input
             label="確認用パスワード"
-            type="password"
+            type={confirmPassType}
             inputId="password2"
             inputName="password2"
             inputClass={inputPass2Style}
@@ -177,6 +190,7 @@ export default function Register() {
             handleChange={(e) => setpassword2(e.target.value)}
             placeholder="再度パスワードを入力"
             autocomplete="new-password"
+            iconClick={iconClick2}
           />
           <div className={registerStyle.linkWrap}>
             <ColorLink colorLinkText="ログインはこちら" url="/login" />

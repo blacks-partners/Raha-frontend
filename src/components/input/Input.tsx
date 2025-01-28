@@ -1,8 +1,9 @@
 import inputStyle from "@/components/input/input.module.css";
+import Image from "next/image";
 
 interface Props {
   label: string | React.ReactNode;
-  type: "email" | "password" | "date" | "number" | "text";
+  type: "email" | "password" | "date" | "number" | "text" | string;
   inputId: string;
   placeholder?: string;
   value?: string | number;
@@ -14,6 +15,7 @@ interface Props {
   errorMessage?: string;
   passMessage?: string;
   autocomplete?: string;
+  iconClick?: () => void;
 }
 
 export default function Input({
@@ -28,6 +30,7 @@ export default function Input({
   inputClass,
   passMessage,
   autocomplete,
+  iconClick,
 }: Props) {
   return (
     <>
@@ -44,6 +47,17 @@ export default function Input({
             className={`${inputClass} ${passMessage}`}
             autoComplete={autocomplete}
           />
+          {(label === "パスワード" || label === "確認用パスワード") && (
+            <div className={inputStyle.iconStyle} onClick={iconClick}>
+              <Image
+                src="/common/eye_icon.png"
+                alt="目のアイコン"
+                width={256}
+                height={256}
+                className={`${inputClass} ${passMessage}`}
+              />
+            </div>
+          )}
         </div>
         <p className={inputStyle.errorMessage}>{errorMessage}</p>
         <p className={inputStyle.passMessage}>{passMessage}</p>
