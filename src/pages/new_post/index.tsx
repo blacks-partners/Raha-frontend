@@ -9,10 +9,28 @@ export default function NewPost() {
   const [postTitle, setPostTitle] = useState("");
   const [postTextarea, SetPostTextarea] = useState("");
 
-  const handlePost = () => {
-    // ここでAPIリクエストなど実行してもOK
-    // 最終的にページ遷移:
-    router.push("/post_details");
+  const handlePost = async () => {
+    try {
+      const response = await fetch("http://localhost:8000/articles", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title: postTitle,
+          content: postTextarea,
+        }),
+      });
+      //ここでデータ(articleのidがほしい)取ってくる
+      const responseData = await response.json();
+      const articleId = responseData.id;
+
+      if (response.ok) {
+        router.push(`/post_details/${articleId}`);
+      }
+    } finally {
+      console.error("エラーが発生しました");
+    }
   };
   return (
     <Layout
