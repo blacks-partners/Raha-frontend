@@ -5,7 +5,7 @@ import { useState } from "react";
 import inputStyle from "@/components/input/input.module.css";
 import Button from "@/components/button/Button";
 import registerStyle from "@/styles/Register.module.css";
-import ColorLink from "@/components/colorLink/ColorLink";
+import ColorLink from "@/components/ColorLink/ColorLink";
 import { useRouter } from "next/router";
 
 export default function Register() {
@@ -24,6 +24,18 @@ export default function Register() {
   // 画面遷移
   const [isValid, setIsValid] = useState(true);
   const router = useRouter();
+
+  // パスワードを表示
+  const [passType, setPassType] = useState("password");
+  const [confirmPassType, setconfirmPassType] = useState("password");
+  const iconClick1 = () => {
+    passType === "password" ? setPassType("text") : setPassType("password");
+  };
+  const iconClick2 = () => {
+    confirmPassType === "password"
+      ? setconfirmPassType("text")
+      : setconfirmPassType("password");
+  };
 
   // エラー 初期値
   const [inputNameError, setInputNameError] = useState("");
@@ -141,6 +153,7 @@ export default function Register() {
             value={name}
             handleChange={(e) => setName(e.target.value)}
             placeholder="（例）山田太郎"
+            autocomplete="off"
           />
           <Input
             label="メールアドレス"
@@ -152,10 +165,11 @@ export default function Register() {
             value={email}
             handleChange={(e) => setEmail(e.target.value)}
             placeholder="（例）example@example.com"
+            autocomplete="username"
           />
           <Input
             label="パスワード"
-            type="password"
+            type={passType}
             inputId="password"
             inputName="password"
             inputClass={inputPassStyle}
@@ -164,10 +178,12 @@ export default function Register() {
             handleChange={(e) => setPassword(e.target.value)}
             placeholder="パスワードを入力"
             passMessage="半角英数と記号を含む8文字以上16字以内"
+            autocomplete="new-password"
+            iconClick={iconClick1}
           />
           <Input
             label="確認用パスワード"
-            type="password"
+            type={confirmPassType}
             inputId="password2"
             inputName="password2"
             inputClass={inputPass2Style}
@@ -175,6 +191,8 @@ export default function Register() {
             value={password2}
             handleChange={(e) => setpassword2(e.target.value)}
             placeholder="再度パスワードを入力"
+            autocomplete="new-password"
+            iconClick={iconClick2}
           />
           <div className={registerStyle.linkWrap}>
             <ColorLink colorLinkText="ログインはこちら" url="/login" />

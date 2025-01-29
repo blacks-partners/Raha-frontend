@@ -5,6 +5,7 @@
 .inputAreaWrap {
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 .inputAreaWrap input {
   width: 100%;
@@ -43,6 +44,21 @@
   font-size: 0.8rem;
 }
 
+/* 目のアイコン */
+.iconStyle {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 31px;
+  right: 10px;
+}
+.iconStyle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: none;
+}
+
 /* PC */
 @media screen and (min-width: 800px) {
   .wrap {
@@ -59,5 +75,9 @@
   .errorMessage,
   .passMessage {
     margin-left: 200px;
+  }
+  /* 目のアイコン */
+  .iconStyle {
+    top: 4px;
   }
 }

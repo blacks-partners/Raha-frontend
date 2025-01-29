@@ -31,6 +31,12 @@ export default function Login() {
     return regex.test(value);
   };
 
+  // パスワードを表示
+  const [passType, setPassType] = useState("password");
+  const iconClick = () => {
+    passType === "password" ? setPassType("text") : setPassType("password");
+  };
+
   // 「ログイン」を押下した時
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -70,6 +76,9 @@ export default function Login() {
 
         if (users.length > 0) {
           console.log("ログイン成功");
+
+          // 仮としてクライアント側でクッキーを設定（認証系はサーバ側で設定した方がセキュリティ的に良い）
+          document.cookie = `loginID=${users[0].id}; path=/; max-age=3600; secure; samesite=strict`;
         } else {
           setPassError("メールアドレス又はパスワードが誤っています");
           setInputEmailArea(inputStyle.errorInput);
@@ -109,10 +118,11 @@ export default function Login() {
             handleChange={(e) => setEmail(e.target.value)}
             inputClass={inputEmailArea}
             errorMessage={emailError}
+            autocomplete="username"
           />
           <Input
             label="パスワード"
-            type="password"
+            type={passType}
             inputId="password"
             placeholder="パスワードを入力してください"
             inputName="password"
@@ -120,6 +130,8 @@ export default function Login() {
             handleChange={(e) => setPassword(e.target.value)}
             inputClass={inputPassArea}
             errorMessage={passError}
+            autocomplete="new-password"
+            iconClick={iconClick}
           />
           <div className={loginStyle.linkWrap}>
             <ColorLink colorLinkText="ユーザー登録はこちら" url="/register" />
