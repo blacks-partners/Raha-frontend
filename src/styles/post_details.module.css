@@ -5,18 +5,32 @@
   margin-bottom: 10px;
 }
 
-.input {
+.textarea {
   border: none;
   outline: none;
   padding: 1em 0.5em;
-  line-height: 5;
+  line-height: 1.5; /* 読みやすさを向上させるために調整 */
   width: 100%;
   box-sizing: border-box;
   color: #434343;
+  resize: none; /* リサイズを防ぎたい場合 */
+  overflow-wrap: break-word; /* テキストがtextarea内で折り返されるように設定 */
+  height: auto; /* 内容に基づいて調整、または固定高さを設定 */
+
+  border-radius: 8px; /* 角を丸くする */
 }
+
 .button {
   margin-top: 20px;
   text-align: center;
+}
+
+.editButton {
+  margin-top: 10px;
+}
+
+.error {
+  color: #da0000;
 }
 
 @media (min-width: 600px) {

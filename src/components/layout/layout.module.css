@@ -30,4 +30,8 @@
   .sectionLayout {
     padding: 80px;
   }
+
+  .header {
+    position: relative;
+  }
 }
