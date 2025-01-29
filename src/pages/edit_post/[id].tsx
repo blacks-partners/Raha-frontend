@@ -34,8 +34,7 @@ export default function EditPost({ postData }: EdidPostProps) {
         headers: {
           "Content-Type": "application/json",
           "X-AUTH-TOKEN":
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsInVzZXJJZCI6ImhvZ2UifQ.lGXvjOuj3hcpuqaE33SRjQSs1I9kO2VKNql9X2ZSCOw",
-          // "Access-Control-Allow-Origin": "http://localhost:8080",
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImV4cCI6MTc0MDgwNTY2Nn0.c9iu6gUqHs__7XB8MROtjhUwzzIYOjxI4hPeoevX0VY",
         },
         body: JSON.stringify({ title, content }),
       }
