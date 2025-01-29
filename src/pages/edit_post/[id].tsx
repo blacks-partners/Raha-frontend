@@ -2,20 +2,54 @@ import Layout from "@/components/layout/Layout";
 import MarkDown from "@/components/markDown/MarkDown";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { GetServerSideProps } from "next";
 
-export default function EdidPost() {
+interface EdidPostProps {
+  postData: {
+    title: string;
+    content: string;
+    articleId: number;
+  };
+}
+
+export default function EditPost({ postData }: EdidPostProps) {
   const router = useRouter();
-
+  console.log(postData);
+  console.log(postData.title);
+  console.log(postData.content);
   // タイトルと内容を親で管理（編集可能にする）
-  const [title, setTitle] = useState("Javaの基礎");
-  const [content, setContent] = useState("あいう");
+  const [title, setTitle] = useState(postData.title);
+  const [content, setContent] = useState(postData.content);
 
   // 「投稿」ボタン押下時に呼ばれる
-  // (画面遷移やAPI通信などの処理を親が担う)
-  const handlePost = () => {
-    // ここでAPIリクエストなど実行してもOK
-    // 最終的にページ遷移:
-    router.push("/post_details");
+  const handlePost = async () => {
+    console.log("hoge");
+    console.log(postData);
+
+    // PUTリクエストでデータを更新
+    const response = await fetch(
+      `http://localhost:8080/articles/${postData.articleId}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "X-AUTH-TOKEN":
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsInVzZXJJZCI6ImhvZ2UifQ.lGXvjOuj3hcpuqaE33SRjQSs1I9kO2VKNql9X2ZSCOw",
+          // "Access-Control-Allow-Origin": "http://localhost:8080",
+        },
+        body: JSON.stringify({ title, content }),
+      }
+    );
+    console.log("hogehoge");
+    console.log(response);
+
+    if (response.ok) {
+      // 更新が成功したら該当する投稿詳細画面へ遷移
+      router.push(`/post_details/${postData.articleId}`);
+    } else {
+      // エラー処理（エラーメッセージを表示するなど）
+      console.error("Failed to update post:", await response.text());
+    }
   };
 
   const button = "投稿";
@@ -29,15 +63,37 @@ export default function EdidPost() {
     >
       <MarkDown
         buttonText={button}
-        // 親のstateを渡す（ユーザーが編集できるようにする）
         title={title}
         textarea={content}
-        // ユーザーが入力した値を受け取るためのコールバック
-        onTitleChange={(newTitle) => setTitle(newTitle)}
-        onContentChange={(newContent) => setContent(newContent)}
-        // フォーム送信時に呼ばれるコールバック（投稿ボタン押下時）
+        onTitleChange={setTitle}
+        onContentChange={setContent}
         onPost={handlePost}
       />
     </Layout>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  // context.paramsからidを取得
+  const { id } = context.params as { id: string };
+
+  const response = await fetch(`http://localhost:8080/articles/${id}`);
+  console.log(response);
+  const postData = await response.json();
+  console.log(postData);
+  if (!response.ok) {
+    // response.ok が false の場合、エラーとして扱う
+    console.error(
+      `Failed to fetch data: ${response.status} ${response.statusText}`
+    );
+    return {
+      notFound: true,
+    };
+  }
+
+  return {
+    props: {
+      postData,
+    },
+  };
+};
