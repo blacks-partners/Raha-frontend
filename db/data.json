@@ -211,7 +211,7 @@
       "updated_at": "2025-01-21T09:00:00Z"
     },
     {
-      "id": "103",
+      "id": 103,
       "name": "高橋 一郎",
       "email": "takahashi.ichiro@example.com",
       "password": "hashed_password_789",
