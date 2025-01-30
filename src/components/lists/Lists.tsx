@@ -73,7 +73,7 @@ export default function Lists({ pagedata }: Props) {
               ></ColorLink>
 
               <h3>「{post.title}」</h3>
-              <p>{splitAndLimitByHeadings(post.content)}</p>
+              <div>{splitAndLimitByHeadings(post.content)}</div>
             </RoundFrame>
           </Link>
         </li>

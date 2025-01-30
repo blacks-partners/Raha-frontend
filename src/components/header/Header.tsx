@@ -2,29 +2,51 @@ import Link from "next/link";
 import { useState } from "react";
 import HeaderStyle from "../header/header.module.css";
 import Image from "next/image";
+import useSWR from "swr";
+import Toast from "../toast/Toast";
 
 export default function Header() {
-  const [text, setText] = useState(true);
   const [hamburger, setHamburger] = useState(false);
-  //   const {
-  //     data: res,
-  //     error,
-  //     isLoading,
-  //   } = useSWR("フェッチAPI。認証", (url: string) => fetch(url));
+  const [toast, setToast] = useState("");
+  const [view, setView] = useState(false);
+  const {
+    data: res,
+    error,
+    isLoading,
+  } = useSWR("/api/me", (url: string) => fetch(url));
 
-  //   const loginStatus = !error && !isLoading && res && res.status === 200;
-  //API確認次第、コメントの部分を表示させます！
+  const loginStatus = !error && !isLoading && res && res.status === 200;
+  console.log(res);
 
-  const handleClick = () => {
-    setText(!text);
-  };
   const changeShape = () => {
     setHamburger(!hamburger);
+  };
+
+  const handleClick = async () => {
+    try {
+      const res = await fetch("/api/logout", {});
+
+      if (res.ok) {
+        setView(true);
+        setToast("ログアウトしました");
+        setTimeout(() => {
+          setToast(""), setView(false);
+        }, 2000);
+      }
+    } catch {
+      setView(true);
+
+      setToast("ログアウトに失敗しました");
+      setTimeout(() => {
+        setToast(""), setView(false);
+      }, 2000);
+    }
   };
 
   return (
     <div className={HeaderStyle.header}>
       <div className={HeaderStyle.headerContents}>
+        {view && <Toast toastText={toast}></Toast>}
         <div className={HeaderStyle.headerIcons} onClick={changeShape}>
           {hamburger ? (
             <div className={HeaderStyle.hamburger}>
@@ -49,101 +71,76 @@ export default function Header() {
         </div>
         {hamburger && (
           <ul className={HeaderStyle.mobileUl}>
-            <li>
-              {text && (
-                <p>
-                  <Link href="/login" onClick={handleClick}>
-                    ログイン
-                  </Link>
-                </p>
-              )}
-              {!text && (
-                <p>
+            {loginStatus ? (
+              <>
+                <li>
+                  <Link href="/post_list">投稿一覧</Link>
+                </li>
+                <li>
+                  <Link href="/newPost">マイページ</Link>
+                </li>
+                <li>
+                  <Link href="/new_post">新規投稿</Link>
+                </li>
+                <li>
+                  <Link href="/newPost">アカウント情報</Link>
+                </li>
+                <li>
                   <Link href="#" onClick={handleClick}>
                     ログアウト
                   </Link>
-                </p>
-              )}
-            </li>
-
-            <li>
-              <p>
-                <Link href="/newPost">新規投稿</Link>
-              </p>
-            </li>
-            <li>
-              <p>
-                <Link href="/list">投稿一覧</Link>
-              </p>
-            </li>
-            <li>
-              {!text && (
-                <p>
-                  <Link href="#" onClick={handleClick}>
-                    マイページ
-                  </Link>
-                </p>
-              )}
-            </li>
+                </li>
+              </>
+            ) : (
+              <>
+                <li>
+                  <Link href="/post_list">投稿一覧</Link>
+                </li>
+                <li>
+                  <Link href="/login">ログイン</Link>
+                </li>
+                <li>
+                  <Link href="/new-post">新規登録</Link>
+                </li>
+              </>
+            )}
           </ul>
         )}
         <ul className={HeaderStyle.pcUl}>
-          <li>
-            {text && (
-              <p>
-                <Link href="#" onClick={handleClick}>
-                  ログイン
-                </Link>
-              </p>
-            )}
-            {!text && (
-              <p>
+          {loginStatus ? (
+            <>
+              <li>
+                <Link href="/post_list">投稿一覧</Link>
+              </li>
+              <li>
+                <Link href="/newPost">マイページ</Link>
+              </li>
+              <li>
+                <Link href="/new-post">新規投稿</Link>
+              </li>
+              <li>
+                <Link href="/newPost">アカウント情報</Link>
+              </li>
+              <li>
                 <Link href="#" onClick={handleClick}>
                   ログアウト
                 </Link>
-              </p>
-            )}
-          </li>
-
-          <li>
-            <p>
-              <Link href="/newPost">新規投稿</Link>
-            </p>
-          </li>
-          <li>
-            <p>
-              <Link href="/list">投稿一覧</Link>
-            </p>
-          </li>
-          <li>
-            {!text && (
-              <p>
-                <Link href="#" onClick={handleClick}>
-                  マイページ
-                </Link>
-              </p>
-            )}
-          </li>
+              </li>
+            </>
+          ) : (
+            <>
+              <li>
+                <Link href="/post-list">投稿一覧</Link>
+              </li>
+              <li>
+                <Link href="/login">ログイン</Link>
+              </li>
+              <li>
+                <Link href="/new-post">新規登録</Link>
+              </li>
+            </>
+          )}
         </ul>
-
-        {/* {loginStatus&&(
-           <p>
-             <Link href="/login">ログイン</Link>
-           </p>
-        )}
-        {!loginStatus&&(
-           <p>
-          <Link href="/logout">ログアウト</Link>
-          </p>
-        )}
-        */}
-
-        {/* {loginStatus&&(
-           <p>
-          <Link href="/myPage">マイページ</Link>
-           </p>
-        )}
-       */}
       </div>
     </div>
   );
