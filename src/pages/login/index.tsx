@@ -8,6 +8,7 @@ import inputStyle from "@/components/input/input.module.css";
 import ColorLink from "@/components/ColorLink/ColorLink";
 import loginStyle from "@/styles/Login.module.css";
 import Toast from "@/components/toast/Toast";
+import toastStyle from "@/components/toast/Toast.module.css";
 
 export default function Login() {
   // メールアドレス、パスワード 初期値
@@ -25,6 +26,9 @@ export default function Login() {
   // 画面遷移
   const [isValid, setIsValid] = useState(true);
   const router = useRouter();
+
+  // トースト
+  const [toast, setToast] = useState(toastStyle.toastAreaHidden);
 
   // メールアドレスバリデーション
   const validateEmail = (value: string) => {
@@ -112,7 +116,7 @@ export default function Login() {
 
         if (users.length > 0) {
           console.log("ログイン成功");
-
+          setToast(toastStyle.toastArea);
           // 仮としてクライアント側でクッキーを設定（認証系はサーバ側で設定した方がセキュリティ的に良い）
           document.cookie = `loginID=${users[0].id}; path=/; max-age=3600; secure; samesite=strict`;
         } else {
@@ -132,7 +136,7 @@ export default function Login() {
     if (!hasError) {
       setTimeout(() => {
         router.push("/");
-      });
+      }, 2500);
     }
   };
 
@@ -176,7 +180,7 @@ export default function Login() {
           <div className={loginStyle.btnWrap}>
             <Button type="submit" buttonText="ログイン" size="M" />
           </div>
-          <Toast toastText={"ログインしました"} />
+          <Toast toastText={"ログインしました"} toastClass={toast} />
         </Form>
       </Layout>
     </>
