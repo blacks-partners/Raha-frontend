@@ -30,6 +30,9 @@ export default function PostDetails() {
   const [comment, setComment] = useState("");
   const [newComment, setNewComment] = useState("");
 
+  const [commentError, setCommentError] = useState(""); // エラーメッセージの状態
+  const [newCommentError, setNewCommentError] = useState("");
+
   // 記事削除用ダイアログ
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   // コメント削除用ダイアログ
@@ -44,7 +47,11 @@ export default function PostDetails() {
   // フォーム送信
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("handleSubmitが呼ばれました！");
+    if (comment.length <= 500) {
+      console.log("Comment submitted:", comment);
+    } else {
+      setCommentError("コメントは500文字以内で入力してください");
+    }
   };
 
   //  トーストを2秒表示する関数
@@ -108,9 +115,38 @@ export default function PostDetails() {
       router.push("#");
     }
   };
+  //コメント編集時、500文字超えたらエラー出す
+  const handleCommentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const textarea = e.target;
+    textarea.style.height = "auto"; // 一度高さをautoに設定してから
+    textarea.style.height = `${textarea.scrollHeight}px`; // スクロール高さに基づいて高さを設定
+
+    const editCommentValue = textarea.value;
+    if (editCommentValue.length > 500) {
+      setCommentError("500文字まで記載してください");
+    } else {
+      setCommentError("");
+      setComment(editCommentValue);
+    }
+  };
+
+  //コメント投稿時、500文字超えたらエラー出す
+  const handleCommentPost = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const newTextarea = e.target;
+    newTextarea.style.height = "auto"; // 一度高さをautoに設定してから
+    newTextarea.style.height = `${newTextarea.scrollHeight}px`; // スクロール高さに基づいて高さを設定
+
+    const newCommentValue = newTextarea.value;
+    if (newCommentValue.length > 500) {
+      setNewCommentError("500文字まで記載してください");
+    } else {
+      setNewCommentError("");
+      setNewComment(newCommentValue);
+    }
+  };
 
   // 入力欄フォーカス用
-  const inputRef = useRef<HTMLInputElement>(null);
+  const commentRef = useRef<HTMLTextAreaElement>(null);
 
   return (
     <Layout
@@ -185,18 +221,18 @@ export default function PostDetails() {
             {commenterName}
             <br />
             <label htmlFor="comment"></label>
-            <input
-              className={styles.input}
-              type="text"
+            <textarea
+              className={styles.textarea}
               name="comment"
               id="comment"
               value={comment}
               readOnly={!isCommentEditing}
-              onChange={(e) => setComment(e.target.value)}
+              onChange={handleCommentChange}
+              ref={commentRef}
             />
-
+            {commentError && <p className={styles.error}>{commentError}</p>}
             {isCommentEditing && (
-              <div style={{ marginTop: "10px" }}>
+              <div className={styles.editButton}>
                 <Button
                   type="button"
                   buttonText="編集完了"
@@ -211,22 +247,30 @@ export default function PostDetails() {
 
         <RoundFrame
           onFrameClick={() => {
-            inputRef.current?.focus();
+            commentRef.current?.focus();
           }}
         >
           <div>
             <label htmlFor="comment"></label>
-            <input
-              className={styles.input}
-              type="text"
+            <textarea
+              className={styles.textarea}
               name="post_comment"
               id="post_comment"
+              placeholder="コメントを追加してください"
               value={newComment}
-              onChange={(e) => setNewComment(e.target.value)}
-              ref={inputRef}
+              onChange={handleCommentPost}
+              ref={commentRef}
             />
+            {newCommentError && (
+              <p className={styles.error}>{newCommentError}</p>
+            )}
             <div className={styles.button}>
-              <Button type="submit" buttonText="投稿" size="S" />
+              <Button
+                type="submit"
+                buttonText="投稿"
+                size="S"
+                disabled={!newComment.trim()}
+              />
             </div>
           </div>
         </RoundFrame>

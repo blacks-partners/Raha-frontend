@@ -26,10 +26,12 @@
 
 @media screen and (min-width: 600px) {
   .header {
-    height: 100vh;
+    height: 100%;
     width: 250px;
     background-color: var(--foreground);
     color: var(--background);
+    position: sticky;
+    position: -webkit-sticky;
   }
 
   .headerIcons {
