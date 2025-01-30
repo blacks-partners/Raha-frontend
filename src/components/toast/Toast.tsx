@@ -3,7 +3,7 @@ import { useState } from "react";
 
 interface Props {
   toastText: string;
-  toastClass: string | any;
+  toastClass: string;
 }
 
 export default function Toast({ toastClass, toastText }: Props) {
