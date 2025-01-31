@@ -28,13 +28,13 @@ export default function Dialog({
               <Button
                 buttonText={noButtonText}
                 size="S"
-                type="submit"
+                type="button"
                 buttonClick={noButton}
               ></Button>
               <Button
                 buttonText={yesButtonText}
                 size="S"
-                type="submit"
+                type="button"
                 buttonClick={okButton}
               ></Button>
             </div>
