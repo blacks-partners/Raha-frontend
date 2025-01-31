@@ -7,6 +7,8 @@ import Button from "@/components/button/Button";
 import inputStyle from "@/components/input/input.module.css";
 import ColorLink from "@/components/ColorLink/ColorLink";
 import loginStyle from "@/styles/Login.module.css";
+import Toast from "@/components/toast/Toast";
+import toastStyle from "@/components/toast/Toast.module.css";
 
 export default function Login() {
   // メールアドレス、パスワード 初期値
@@ -24,6 +26,9 @@ export default function Login() {
   // 画面遷移
   const [isValid, setIsValid] = useState(true);
   const router = useRouter();
+
+  // トースト
+  const [toast, setToast] = useState(toastStyle.toastAreaHidden);
 
   // メールアドレスバリデーション
   const validateEmail = (value: string) => {
@@ -66,8 +71,43 @@ export default function Login() {
       setInputPassArea(inputStyle.usualInput);
     }
 
-    // fetchでユーザー情報取得
+    // // fetchでユーザー情報取得
     if (email.trim() !== "" && password.trim() !== "") {
+      // 本番サーバ用のコード
+      //   try {
+      //     const res = await fetch("http://localhost:8080/login", {
+      //       method: "POST",
+      //       headers: { "Content-Type": "application/json" },
+      //       body: JSON.stringify({
+      //         email,
+      //         password,
+      //       }),
+      //     });
+
+      //     // レスポンスをjson形式で取得し、usersに格納
+      //     const users = await res.json();
+      //     // レスポンスからトークンを取得し、tokenに格納
+      //     const token = await res.headers.get("X-AUTH-TOKEN");
+
+      //     if (res.ok) {
+      //       console.log(res.status, "成功");
+      //     } else {
+      //       console.log(res.status, "失敗");
+      //     }
+
+      //     // POSTしたユーザが存在するかの条件分岐
+      //     if (users.userId > 0) {
+      //       console.log("ログイン成功");
+
+      //       // 仮としてクライアント側でクッキーを設定（認証系はサーバ側で設定した方がセキュリティ的に良い）
+      //       document.cookie = `loginID=${users.userId}; path=/; max-age=3600; secure; samesite=strict`;
+      //       document.cookie = `token=${token}; path=/; max-age=3600; secure; samesite=strict`;
+      //     } else {
+      //       setPassError("メールアドレス又はパスワードが誤っています");
+      //       setInputEmailArea(inputStyle.errorInput);
+      //       setInputPassArea(inputStyle.errorInput);
+      //       hasError = true;
+      //     }
       try {
         const res = await fetch(
           `http://localhost:8000/users?email=${email}&password=${password}`
@@ -76,7 +116,7 @@ export default function Login() {
 
         if (users.length > 0) {
           console.log("ログイン成功");
-
+          setToast(toastStyle.toastArea);
           // 仮としてクライアント側でクッキーを設定（認証系はサーバ側で設定した方がセキュリティ的に良い）
           document.cookie = `loginID=${users[0].id}; path=/; max-age=3600; secure; samesite=strict`;
         } else {
@@ -87,6 +127,7 @@ export default function Login() {
         }
       } catch {
         console.log("ログインエラー");
+        hasError = true;
       }
     }
 
@@ -95,7 +136,7 @@ export default function Login() {
     if (!hasError) {
       setTimeout(() => {
         router.push("/");
-      });
+      }, 2500);
     }
   };
 
@@ -139,6 +180,7 @@ export default function Login() {
           <div className={loginStyle.btnWrap}>
             <Button type="submit" buttonText="ログイン" size="M" />
           </div>
+          <Toast toastText={"ログインしました"} toastClass={toast} />
         </Form>
       </Layout>
     </>

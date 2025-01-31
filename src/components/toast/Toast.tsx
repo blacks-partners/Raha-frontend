@@ -3,11 +3,12 @@ import { useState } from "react";
 
 interface Props {
   toastText: string;
+  toastClass?: string;
 }
 
-export default function Toast({ toastText }: Props) {
+export default function Toast({ toastClass, toastText }: Props) {
   return (
-    <div className={toastStyle.toastArea}>
+    <div className={toastClass}>
       <div className={toastStyle.toastSuccess}>
         <p>{toastText}</p>
       </div>
