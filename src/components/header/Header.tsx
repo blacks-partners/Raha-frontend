@@ -74,16 +74,16 @@ export default function Header() {
             {loginStatus ? (
               <>
                 <li>
-                  <Link href="/post_list">投稿一覧</Link>
+                  <Link href="/">投稿一覧</Link>
                 </li>
                 <li>
-                  <Link href="/newPost">マイページ</Link>
+                  <Link href="/mypage/post-list">マイページ</Link>
                 </li>
                 <li>
                   <Link href="/new_post">新規投稿</Link>
                 </li>
                 <li>
-                  <Link href="/newPost">アカウント情報</Link>
+                  <Link href="/mypage">アカウント情報</Link>
                 </li>
                 <li>
                   <Link href="#" onClick={handleClick}>
@@ -94,7 +94,7 @@ export default function Header() {
             ) : (
               <>
                 <li>
-                  <Link href="/post_list">投稿一覧</Link>
+                  <Link href="/">投稿一覧</Link>
                 </li>
                 <li>
                   <Link href="/login">ログイン</Link>
@@ -113,13 +113,13 @@ export default function Header() {
                 <Link href="/post_list">投稿一覧</Link>
               </li>
               <li>
-                <Link href="/newPost">マイページ</Link>
+                <Link href="/mypage/post-list">マイページ</Link>
               </li>
               <li>
                 <Link href="/new-post">新規投稿</Link>
               </li>
               <li>
-                <Link href="/newPost">アカウント情報</Link>
+                <Link href="/mypage">アカウント情報</Link>
               </li>
               <li>
                 <Link href="#" onClick={handleClick}>
@@ -130,13 +130,13 @@ export default function Header() {
           ) : (
             <>
               <li>
-                <Link href="/post-list">投稿一覧</Link>
+                <Link href="/">投稿一覧</Link>
               </li>
               <li>
                 <Link href="/login">ログイン</Link>
               </li>
               <li>
-                <Link href="/new-post">新規登録</Link>
+                <Link href="/register">新規登録</Link>
               </li>
             </>
           )}
