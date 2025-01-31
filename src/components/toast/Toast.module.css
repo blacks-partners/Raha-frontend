@@ -8,7 +8,7 @@
     opacity: 1;
     bottom: 30px;
   }
-  80% {
+  60% {
     opacity: 1;
     bottom: 30px;
   }
@@ -21,13 +21,14 @@
   display: flex;
   justify-content: center;
   margin-bottom: 30px;
+  color:var(--foreground);
 }
 
 .toastSuccess {
   border-radius: 10px;
   width: max-content;
   border: 3px solid var(--foreground);
-  animation: fadeOut 3s;
+  animation: fadeOut 3s forwards;
   /* display: none; */
   position: fixed;
   background-color: var(--background);
@@ -37,6 +38,11 @@
   font-size: 1rem;
   font-weight: bold;
   padding: 10px;
+}
+
+/* トースト非表示 */
+.toastAreaHidden {
+  display: none;
 }
 
 @media screen and (min-width: 600px) {

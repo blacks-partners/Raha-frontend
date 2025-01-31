@@ -41,6 +41,15 @@
   height: 150px;
   padding: 10px;
   color: #434343;
+  resize: none;
+  /* リサイズを防ぎたい場合 */
+  overflow-wrap: break-word;
+  /* テキストがtextarea内で折り返されるように設定 */
+  height: auto;
+  /* 内容に基づいて調整、または固定高さを設定 */
+
+  border-radius: 8px;
+  /* 角を丸くする */
 }
 
 .login_text {

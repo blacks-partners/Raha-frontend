@@ -5,9 +5,40 @@ import Input from "@/components/input/Input";
 import inputStyle from "@/components/input/input.module.css";
 import Button from "@/components/button/Button";
 import style from "@/styles/mypage.module.css";
+import { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import Toast from "@/components/toast/Toast";
+import toastStyle from "@/components/toast/Toast.module.css";
 
-export default function Home() {
+type User = {
+  id: string;
+  name: string;
+  email: string;
+  password: string;
+  introduction: string;
+  created_at: string;
+  updated_at: string;
+};
+export const getServerSideProps = (async (context) => {
+  const userCookie = context.req.cookies;
+  const res = await fetch(`http://localhost:8000/users/${userCookie.loginID}`);
+  const user: User = await res.json();
+
+  const allUsers = await fetch(`http://localhost:8000/users`);
+  const users = await allUsers.json();
+  return {
+    props: {
+      user,
+      users,
+    },
+  };
+}) satisfies GetServerSideProps<{ user: User; users: any }>;
+
+export default function Home({
+  user,
+  users,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   // エラーメッセージ 初期値
+  console.log(users[0]);
   const [emailError, setEmailError] = useState("");
   const [nameError, setNameError] = useState("");
   // style
@@ -17,9 +48,9 @@ export default function Home() {
     inputStyle.introduction
   );
   // ユーザーデータ
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [introduction, setIntroduction] = useState("");
+  const [name, setName] = useState(user.name);
+  const [email, setEmail] = useState(user.email);
+  const [introduction, setIntroduction] = useState(user.introduction);
   // メールアドレスバリデーション
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -27,6 +58,11 @@ export default function Home() {
   const backToMypage = () => {
     location.href = "/mypage";
   };
+
+  // Toast関連
+  const [toast, setToast] = useState(toastStyle.toastAreaHidden);
+  const [toastMessage, setToastMessage] = useState("変更が完了しました");
+  const emailCheck = users.filter((users: any) => users.email === email);
 
   //　submit時の処理
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -37,6 +73,8 @@ export default function Home() {
     if (hasError) {
       return;
     }
+    // クリックするたびに一度Toastのクラスをリセットする
+    setToast(toastStyle.toastAreaHidden);
     if (name === "") {
       setNameError("名前を入力してください");
       setInputNameArea(inputStyle.errorInput);
@@ -55,12 +93,48 @@ export default function Home() {
       setEmailError("メールアドレスの形式が正しくありません");
       setInputEmailArea(inputStyle.errorInput);
       hasError = true;
+    } else if (emailCheck.length > 0 && email !== user.email) {
+      setEmailError("既に使用されています");
+      setInputEmailArea(inputStyle.errorInput);
+      hasError = true;
     } else if (emailPattern.test(email)) {
       setEmailError("");
       setInputEmailArea(inputStyle.usualInput);
       hasError = false;
     }
+
+    if (
+      email !== "" &&
+      emailPattern.test(email) &&
+      (emailCheck.length < 0 || email === user.email)
+    ) {
+      hasError = false;
+      fetch(`http://localhost:8000/users/${user.id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          introduction,
+        }),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("登録に失敗しました");
+          }
+          return response.json();
+        })
+        .then(() => {
+          setToast(toastStyle.toastArea);
+        })
+        .catch((error) => {
+          console.log("Error:", error);
+        });
+    }
   };
+
   return (
     <>
       <Layout
@@ -117,6 +191,7 @@ export default function Home() {
             <Button type="submit" buttonText="登録" size="M" />
           </div>
         </Form>
+        <Toast toastText={toastMessage} toastClass={toast}></Toast>{" "}
       </Layout>
     </>
   );

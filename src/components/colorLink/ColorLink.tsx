@@ -1,10 +1,10 @@
 import Link from "next/link";
-import ColorLinkStyle from "@/components/ColorLink/ColorLink.module.css";
+import ColorLinkStyle from "@/components/colorLink/ColorLink.module.css";
 
 interface Props {
   colorLinkText: string | boolean;
   url: string;
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
 }
 
 export default function ColorLink({ colorLinkText, url, onClick }: Props) {
