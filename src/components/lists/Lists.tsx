@@ -1,8 +1,9 @@
 import RoundFrame from "@/components/roundFrame/RoundFrame";
-import Link from "next/link";
+
 import ColorLink from "@/components/colorLink/ColorLink";
 import Style from "../lists/lists.module.css";
 import { JSX } from "react";
+import { useRouter } from "next/router";
 
 // 日付をスラッシュ形式にフォーマットする関数
 const formatDate = (dateString: string): string => {
@@ -41,15 +42,16 @@ interface Props {
 }
 
 export default function Lists({ pagedata }: Props) {
+  const router = useRouter();
   const splitAndLimitByHeadings = (content: string): JSX.Element[] => {
     // ### ごとに分割して配列化
     const sections = content.split("###");
     // 最初の3行を取得
     return sections.slice(0, 3).map((section, index) => (
-      <p key={index}>
+      <div key={index}>
         {index > 0 && <strong>###</strong>} {/* 先頭以外に ### を追加 */}
-        {section.trim()}
-      </p>
+        <p>{section.trim()}</p>
+      </div>
     ));
   };
 
@@ -57,25 +59,28 @@ export default function Lists({ pagedata }: Props) {
     (a, b) =>
       new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
   );
+
+  const handleNavigate = () => {
+    router.push("/post_details"); // 画面遷移先のURL
+  };
+
   return (
-    <ul className={Style.ul}>
+    <ul className={Style.ul} onClick={handleNavigate}>
       {sortedData.map((post) => (
         <li key={post.articleId}>
-          <Link href="#">
-            <RoundFrame>
-              <div>
-                <p>作成日: {formatDate(post.created_at)}</p>
-              </div>
-              <span>作成者:</span>
-              <ColorLink
-                url={`/user/${post.user.userId}`}
-                colorLinkText={post.user.name}
-              ></ColorLink>
+          <RoundFrame>
+            <div>
+              <p>作成日: {formatDate(post.created_at)}</p>
+            </div>
+            <span>作成者:</span>
+            <ColorLink
+              url={`/user/${post.user.userId}`}
+              colorLinkText={post.user.name}
+            ></ColorLink>
 
-              <h3>「{post.title}」</h3>
-              <p>{splitAndLimitByHeadings(post.content)}</p>
-            </RoundFrame>
-          </Link>
+            <h3>「{post.title}」</h3>
+            {splitAndLimitByHeadings(post.content)}
+          </RoundFrame>
         </li>
       ))}
     </ul>
