@@ -45,6 +45,7 @@ export default function Home({
     setIsVisible(true);
   };
 
+  console.log(user);
   const edit = () => {
     location.href = "/mypage/edit";
   };
@@ -54,7 +55,7 @@ export default function Home({
   };
 
   // DBからユーザー情報を削除する処理
-  const delete_membership = (event: React.FormEvent<HTMLFormElement>) => {
+  const delete_membership = () => {
     fetch(`http://localhost:8000/users/${user.id}`, {
       method: "delete",
       headers: {
