@@ -27,9 +27,9 @@ export default function Layout({
       </Head>
       <div>
         <main className={LayoutStyle.layout}>
-          <div className={LayoutStyle.header}>
+          <aside className={LayoutStyle.header}>
             <Header />
-          </div>
+          </aside>
           <section className={LayoutStyle.sectionLayout}>
             <h1 className={LayoutStyle.title}>{pageTitle}</h1>
             {children}

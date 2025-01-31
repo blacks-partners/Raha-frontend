@@ -47,6 +47,7 @@
     flex-direction: column;
     gap: 30px;
     list-style: none;
-    text-align: center;
+    text-align: left;
+    padding-left: 20px;
   }
 }
