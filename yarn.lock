@@ -546,6 +546,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"github-markdown-css@npm:^5.8.1":
+  version: 5.8.1
+  resolution: "github-markdown-css@npm:5.8.1"
+  checksum: 10c0/67d3540731f9f1fc3b903362ef270e6db0ffe252fd4998a1a8777fc63b288b1904e5e57703e74a2ee04f1d613a4732b1949cb472b66a3c2e9e2b7a1750d1f0a6
+  languageName: node
+  linkType: hard
+
 "hast-util-is-element@npm:^3.0.0":
   version: 3.0.0
   resolution: "hast-util-is-element@npm:3.0.0"
@@ -1353,6 +1360,7 @@ __metadata:
     "@types/node": "npm:^20"
     "@types/react": "npm:^19"
     "@types/react-dom": "npm:^19"
+    github-markdown-css: "npm:^5.8.1"
     next: "npm:15.1.4"
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
