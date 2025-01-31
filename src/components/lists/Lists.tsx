@@ -65,9 +65,9 @@ export default function Lists({ pagedata }: Props) {
   };
 
   return (
-    <ul className={Style.ul} onClick={handleNavigate}>
+    <ul className={Style.ul}>
       {sortedData.map((post) => (
-        <li key={post.articleId}>
+        <li key={post.articleId} onClick={handleNavigate}>
           <RoundFrame>
             <div>
               <p>作成日: {formatDate(post.created_at)}</p>
@@ -76,6 +76,10 @@ export default function Lists({ pagedata }: Props) {
             <ColorLink
               url={`/user/${post.user.userId}`}
               colorLinkText={post.user.name}
+              onClick={(e) => {
+                e.stopPropagation(); // これで親へのイベント伝播を防ぐ
+                router.push(`/user/${post.user.userId}`);
+              }}
             ></ColorLink>
 
             <h3>「{post.title}」</h3>
