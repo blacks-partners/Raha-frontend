@@ -3,7 +3,7 @@ import Link from "next/link";
 import ColorLink from "@/components/colorLink/ColorLink";
 import Style from "../UsersArticleList/UsersArticleList.module.css";
 import { JSX } from "react";
-import EditRoundFrame from "../editRoundFrame/EditRoundFrame";
+import RoundFrameStyle from "@/styles/loginees_post_list.module.css";
 
 // 日付をスラッシュ形式にフォーマットする関数
 const formatDate = (dateString: string): string => {
@@ -62,8 +62,8 @@ export default function UsersArticleList({ pagedata }: Props) {
     <ul className={Style.ul}>
       {sortedData.map((post) => (
         <li key={post.articleId}>
-          <Link href="#">
-            <EditRoundFrame>
+          <Link href={`/post_details/${post.articleId}`}>
+            <div className={RoundFrameStyle.frame}>
               <div>
                 <p>作成日: {formatDate(post.created_at)}</p>
               </div>
@@ -75,7 +75,7 @@ export default function UsersArticleList({ pagedata }: Props) {
 
               <h3>「{post.title}」</h3>
               <p>{splitAndLimitByHeadings(post.content)}</p>
-            </EditRoundFrame>
+            </div>
           </Link>
         </li>
       ))}

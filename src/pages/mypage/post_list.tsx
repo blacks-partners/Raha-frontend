@@ -6,7 +6,7 @@ import useSWR from "swr";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 // ↓cookie発火後コメントアウト解除
-/*
+
 type User = {
   id: string;
   name: string;
@@ -17,10 +17,8 @@ type User = {
   updated_at: string;
 };
 export const getServerSideProps = (async (context) => {
-  // cookieからユーザーIDを取得する
   const userCookie = context.req.cookies;
-  //   DBからcookieのIDに相当するユーザー情報を取得する
-  const res = await fetch(`http://localhost:8000/users/${userCookie.ID}`);
+  const res = await fetch(`http://localhost:8000/users/${userCookie.loginID}`);
   const user: User = await res.json();
 
   return {
@@ -29,13 +27,10 @@ export const getServerSideProps = (async (context) => {
     },
   };
 }) satisfies GetServerSideProps<{ user: User }>;
-*/
 
-// cookie発火設定次第引数のコメントアウト解除
-
-export default function PostList(/*a{
+export default function Home({
   user,
-}: InferGetServerSidePropsType<typeof getServerSideProps>*/) {
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { data, error, isLoading } = useSWR(
     "http://localhost:8000/articles",
     fetcher
@@ -45,17 +40,16 @@ export default function PostList(/*a{
   if (isLoading) return <div>loading...</div>;
   //   本来はログインしているユーザーのuserIdで絞る
   const filteredData = data.filter(
-    (articles: any) => articles.user.userId === 1
+    (articles: any) => articles.user.userId === Number(user.id)
   );
 
-  console.log(filteredData);
+  console.log(user.id);
   return (
     <Layout
-      /*本当は={`${user.name}の投稿一覧`}*/
-      headContent="山田 太郎の投稿一覧"
-      headName="山田 太郎の投稿一覧"
-      pageTitle="山田 太郎の投稿一覧"
-      headTitle="山田 太郎の投稿一覧"
+      headContent={`${user.name}さんの投稿一覧`}
+      headName={`${user.name}さんの投稿一覧`}
+      pageTitle={`${user.name}さんの投稿一覧`}
+      headTitle={`${user.name}さんの投稿一覧`}
     >
       <UsersArticleList pagedata={filteredData}></UsersArticleList>
     </Layout>
