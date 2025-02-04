@@ -25,19 +25,19 @@ interface Props {
       email: string;
       password: string;
       introduction: string;
-      created_at: string;
-      updated_at: string;
+      createdAt: string;
+      updatedAt: string;
     };
     commentList: [
       {
         commentId: number;
         content: string;
-        created_at: string;
-        updated_at: string;
+        createdAt: string;
+        updatedAt: string;
       }
     ];
-    created_at: string;
-    updated_at: string;
+    createdAt: string;
+    updatedAt: string;
   }[];
 }
 
@@ -56,8 +56,7 @@ export default function Lists({ pagedata }: Props) {
   };
 
   const sortedData = [...pagedata].sort(
-    (a, b) =>
-      new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
   );
 
   const handleNavigate = () => {
@@ -70,7 +69,7 @@ export default function Lists({ pagedata }: Props) {
         <li key={post.articleId} onClick={handleNavigate}>
           <RoundFrame>
             <div>
-              <p>作成日: {formatDate(post.created_at)}</p>
+              <p>作成日: {formatDate(post.createdAt)}</p>
             </div>
             <span>作成者:</span>
             <ColorLink
