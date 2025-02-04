@@ -22,6 +22,7 @@ export const getServerSideProps = (async (context) => {
     `${process.env.NEXT_PUBLIC_URL}/users/${userCookie.loginID}`
   );
   const user: User = await res.json();
+  console.log(user);
 
   return {
     props: {
@@ -34,18 +35,17 @@ export default function Home({
   user,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { data, error, isLoading } = useSWR(
-    "${process.env.NEXT_PUBLIC_URL}/articles",
+    `${process.env.NEXT_PUBLIC_URL}/articles`,
     fetcher
   );
 
   if (error) return <div>failed to load</div>;
   if (isLoading) return <div>loading...</div>;
   //   本来はログインしているユーザーのuserIdで絞る
-  const filteredData = data.filter(
-    (articles: any) => articles.user.userId === Number(user.id)
-  );
+  const filteredData = data.filter((articles: any) => articles.user.userId);
 
-  console.log(user.id);
+  console.log("ユーザーのID", filteredData);
+
   return (
     <Layout
       headContent={`${user.name}さんの投稿一覧`}

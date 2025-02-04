@@ -1,7 +1,7 @@
 import RoundFrame from "@/components/roundFrame/RoundFrame";
 import Link from "next/link";
 import ColorLink from "@/components/colorLink/ColorLink";
-import Style from "../UsersArticleList/UsersArticleList.module.css";
+import Style from "../usersArticleList/UsersArticleList.module.css";
 import { JSX } from "react";
 import RoundFrameStyle from "@/styles/loginees_post_list.module.css";
 

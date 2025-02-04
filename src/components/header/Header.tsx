@@ -86,7 +86,7 @@ export default function Header() {
                   <Link href="/mypage">アカウント情報</Link>
                 </li>
                 <li>
-                  <Link href="#" onClick={handleClick}>
+                  <Link href="/" onClick={handleClick}>
                     ログアウト
                   </Link>
                 </li>
@@ -122,7 +122,7 @@ export default function Header() {
                 <Link href="/mypage">アカウント情報</Link>
               </li>
               <li>
-                <Link href="#" onClick={handleClick}>
+                <Link href="/" onClick={handleClick}>
                   ログアウト
                 </Link>
               </li>
