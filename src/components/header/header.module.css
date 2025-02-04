@@ -17,10 +17,13 @@
 .mobileUl {
   display: flex;
   flex-direction: column;
-  justify-self: start;
-  align-items: start;
+  text-align: center;
+  justify-content: space-around;
+  letter-spacing: 5px;
   gap: 1.5rem;
-  padding: 20px;
+  padding: 100px 20px 200px 20px;
+  height: 100vh;
+  font-size: 20px;
 }
 
 .pcUl {
