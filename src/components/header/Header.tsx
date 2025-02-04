@@ -77,7 +77,7 @@ export default function Header() {
                   <Link href="/">投稿一覧</Link>
                 </li>
                 <li>
-                  <Link href="/mypage/post-list">マイページ</Link>
+                  <Link href="/mypage/post_list">マイページ</Link>
                 </li>
                 <li>
                   <Link href="/new_post">新規投稿</Link>
@@ -100,7 +100,7 @@ export default function Header() {
                   <Link href="/login">ログイン</Link>
                 </li>
                 <li>
-                  <Link href="/new-post">新規登録</Link>
+                  <Link href="/new_post">新規登録</Link>
                 </li>
               </>
             )}
@@ -110,13 +110,13 @@ export default function Header() {
           {loginStatus ? (
             <>
               <li>
-                <Link href="/post_list">投稿一覧</Link>
+                <Link href="/">投稿一覧</Link>
               </li>
               <li>
-                <Link href="/mypage/post-list">マイページ</Link>
+                <Link href="/mypage/post_list">マイページ</Link>
               </li>
               <li>
-                <Link href="/new-post">新規投稿</Link>
+                <Link href="/new_post">新規投稿</Link>
               </li>
               <li>
                 <Link href="/mypage">アカウント情報</Link>

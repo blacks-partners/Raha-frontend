@@ -8,4 +8,5 @@
 
 .frame:hover {
   background-color: #b5b5b53c;
+  transition: 0.5s;
 }
