@@ -113,6 +113,7 @@ export default function Login() {
           `${process.env.NEXT_PUBLIC_URL}/users?email=${email}&password=${password}`
         );
         const users = await res.json();
+        // users.id = Number(users.id);
 
         if (users.length > 0) {
           console.log("ログイン成功");
