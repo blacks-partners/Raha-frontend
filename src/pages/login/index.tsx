@@ -100,6 +100,8 @@ export default function Login() {
         console.log("ログイン成功");
 
         // 仮としてクライアント側でクッキーを設定（認証系はサーバ側で設定した方がセキュリティ的に良い）
+        setToast(toastStyle.toastArea);
+
         document.cookie = `loginID=${users.userId}; path=/; max-age=3600; secure; samesite=strict`;
         //       document.cookie = `token=${token}; path=/; max-age=3600; secure; samesite=strict`;
       } else {
