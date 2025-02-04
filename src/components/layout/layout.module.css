@@ -25,6 +25,7 @@
 
   .layout {
     display: flex;
+    margin-left: 200px;
   }
 
   .sectionLayout {
