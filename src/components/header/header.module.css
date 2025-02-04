@@ -1,6 +1,9 @@
 .header {
   background-color: var(--foreground);
   font-size: 16px;
+  position: fixed;
+  width: 100%;
+  z-index: 100;
 }
 
 .headerIcons {
@@ -26,12 +29,13 @@
 
 @media screen and (min-width: 600px) {
   .header {
-    height: 100%;
     width: 250px;
     background-color: var(--foreground);
     color: var(--background);
-    position: sticky;
-    position: -webkit-sticky;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
   }
 
   .headerIcons {
@@ -49,5 +53,9 @@
     list-style: none;
     text-align: left;
     padding-left: 20px;
+  }
+
+  .mobileUl {
+    display: none;
   }
 }
