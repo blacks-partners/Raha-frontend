@@ -75,7 +75,7 @@ export default function Login() {
     if (email.trim() !== "" && password.trim() !== "") {
       // 本番サーバ用のコード
       //   try {
-      //     const res = await fetch("http://localhost:8080/login", {
+      //     const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/login`, {
       //       method: "POST",
       //       headers: { "Content-Type": "application/json" },
       //       body: JSON.stringify({
@@ -110,7 +110,7 @@ export default function Login() {
       //     }
       try {
         const res = await fetch(
-          `http://localhost:8000/users?email=${email}&password=${password}`
+          `${process.env.NEXT_PUBLIC_URL}/users?email=${email}&password=${password}`
         );
         const users = await res.json();
 
