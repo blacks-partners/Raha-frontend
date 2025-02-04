@@ -6,7 +6,7 @@ const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export default function Home() {
   const { data, error, isLoading } = useSWR(
-    "http://localhost:8000/articles",
+    `${process.env.NEXT_PUBLIC_URL}/articles`,
     fetcher
   );
 

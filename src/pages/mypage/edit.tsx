@@ -20,10 +20,12 @@ type User = {
 };
 export const getServerSideProps = (async (context) => {
   const userCookie = context.req.cookies;
-  const res = await fetch(`http://localhost:8000/users/${userCookie.loginID}`);
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/users/${userCookie.loginID}`
+  );
   const user: User = await res.json();
 
-  const allUsers = await fetch(`http://localhost:8000/users`);
+  const allUsers = await fetch(`${process.env.NEXT_PUBLIC_URL}/users`);
   const users = await allUsers.json();
   return {
     props: {
@@ -109,7 +111,7 @@ export default function Home({
       (emailCheck.length < 0 || email === user.email)
     ) {
       hasError = false;
-      fetch(`http://localhost:8000/users/${user.id}`, {
+      fetch(`${process.env.NEXT_PUBLIC_URL}/users/${user.id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
