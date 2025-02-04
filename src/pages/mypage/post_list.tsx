@@ -18,7 +18,9 @@ type User = {
 };
 export const getServerSideProps = (async (context) => {
   const userCookie = context.req.cookies;
-  const res = await fetch(`http://localhost:8000/users/${userCookie.loginID}`);
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/users/${userCookie.loginID}`
+  );
   const user: User = await res.json();
 
   return {
@@ -32,7 +34,7 @@ export default function Home({
   user,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { data, error, isLoading } = useSWR(
-    "http://localhost:8000/articles",
+    "${process.env.NEXT_PUBLIC_URL}/articles",
     fetcher
   );
 

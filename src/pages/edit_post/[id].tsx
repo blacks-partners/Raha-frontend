@@ -35,7 +35,7 @@ export default function EditPost({ postData, token }: EditPostProps) {
 
     // PUTリクエストでデータを更新
     const response = await fetch(
-      `http://localhost:8080/articles/${postData.articleId}`,
+      `${process.env.NEXT_PUBLIC_URL}/articles/${postData.articleId}`,
       {
         //API設計書の通りのmethod
 
@@ -97,7 +97,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   //params.idと同じidをもつ記事データのフェッチ
 
-  const response = await fetch(`http://localhost:8080/articles/${id}`);
+  const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/articles/${id}`);
   console.log(response);
   const postData = await response.json();
   console.log(postData);

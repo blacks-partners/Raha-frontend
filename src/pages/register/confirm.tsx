@@ -19,12 +19,12 @@ export default function Confirm() {
     e.preventDefault();
 
     try {
-      const userRes = await fetch("http://localhost:8000/users");
+      const userRes = await fetch(`${process.env.NEXT_PUBLIC_URL}/users`);
       const users = await userRes.json();
       const maxId =
         users.length > 0 ? Math.max(...users.map((user: any) => user.id)) : 0;
 
-      const res = await fetch("http://localhost:8000/users", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/users`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

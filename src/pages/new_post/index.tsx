@@ -24,7 +24,7 @@ export default function NewPost({ data }: Props) {
 
   const handlePost = async () => {
     try {
-      const response = await fetch("http://localhost:8000/articles", {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/articles`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -69,7 +69,9 @@ export default function NewPost({ data }: Props) {
 export const getServerSideProps = (async ({ req }) => {
   console.log("cookie", req.cookies);
 
-  const res = await fetch(`http://localhost:8000/users/${req.cookies.loginID}`);
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/users/${req.cookies.loginID}`
+  );
 
   const data = await res.json();
   console.log(data);

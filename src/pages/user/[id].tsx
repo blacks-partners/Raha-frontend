@@ -3,7 +3,7 @@ import Lists from "@/components/lists/Lists";
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const res = await fetch("http://localhost:8000/articles");
+  const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/articles`);
   const articles = await res.json();
 
   const paths = articles.map((article: any) => ({
@@ -13,7 +13,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const res = await fetch(`http://localhost:8000/articles`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/articles`);
   const articles = await res.json();
 
   return {
