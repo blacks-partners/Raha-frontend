@@ -75,60 +75,60 @@ export default function Login() {
     if (email.trim() !== "" && password.trim() !== "") {
       // 本番サーバ用のコード
       //   try {
-      //     const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/login`, {
-      //       method: "POST",
-      //       headers: { "Content-Type": "application/json" },
-      //       body: JSON.stringify({
-      //         email,
-      //         password,
-      //       }),
-      //     });
+      const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
 
-      //     // レスポンスをjson形式で取得し、usersに格納
-      //     const users = await res.json();
+      // レスポンスをjson形式で取得し、usersに格納
+      const users = await res.json();
       //     // レスポンスからトークンを取得し、tokenに格納
       //     const token = await res.headers.get("X-AUTH-TOKEN");
 
-      //     if (res.ok) {
-      //       console.log(res.status, "成功");
-      //     } else {
-      //       console.log(res.status, "失敗");
-      //     }
+      if (res.ok) {
+        console.log(res.status, "成功");
+      } else {
+        console.log(res.status, "失敗");
+      }
 
-      //     // POSTしたユーザが存在するかの条件分岐
-      //     if (users.userId > 0) {
-      //       console.log("ログイン成功");
+      // POSTしたユーザが存在するかの条件分岐
+      if (users.userId > 0) {
+        console.log("ログイン成功");
 
-      //       // 仮としてクライアント側でクッキーを設定（認証系はサーバ側で設定した方がセキュリティ的に良い）
-      //       document.cookie = `loginID=${users.userId}; path=/; max-age=3600; secure; samesite=strict`;
-      //       document.cookie = `token=${token}; path=/; max-age=3600; secure; samesite=strict`;
-      //     } else {
-      //       setPassError("メールアドレス又はパスワードが誤っています");
-      //       setInputEmailArea(inputStyle.errorInput);
-      //       setInputPassArea(inputStyle.errorInput);
-      //       hasError = true;
-      //     }
-      try {
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_URL}/users?email=${email}&password=${password}`
-        );
-        const users = await res.json();
-
-        if (users.length > 0) {
-          console.log("ログイン成功");
-          setToast(toastStyle.toastArea);
-          // 仮としてクライアント側でクッキーを設定（認証系はサーバ側で設定した方がセキュリティ的に良い）
-          document.cookie = `loginID=${users[0].id}; path=/; max-age=3600; secure; samesite=strict`;
-        } else {
-          setPassError("メールアドレス又はパスワードが誤っています");
-          setInputEmailArea(inputStyle.errorInput);
-          setInputPassArea(inputStyle.errorInput);
-          hasError = true;
-        }
-      } catch {
-        console.log("ログインエラー");
+        // 仮としてクライアント側でクッキーを設定（認証系はサーバ側で設定した方がセキュリティ的に良い）
+        document.cookie = `loginID=${users.userId}; path=/; max-age=3600; secure; samesite=strict`;
+        //       document.cookie = `token=${token}; path=/; max-age=3600; secure; samesite=strict`;
+      } else {
+        setPassError("メールアドレス又はパスワードが誤っています");
+        setInputEmailArea(inputStyle.errorInput);
+        setInputPassArea(inputStyle.errorInput);
         hasError = true;
       }
+      // try {
+      //   const res = await fetch(
+      //     `${process.env.NEXT_PUBLIC_URL}/users?email=${email}&password=${password}`
+      //   );
+      //   const users = await res.json();
+
+      //   if (users.length > 0) {
+      //     console.log("ログイン成功");
+      //     setToast(toastStyle.toastArea);
+      //     // 仮としてクライアント側でクッキーを設定（認証系はサーバ側で設定した方がセキュリティ的に良い）
+      //     document.cookie = `loginID=${users[0].id}; path=/; max-age=3600; secure; samesite=strict`;
+      //   } else {
+      //     setPassError("メールアドレス又はパスワードが誤っています");
+      //     setInputEmailArea(inputStyle.errorInput);
+      //     setInputPassArea(inputStyle.errorInput);
+      //     hasError = true;
+      //   }
+      // } catch {
+      //   console.log("ログインエラー");
+      //   hasError = true;
+      // }
     }
 
     // エラーではない場合にホームへ遷移
