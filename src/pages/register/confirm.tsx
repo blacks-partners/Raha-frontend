@@ -2,14 +2,18 @@ import Button from "@/components/button/Button";
 import Form from "@/components/form/Form";
 import Layout from "@/components/layout/Layout";
 import RoundFrame from "@/components/roundFrame/RoundFrame";
+import Toast from "@/components/toast/Toast";
 import confirmStyle from "@/styles/Confirm.module.css";
 import { useRouter } from "next/router";
+import { useState } from "react";
+import toastStyle from "@/components/toast/Toast.module.css";
 
 export default function Confirm() {
   const router = useRouter();
   const { name, email, password, introduction, created_at, updated_at } =
     router.query;
 
+  const [toast, setToast] = useState(toastStyle.toastAreaHidden);
   //登録を押下した時
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -34,15 +38,16 @@ export default function Confirm() {
         }),
       });
       if (res.ok) {
-        console.log("登録成功");
+        console.log("成功");
+        setToast(toastStyle.toastArea);
         setTimeout(() => {
           router.push("/login");
-        }, 1000);
+        }, 2500);
       } else {
-        console.error("登録失敗");
+        console.error("失敗");
       }
     } catch {
-      console.error("登録失敗");
+      console.error("失敗");
     }
   };
 
@@ -74,6 +79,10 @@ export default function Confirm() {
             />
             <Button type={"submit"} buttonText={"登録"} size={"M"} />
           </div>
+          <Toast
+            toastText={"登録しました。ログイン画面に遷移します。"}
+            toastClass={toast}
+          />
         </Form>
       </Layout>
     </>
