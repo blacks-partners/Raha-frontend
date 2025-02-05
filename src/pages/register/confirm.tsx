@@ -7,9 +7,12 @@ import confirmStyle from "@/styles/Confirm.module.css";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import toastStyle from "@/components/toast/Toast.module.css";
+import ColorLink from "@/components/colorLink/ColorLink";
+import registerStyle from "@/styles/Register.module.css";
 
 export default function Confirm() {
   const router = useRouter();
+  const [addressError, setAddressError] = useState(false);
   const { name, email, password, introduction, createdAt, updatedAt } =
     router.query;
 
@@ -45,6 +48,7 @@ export default function Confirm() {
         }, 2500);
       } else {
         console.error("失敗");
+        setAddressError(true);
       }
     } catch {
       console.error("失敗");
@@ -70,6 +74,17 @@ export default function Confirm() {
               <p>メールアドレス：{email}</p>
             </div>
           </RoundFrame>
+          {addressError && (
+            <p className={registerStyle.errorMessage}>
+              このメールアドレスは既に登録されています。
+              <br className={registerStyle.brBranch} />
+              <ColorLink
+                colorLinkText={"ログイン画面"}
+                url={"/login"}
+              ></ColorLink>
+              よりログインしてください。
+            </p>
+          )}
           <div className={confirmStyle.btnWrap}>
             <Button
               type={"button"}

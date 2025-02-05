@@ -2,3 +2,14 @@
 .linkWrap {
   margin: 40px auto 20px;
 }
+.errorMessage {
+  color: #da0000;
+}
+.brBranch {
+  display: block;
+}
+@media screen and (min-width: 600px) {
+  .brBranch {
+    display: none;
+  }
+}
