@@ -28,13 +28,26 @@ export default function Register() {
   // パスワードを表示
   const [passType, setPassType] = useState("password");
   const [confirmPassType, setconfirmPassType] = useState("password");
+  const [passIcon, setPassIcon] = useState(true);
+  const [confirmPassIcon, setConfirmPassIcon] = useState(true);
+
   const iconClick1 = () => {
-    passType === "password" ? setPassType("text") : setPassType("password");
+    if (passType === "password") {
+      setPassType("text");
+      setPassIcon(false);
+    } else {
+      setPassType("password");
+      setPassIcon(true);
+    }
   };
   const iconClick2 = () => {
-    confirmPassType === "password"
-      ? setconfirmPassType("text")
-      : setconfirmPassType("password");
+    if (confirmPassType === "password") {
+      setconfirmPassType("text");
+      setConfirmPassIcon(false);
+    } else {
+      setconfirmPassType("password");
+      setConfirmPassIcon(true);
+    }
   };
 
   // エラー 初期値
@@ -180,6 +193,7 @@ export default function Register() {
             passMessage="半角英数と記号を含む8文字以上16字以内"
             autocomplete="new-password"
             iconClick={iconClick1}
+            passIcon={passIcon}
           />
           <Input
             label="確認用パスワード"
@@ -193,6 +207,7 @@ export default function Register() {
             placeholder="再度パスワードを入力"
             autocomplete="new-password"
             iconClick={iconClick2}
+            passIcon={confirmPassIcon}
           />
           <div className={registerStyle.linkWrap}>
             <ColorLink colorLinkText="ログインはこちら" url="/login" />
