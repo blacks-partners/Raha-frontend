@@ -30,9 +30,6 @@ export default function Login() {
   // トースト
   const [toast, setToast] = useState(toastStyle.toastAreaHidden);
 
-  // パスワード確認アイコン
-  const [passIcon, setPassIcon] = useState(true);
-
   // メールアドレスバリデーション
   const validateEmail = (value: string) => {
     const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -41,6 +38,8 @@ export default function Login() {
 
   // パスワードを表示
   const [passType, setPassType] = useState("password");
+  const [passIcon, setPassIcon] = useState(true);
+
   const iconClick = () => {
     if (passType === "password") {
       setPassType("text");
