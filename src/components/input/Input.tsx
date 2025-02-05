@@ -16,6 +16,7 @@ interface Props {
   passMessage?: string;
   autocomplete?: string;
   iconClick?: () => void;
+  passIcon?: boolean;
 }
 
 export default function Input({
@@ -31,6 +32,7 @@ export default function Input({
   passMessage,
   autocomplete,
   iconClick,
+  passIcon,
 }: Props) {
   return (
     <>
@@ -49,13 +51,23 @@ export default function Input({
           />
           {(label === "パスワード" || label === "確認用パスワード") && (
             <div className={inputStyle.iconStyle} onClick={iconClick}>
-              <Image
-                src="/common/eye_icon.png"
-                alt="目のアイコン"
-                width={256}
-                height={256}
-                className={`${inputClass} ${passMessage}`}
-              />
+              {passIcon ? (
+                <Image
+                  src="/common/eye_icon01.png"
+                  alt="目のアイコン"
+                  width={256}
+                  height={256}
+                  className={`${inputClass} ${passMessage}`}
+                />
+              ) : (
+                <Image
+                  src="/common/eye_icon02.png"
+                  alt="目のアイコン"
+                  width={256}
+                  height={256}
+                  className={`${inputClass} ${passMessage}`}
+                />
+              )}
             </div>
           )}
         </div>
