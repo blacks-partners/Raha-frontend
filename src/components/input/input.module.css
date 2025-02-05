@@ -30,7 +30,7 @@
 }
 .errorInput {
   border: solid 2px #da0000;
-  background-color: rgba(255, 0, 0, 0.1);
+  background-color: #f3d9d8;
 }
 .errorMessage {
   color: #da0000;
