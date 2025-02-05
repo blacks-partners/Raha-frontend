@@ -9,13 +9,13 @@ import Toast from "@/components/toast/Toast";
 import toastStyle from "@/components/toast/Toast.module.css";
 
 type User = {
-  id: string;
+  userId: string;
   name: string;
   email: string;
   password: string;
   introduction: string;
-  created_at: string;
-  updated_at: string;
+  createdAt: string;
+  updatedAt: string;
 };
 export const getServerSideProps = (async (context) => {
   const userCookie = context.req.cookies;
@@ -58,23 +58,28 @@ export default function Home({
 
   // DBからユーザー情報を削除する処理
   const delete_membership = () => {
-    fetch(`${process.env.NEXT_PUBLIC_URL}/users/${user.id}`, {
+    fetch(`${process.env.NEXT_PUBLIC_URL}/users/${user.userId}`, {
       method: "delete",
       headers: {
         "Content-Type": "application/json",
       },
     })
       .then((response) => {
-        if (!response.ok) {
-          throw new Error("退会処理に失敗しました");
+        console.log(response.status);
+        if (response.status > 199 && response.status < 300) {
+          setToast(toastStyle.toastArea);
+          setTimeout(() => {
+            location.href = "/";
+          }, 2000);
+        } else {
+          throw new Error("登録に失敗しました");
         }
+
         return response.json();
       })
-      .then(() => {
-        setToast(toastStyle.toastArea);
-        setTimeout(() => {
-          location.href = "/";
-        }, 2500);
+
+      .catch((error) => {
+        console.log("Error:", error);
       });
   };
   return (
