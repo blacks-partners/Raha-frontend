@@ -25,7 +25,7 @@
 }
 
 .html {
-  display: flex;
+  display: block;
   width: 100%;
   padding: 5px;
   border-radius: 3px;
@@ -34,7 +34,6 @@
   word-wrap: break-word; /* 長い単語を折り返す */
   word-break: break-all; /* 必要に応じて単語を途中で分割 */
   overflow: auto; /* スクロールを有効にする */
-
 }
 
 .pcUl {
