@@ -10,7 +10,7 @@ import toastStyle from "@/components/toast/Toast.module.css";
 
 export default function Confirm() {
   const router = useRouter();
-  const { name, email, password, introduction, created_at, updated_at } =
+  const { name, email, password, introduction, createdAt, updatedAt } =
     router.query;
 
   const [toast, setToast] = useState(toastStyle.toastAreaHidden);
@@ -19,22 +19,22 @@ export default function Confirm() {
     e.preventDefault();
 
     try {
-      const userRes = await fetch(`${process.env.NEXT_PUBLIC_URL}/users`);
+      const userRes = await fetch(`${process.env.NEXT_PUBLIC_URL}/register`);
       const users = await userRes.json();
       const maxId =
         users.length > 0 ? Math.max(...users.map((user: any) => user.id)) : 0;
 
-      const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/users`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           id: maxId + 1,
-          name: name,
-          email: email,
-          password: password,
+          name,
+          email,
+          password,
           introduction: "",
-          created_at: new Date().toISOString(),
-          updated_at: "",
+          createdAt: new Date().toISOString(),
+          updatedAt: "",
         }),
       });
       if (res.ok) {
