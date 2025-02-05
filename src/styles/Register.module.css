@@ -2,3 +2,6 @@
 .linkWrap {
   margin: 40px auto 20px;
 }
+.errorMessage {
+  color: #da0000;
+}
