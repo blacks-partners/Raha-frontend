@@ -10,7 +10,7 @@ import Toast from "@/components/toast/Toast";
 import toastStyle from "@/components/toast/Toast.module.css";
 
 type User = {
-  id: string;
+  userId: string;
   name: string;
   email: string;
   password: string;
@@ -40,7 +40,6 @@ export default function Home({
   users,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   // エラーメッセージ 初期値
-  console.log(users[0]);
   const [emailError, setEmailError] = useState("");
   const [nameError, setNameError] = useState("");
   // style
@@ -61,10 +60,10 @@ export default function Home({
     location.href = "/mypage";
   };
 
+  console.log(user.userId);
   // Toast関連
   const [toast, setToast] = useState(toastStyle.toastAreaHidden);
   const [toastMessage, setToastMessage] = useState("変更が完了しました");
-  const emailCheck = users.filter((users: any) => users.email === email);
 
   //　submit時の処理
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -95,23 +94,14 @@ export default function Home({
       setEmailError("メールアドレスの形式が正しくありません");
       setInputEmailArea(inputStyle.errorInput);
       hasError = true;
-    } else if (emailCheck.length > 0 && email !== user.email) {
-      setEmailError("既に使用されています");
-      setInputEmailArea(inputStyle.errorInput);
-      hasError = true;
     } else if (emailPattern.test(email)) {
       setEmailError("");
       setInputEmailArea(inputStyle.usualInput);
       hasError = false;
     }
-
-    if (
-      email !== "" &&
-      emailPattern.test(email) &&
-      (emailCheck.length < 0 || email === user.email)
-    ) {
+    if (email !== "" && emailPattern.test(email)) {
       hasError = false;
-      fetch(`${process.env.NEXT_PUBLIC_URL}/users/${user.id}`, {
+      fetch(`${process.env.NEXT_PUBLIC_URL}/users/${user.userId}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
