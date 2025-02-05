@@ -15,8 +15,8 @@ type User = {
   email: string;
   password: string;
   introduction: string;
-  created_at: string;
-  updated_at: string;
+  createdAt: string;
+  updatedAt: string;
 };
 export const getServerSideProps = (async (context) => {
   const userCookie = context.req.cookies;
@@ -60,7 +60,6 @@ export default function Home({
     location.href = "/mypage";
   };
 
-  console.log(user.userId);
   // Toast関連
   const [toast, setToast] = useState(toastStyle.toastAreaHidden);
   const [toastMessage, setToastMessage] = useState("変更が完了しました");
@@ -102,25 +101,30 @@ export default function Home({
     if (email !== "" && emailPattern.test(email)) {
       hasError = false;
       fetch(`${process.env.NEXT_PUBLIC_URL}/users/${user.userId}`, {
-        method: "PATCH",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          name,
-          email,
-          introduction,
+          userId: user.userId,
+          name: name,
+          email: email,
+          introduction: introduction,
+          createdAt: user.createdAt,
+          updatedAt: user.updatedAt,
         }),
       })
         .then((response) => {
-          if (!response.ok) {
+          console.log(response.status);
+          if (response.status > 199 && response.status < 300) {
+            setToast(toastStyle.toastArea);
+          } else {
             throw new Error("登録に失敗しました");
           }
+
           return response.json();
         })
-        .then(() => {
-          setToast(toastStyle.toastArea);
-        })
+
         .catch((error) => {
           console.log("Error:", error);
         });
