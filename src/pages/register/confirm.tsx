@@ -77,6 +77,7 @@ export default function Confirm() {
           {addressError && (
             <p className={registerStyle.errorMessage}>
               このメールアドレスはすでに存在しています。
+              <br className={registerStyle.brBranch} />
               <ColorLink
                 colorLinkText={"ログイン画面"}
                 url={"/login"}
