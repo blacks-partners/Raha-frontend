@@ -76,7 +76,7 @@ export default function Confirm() {
           </RoundFrame>
           {addressError && (
             <p className={registerStyle.errorMessage}>
-              このメールアドレスはすでに存在しています。
+              このメールアドレスは既に登録されています。
               <br className={registerStyle.brBranch} />
               <ColorLink
                 colorLinkText={"ログイン画面"}
