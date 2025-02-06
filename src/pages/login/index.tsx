@@ -38,8 +38,16 @@ export default function Login() {
 
   // パスワードを表示
   const [passType, setPassType] = useState("password");
+  const [passIcon, setPassIcon] = useState(true);
+
   const iconClick = () => {
-    passType === "password" ? setPassType("text") : setPassType("password");
+    if (passType === "password") {
+      setPassType("text");
+      setPassIcon(false);
+    } else {
+      setPassType("password");
+      setPassIcon(true);
+    }
   };
 
   // 「ログイン」を押下した時
@@ -98,10 +106,8 @@ export default function Login() {
       // POSTしたユーザが存在するかの条件分岐
       if (users.userId > 0) {
         console.log("ログイン成功");
-
-        // 仮としてクライアント側でクッキーを設定（認証系はサーバ側で設定した方がセキュリティ的に良い）
         setToast(toastStyle.toastArea);
-
+        // 仮としてクライアント側でクッキーを設定（認証系はサーバ側で設定した方がセキュリティ的に良い）
         document.cookie = `loginID=${users.userId}; path=/; max-age=3600; secure; samesite=strict`;
         //       document.cookie = `token=${token}; path=/; max-age=3600; secure; samesite=strict`;
       } else {
@@ -110,27 +116,6 @@ export default function Login() {
         setInputPassArea(inputStyle.errorInput);
         hasError = true;
       }
-      // try {
-      //   const res = await fetch(
-      //     `${process.env.NEXT_PUBLIC_URL}/users?email=${email}&password=${password}`
-      //   );
-      //   const users = await res.json();
-
-      //   if (users.length > 0) {
-      //     console.log("ログイン成功");
-      //     setToast(toastStyle.toastArea);
-      //     // 仮としてクライアント側でクッキーを設定（認証系はサーバ側で設定した方がセキュリティ的に良い）
-      //     document.cookie = `loginID=${users[0].id}; path=/; max-age=3600; secure; samesite=strict`;
-      //   } else {
-      //     setPassError("メールアドレス又はパスワードが誤っています");
-      //     setInputEmailArea(inputStyle.errorInput);
-      //     setInputPassArea(inputStyle.errorInput);
-      //     hasError = true;
-      //   }
-      // } catch {
-      //   console.log("ログインエラー");
-      //   hasError = true;
-      // }
     }
 
     // エラーではない場合にホームへ遷移
@@ -175,6 +160,7 @@ export default function Login() {
             errorMessage={passError}
             autocomplete="new-password"
             iconClick={iconClick}
+            passIcon={passIcon}
           />
           <div className={loginStyle.linkWrap}>
             <ColorLink colorLinkText="ユーザー登録はこちら" url="/register" />
