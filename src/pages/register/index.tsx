@@ -136,13 +136,13 @@ export default function Register() {
 
     setIsValid(!hasError);
     if (!hasError) {
+      // ユーザー情報をローカルストレージへ保存
+      localStorage.setItem(
+        "userData",
+        JSON.stringify({ name, email, password })
+      );
       router.push({
         pathname: "/register/confirm",
-        query: {
-          name: name,
-          email: email,
-          password: password,
-        },
       });
     }
   };
