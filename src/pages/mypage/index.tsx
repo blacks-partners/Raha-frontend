@@ -7,6 +7,7 @@ import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import EditOnlyRoundFrame from "@/components/editOnlyRoundFrame/EditRoundFrame";
 import Toast from "@/components/toast/Toast";
 import toastStyle from "@/components/toast/Toast.module.css";
+import { error } from "console";
 
 type User = {
   userId: string;
@@ -56,6 +57,21 @@ export default function Home({
     setIsVisible(false);
   };
 
+  // ログアウトする処理
+  const logout = async () => {
+    try {
+      const res = await fetch("/api/logout", {});
+
+      if (res.ok) {
+        console.log("ログアウトしました");
+      } else {
+        throw new Error("ログアウトに失敗しました");
+      }
+    } catch (error) {
+      console.error("エラー:", error);
+    }
+  };
+
   // DBからユーザー情報を削除する処理
   const delete_membership = () => {
     fetch(`${process.env.NEXT_PUBLIC_URL}/users/${user.userId}`, {
@@ -71,6 +87,7 @@ export default function Home({
           setTimeout(() => {
             location.href = "/";
           }, 2000);
+          logout();
         } else {
           throw new Error("登録に失敗しました");
         }
