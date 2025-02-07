@@ -56,32 +56,9 @@ export default function Register() {
   const [inputPassError, setInputPassError] = useState("");
   const [inputPass2Error, setInputPass2Error] = useState("");
 
-  // エラー
-  const validateInput = (
-    value: string,
-    setError: (error: string) => void,
-    setStyle: (style: string) => void,
-    errorMessage: string
-  ) => {
-    if (value.toString().trim() === "") {
-      setError(errorMessage);
-      setStyle(inputStyle.errorInput);
-    } else {
-      setError("");
-      setStyle(inputStyle.usualInput);
-    }
-  };
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     let hasError = false;
-
-    validateInput(
-      name,
-      setInputNameError,
-      setInputNameStyle,
-      "この項目は必須です"
-    );
 
     // メールアドレス
     const validateEmail = (value: string) => {
@@ -94,6 +71,16 @@ export default function Register() {
         /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[@$!%*?&#])[a-zA-Z0-9@$!%*?&#]{8,16}$/;
       return regexPass.test(value);
     };
+
+    // 入力値エラー
+    if (name.trim() === "") {
+      setInputNameError("この項目は必須です");
+      setInputNameStyle(inputStyle.errorInput);
+      hasError = true;
+    } else {
+      setInputNameError("");
+      setInputNameStyle(inputStyle.usualInput);
+    }
 
     if (email.trim() === "") {
       setInputEmailError("この項目は必須です");
@@ -108,7 +95,6 @@ export default function Register() {
       setInputEmailStyle(inputStyle.usualInput);
     }
 
-    // パスワード
     if (password.trim() === "") {
       setInputPassError("この項目は必須です");
       setInputPassStyle(inputStyle.errorInput);
@@ -134,6 +120,7 @@ export default function Register() {
       setInputPass2Style(inputStyle.usualInput);
     }
 
+    // 入力値エラーがない場合の処理
     setIsValid(!hasError);
     if (!hasError) {
       // ユーザー情報をローカルストレージへ保存
