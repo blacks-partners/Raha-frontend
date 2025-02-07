@@ -1,23 +1,60 @@
-.comment_title {
-  font-size: 30px;
+.post_name {
+  font-size: 14px;
   font-weight: bold;
-  margin-top: 30px;
-  margin-bottom: 10px;
+  color: black;
 }
 
-.textarea {
-  border: none;
-  outline: none;
-  padding: 1em 0.5em;
-  line-height: 1.5; /* 読みやすさを向上させるために調整 */
-  width: 100%;
-  box-sizing: border-box;
-  color: #434343;
-  resize: none; /* リサイズを防ぎたい場合 */
-  overflow-wrap: break-word; /* テキストがtextarea内で折り返されるように設定 */
-  height: auto; /* 内容に基づいて調整、または固定高さを設定 */
+.post_name:hover {
+  text-decoration: underline;
+}
 
-  border-radius: 8px; /* 角を丸くする */
+.post_date_container {
+  display: flex;
+}
+
+.post_date_container .label {
+  font-size: 13px;
+  margin-right: 15px;
+  color: #8c8c8c;
+}
+
+.post_title {
+  margin: 10px 0;
+  font-size: 26px;
+}
+
+.post_content {
+  margin: 50px 0;
+}
+
+.comment_title {
+  font-size: 20px;
+  font-weight: bold;
+  border-bottom: 1px solid #8c8c8c;
+  padding-bottom: 5px;
+  margin: 5px 0 20px;
+}
+
+.post_input {
+  outline: none;
+  width: 100%;
+  height: 150px;
+  padding: 10px;
+  color: #434343;
+  resize: none;
+  /* リサイズを防ぎたい場合 */
+  overflow-wrap: break-word;
+  /* テキストがtextarea内で折り返されるように設定 */
+  height: auto;
+  /* 内容に基づいて調整、または固定高さを設定 */
+
+  border-radius: 8px;
+  /* 角を丸くする */
+}
+
+.login_text {
+  text-align: center;
+  margin: 40px 0;
 }
 
 .button {
@@ -25,20 +62,13 @@
   text-align: center;
 }
 
-.editButton {
-  margin-top: 10px;
-}
-
-.error {
-  color: #da0000;
+.error_msg {
+  font-size: 14px;
+  color: red;
 }
 
 @media (min-width: 600px) {
-  .comment_title {
-    margin-top: 60px;
-    margin-bottom: 20px;
-    font-size: 40px;
-  }
+
   .button {
     text-align: right;
   }
