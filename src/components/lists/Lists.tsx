@@ -59,14 +59,19 @@ export default function Lists({ pagedata }: Props) {
     (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
   );
 
-  const handleNavigate = () => {
-    router.push("/post_details"); // 画面遷移先のURL
-  };
+  // const handleNavigate = () => {
+  //   router.push(`/post_details/${post.articleId}`); // 画面遷移先のURL
+  // };
 
   return (
     <ul className={Style.ul}>
       {sortedData.map((post) => (
-        <li key={post.articleId} onClick={handleNavigate}>
+        <li
+          key={post.articleId}
+          onClick={(e) => {
+            router.push(`/post_details/${post.articleId}`);
+          }}
+        >
           <RoundFrame>
             <div>
               <p>作成日: {formatDate(post.createdAt)}</p>
