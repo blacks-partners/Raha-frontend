@@ -59,10 +59,6 @@ export default function Lists({ pagedata }: Props) {
     (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
   );
 
-  // const handleNavigate = () => {
-  //   router.push(`/post_details/${post.articleId}`); // 画面遷移先のURL
-  // };
-
   return (
     <ul className={Style.ul}>
       {sortedData.map((post) => (
