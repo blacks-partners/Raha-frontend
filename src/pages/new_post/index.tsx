@@ -36,22 +36,13 @@ export default function NewPost({ data }: Props) {
           userId: data.id,
         }),
       });
-      const contentType = response.headers.get("Content-Type");
-      console.log("レスポンス Content-Type:", contentType);
-
-      // ❗ エラーレスポンスの処理 (JSON でない場合に `text()` を使う)
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error("エラー発生:", errorText);
-        return;
-      }
-
-      // ✅ JSON のレスポンスを取得
+      //ここでデータ(articleのidがほしい)取ってくる
       const responseData = await response.json();
-      console.log("レスポンスデータ:", responseData);
-
       const articleId = responseData.id;
-      router.push(`/post_details/${articleId}`);
+
+      if (response.ok) {
+        router.push(`/post_details/${articleId}`);
+      }
     } catch (error) {
       console.error("", error);
     }
