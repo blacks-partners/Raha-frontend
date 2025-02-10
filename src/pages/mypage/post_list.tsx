@@ -13,8 +13,8 @@ type User = {
   email: string;
   password: string;
   introduction: string;
-  created_at: string;
-  updated_at: string;
+  createdAt: string;
+  updatedAt: string;
 };
 export const getServerSideProps = (async (context) => {
   const userCookie = context.req.cookies;
