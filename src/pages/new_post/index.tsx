@@ -21,7 +21,7 @@ export default function NewPost({ data }: Props) {
 
   const [postTitle, setPostTitle] = useState("");
   const [postTextarea, SetPostTextarea] = useState("");
-
+  console.log("data", { data });
   const handlePost = async () => {
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/articles`, {
@@ -33,18 +33,27 @@ export default function NewPost({ data }: Props) {
         body: JSON.stringify({
           title: postTitle,
           content: postTextarea,
-          user: data,
+          userId: data.id,
         }),
       });
-      //ここでデータ(articleのidがほしい)取ってくる
-      const responseData = await response.json();
-      const articleId = responseData.id;
+      const contentType = response.headers.get("Content-Type");
+      console.log("レスポンス Content-Type:", contentType);
 
-      if (response.ok) {
-        router.push(`/post_details/${articleId}`);
+      // ❗ エラーレスポンスの処理 (JSON でない場合に `text()` を使う)
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error("エラー発生:", errorText);
+        return;
       }
-    } finally {
-      console.error("エラーが発生しました");
+
+      // ✅ JSON のレスポンスを取得
+      const responseData = await response.json();
+      console.log("レスポンスデータ:", responseData);
+
+      const articleId = responseData.id;
+      router.push(`/post_details/${articleId}`);
+    } catch (error) {
+      console.error("", error);
     }
   };
   return (
