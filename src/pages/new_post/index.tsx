@@ -6,7 +6,7 @@ import { GetServerSideProps } from "next";
 
 interface Props {
   data: {
-    id: number;
+    userId: number;
     name: string;
     email: string;
     password: string;
@@ -33,16 +33,21 @@ export default function NewPost({ data }: Props) {
         body: JSON.stringify({
           title: postTitle,
           content: postTextarea,
-          userId: data.id,
+          userId: data.userId,
         }),
       });
+
+      if (!response.ok) {
+        const errorMessage = await response.text();
+        console.error("投稿エラー:", errorMessage);
+        return;
+      }
+
       //ここでデータ(articleのidがほしい)取ってくる
       const responseData = await response.json();
-      const articleId = responseData.id;
-
-      if (response.ok) {
-        router.push(`/post_details/${articleId}`);
-      }
+      const articleId = responseData.articleId;
+      console.log("記事のIdが返ってくる", articleId);
+      router.push(`/post_details/${articleId}`);
     } catch (error) {
       console.error("", error);
     }
