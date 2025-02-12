@@ -235,7 +235,7 @@ export default function PostDetails({ postData, loginUserId, token }: Props) {
                 // さらに、両者が同じ場合は commentId の昇順で比較
                 return a.commentId - b.commentId;
               })
-              .map((comment, index) => (
+              .map((comment) => (
                 <Comment
                   comment={comment}
                   loginUserId={loginUserId}
