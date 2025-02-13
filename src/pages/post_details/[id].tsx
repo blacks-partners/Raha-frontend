@@ -314,10 +314,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   // Cookie情報取得
   const userCookie = context.req.cookies;
-  // const loginUserId = userCookie.loginID || null;
 
   // トークン未対応
-  const loginUserId = userCookie.loginID || 1;
+  const loginUserId = userCookie.loginID || null;
   const token = userCookie.token || null;
 
   // 記事詳細情報取得
