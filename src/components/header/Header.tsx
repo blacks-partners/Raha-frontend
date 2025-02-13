@@ -2,8 +2,9 @@ import Link from "next/link";
 import { useState } from "react";
 import HeaderStyle from "../header/header.module.css";
 import Image from "next/image";
-import useSWR from "swr";
 import Toast from "../toast/Toast";
+import toastStyle from "../toast/Toast.module.css";
+import useSWR, { mutate } from "swr"; // `mutate` をインポート
 
 export default function Header() {
   const [hamburger, setHamburger] = useState(false);
@@ -32,6 +33,7 @@ export default function Header() {
         setTimeout(() => {
           setToast(""), setView(false);
         }, 2000);
+        mutate("/api/me", null, { revalidate: true });
       }
     } catch {
       setView(true);
@@ -46,7 +48,9 @@ export default function Header() {
   return (
     <div className={HeaderStyle.header}>
       <div className={HeaderStyle.headerContents}>
-        {view && <Toast toastText={toast}></Toast>}
+        {view && (
+          <Toast toastClass={toastStyle.toastArea} toastText={toast}></Toast>
+        )}
         <div className={HeaderStyle.headerIcons} onClick={changeShape}>
           {hamburger ? (
             <div className={HeaderStyle.hamburger}>
