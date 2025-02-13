@@ -27,7 +27,7 @@ export default function Confirm() {
     if (data) {
       setUserData(JSON.parse(data));
     }
-  });
+  }, []);
 
   const [toast, setToast] = useState(toastStyle.toastAreaHidden);
 
