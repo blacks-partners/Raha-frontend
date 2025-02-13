@@ -218,14 +218,31 @@ export default function PostDetails({ postData, loginUserId, token }: Props) {
         <p className={styles.comment_title}>コメント</p>
         {commentList.length > 0 ? (
           <>
-            {commentList.map((comment, index) => (
-              <Comment
-                comment={comment}
-                loginUserId={loginUserId}
-                token={token}
-                key={index}
-              />
-            ))}
+            {commentList
+              .sort((a, b) => {
+                // updatedAt の昇順で比較
+                const updatedA = new Date(a.updatedAt).getTime();
+                const updatedB = new Date(b.updatedAt).getTime();
+                if (updatedA !== updatedB) {
+                  return updatedA - updatedB;
+                }
+                // updatedAt が同じ場合、createdAt の昇順で比較
+                const createdA = new Date(a.createdAt).getTime();
+                const createdB = new Date(b.createdAt).getTime();
+                if (createdA !== createdB) {
+                  return createdA - createdB;
+                }
+                // さらに、両者が同じ場合は commentId の昇順で比較
+                return a.commentId - b.commentId;
+              })
+              .map((comment) => (
+                <Comment
+                  comment={comment}
+                  loginUserId={loginUserId}
+                  token={token}
+                  key={comment.commentId}
+                />
+              ))}
           </>
         ) : (
           <div>
