@@ -25,6 +25,11 @@
 
 .post_content {
   margin: 50px 0;
+  width: 100%; /* 親要素の幅に合わせる */
+  max-width: 100%; /* 親要素を超えない */
+  box-sizing: border-box; /* パディングやボーダーを含めたサイズ計算 */
+  white-space: pre-wrap; /* 改行を維持しつつテキストを折り返す */
+  overflow-wrap: break-word;
 }
 
 .comment_title {
@@ -67,9 +72,21 @@
   color: red;
 }
 
-@media (min-width: 600px) {
+.textarea {
+  width: 100%;
+  min-height: 100px;
+  overflow-y: auto;
+  resize: vertical;
+  border: none;
+}
 
+@media (min-width: 600px) {
   .button {
     text-align: right;
   }
+}
+
+.error_msg {
+  font-size: 14px;
+  color: red;
 }
