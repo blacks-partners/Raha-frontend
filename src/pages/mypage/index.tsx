@@ -49,9 +49,7 @@ export default function Home({
   };
 
   console.log(user);
-  const edit = () => {
-    location.href = "/mypage/edit";
-  };
+
   // ダイアログを閉じる処理（「いいえ」選択時）
   const hideDialog = () => {
     setIsVisible(false);
@@ -107,7 +105,7 @@ export default function Home({
         headTitle="Raha"
         pageTitle="ユーザー情報詳細"
       >
-        <EditOnlyRoundFrame editClick={edit}>
+        <EditOnlyRoundFrame>
           <div>
             <p>名前：{username}</p>
 

@@ -11,6 +11,9 @@
   margin: 0 auto;
 }
 
+.emptyMessage {
+  text-align: center;
+}
 @media screen and (min-width: 600px) {
   .buttonArea {
     display: flex;
@@ -18,5 +21,8 @@
 
   .buttonArea button {
     margin: 40px 20px;
+  }
+  .emptyMessage {
+    text-align: left;
   }
 }

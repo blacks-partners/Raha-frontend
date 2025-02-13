@@ -16,7 +16,6 @@ export default function Header() {
   } = useSWR("/api/me", (url: string) => fetch(url));
 
   const loginStatus = !error && !isLoading && res && res.status === 200;
-  console.log(res);
 
   const changeShape = () => {
     setHamburger(!hamburger);
