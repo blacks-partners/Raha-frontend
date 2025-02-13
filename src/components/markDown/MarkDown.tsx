@@ -34,35 +34,11 @@ export default function MarkDown({
   // フォーム送信時のハンドラ (react-hook-formを使わず独自に実装)
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    // タイトル/本文の文字数チェック
-    const titleLen = title.trim().length;
-    const contentLen = preview.trim().length;
-
-    let hasError = false;
-    // タイトル: 1~50文字
-    if (titleLen < 1 || titleLen > 50) {
-      setErrorTitle("タイトルは1～50文字で入力してください");
-      hasError = true;
-    } else {
-      setErrorTitle("");
+    if (errorTitle || errorContent) {
+      return;
     }
-
-    // 本文: 1~10000文字
-    if (contentLen < 1 || contentLen > 10000) {
-      setErrorContent("記事内容は1～10000文字で入力してください");
-      hasError = true;
-    } else {
-      setErrorContent("");
-    }
-
-    // エラーがなければ投稿処理
-    if (!hasError) {
-      // フォームのリセット等、必要に応じて実施
-      setPreview("");
-      // 親に投稿完了を通知 → 画面遷移など
-      onPost?.();
-    }
+    setPreview("");
+    onPost?.();
   };
 
   // タイトル変更時
@@ -70,14 +46,31 @@ export default function MarkDown({
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     // 親のコールバックがあれば呼ぶ
-    onTitleChange?.(e.target.value);
+    const newTitleValue = e.target.value;
+    onTitleChange?.(newTitleValue);
+    const titleLen = newTitleValue.trim().length;
+    if (titleLen < 1) {
+      setErrorTitle("タイトルを入力してください");
+    } else if (titleLen > 50) {
+      setErrorTitle("タイトルを50字以内で入力してください");
+    } else {
+      setErrorTitle("");
+    }
   };
 
-  // 本文変更時
+  // 本文変更時：入力のたびに文字数をチェックしてエラーを更新
   const textChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const newValue = e.target.value;
     setPreview(newValue);
     onContentChange?.(newValue);
+    const len = newValue.trim().length;
+    if (len < 1) {
+      setErrorContent("記事内容を入力してください");
+    } else if (10000 < len) {
+      setErrorContent("記事内容を10,000字以内で入力してください");
+    } else {
+      setErrorContent("");
+    }
   };
 
   // MarkDown/プレビュー切り替え
@@ -173,7 +166,12 @@ export default function MarkDown({
         {/* 本文のエラー表示 */}
         {errorContent && <p className={Style.error}>{errorContent}</p>}
 
-        <Button buttonText={buttonText} size="M" type="submit" />
+        <Button
+          buttonText={buttonText}
+          size="M"
+          type="submit"
+          disabled={!!errorTitle || !!errorContent}
+        />
       </Form>
     </div>
   );
