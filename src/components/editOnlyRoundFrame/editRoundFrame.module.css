@@ -1,13 +1,21 @@
-.icon{
-    background-color: var(--whiteColor);
-    border: 0;
+.icon {
+  background-color: var(--whiteColor);
+  border: 0;
 }
-.icons{
-   display: flex;
-   gap: 15%;
+.icons {
+  display: flex;
+  gap: 15%;
 }
 
-.iconLayout{
-display: flex;
-justify-content: end;
+.iconLayout {
+  display: flex;
+  justify-content: end;
+}
+
+.frame {
+  background-color: var(--whiteColor);
+  border-radius: 30px;
+  padding: 50px;
+  line-height: 200%;
+  color: var(--foreground);
 }

@@ -1,6 +1,7 @@
 .icon {
   border: 0;
   background-color: white;
+  cursor: pointer;
 }
 .icons {
   display: flex;
