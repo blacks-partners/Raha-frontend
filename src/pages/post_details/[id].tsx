@@ -314,7 +314,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   // Cookie情報取得
   const userCookie = context.req.cookies;
-  // const loginUserId = userCookie.loginID || null;
 
   // トークン未対応
   const loginUserId = userCookie.loginID || null;
