@@ -115,14 +115,24 @@ export default function PostDetails({ postData, loginUserId, token }: Props) {
     }
   };
 
-  // 新規コメント投稿処理
+  // テキストエリアの onChange ハンドラー
+  const handleOnChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const value = e.target.value;
+
+    setNewComment(value);
+
+    if (value.length > 500) {
+      setCommentError("コメントは500文字以内で入力してください");
+    } else if (value.length == 0) {
+      setCommentError("コメントを入力してください");
+    } else {
+      setCommentError("");
+    }
+  };
+
+  // 新規コメント投稿処理（フォーム送信時）
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    if (newComment.length <= 0 || newComment.length > 500) {
-      setCommentError("コメントは1文字以上500文字以内で入力してください");
-      return;
-    }
 
     if (loginUserId == null) {
       router.push("/login");
@@ -273,15 +283,22 @@ export default function PostDetails({ postData, loginUserId, token }: Props) {
         ) : (
           <Form handleSubmit={handleSubmit} noValidate={false}>
             <div>
-              <p className={styles.error_msg}>{commentError}</p>
               <textarea
-                className={styles.post_input}
+                className={styles.textarea}
                 placeholder="ここにコメントを入力してください"
                 value={newComment}
-                onChange={(e) => setNewComment(e.target.value)}
+                onChange={handleOnChange}
               ></textarea>
+              {commentError && (
+                <p className={styles.error_msg}>{commentError}</p>
+              )}
               <div className={styles.button}>
-                <Button type="submit" buttonText="投稿" size="S" />
+                <Button
+                  type="submit"
+                  buttonText="投稿"
+                  size="S"
+                  disabled={!!commentError}
+                />
               </div>
             </div>
           </Form>

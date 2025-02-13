@@ -1,38 +1,43 @@
 
 .comment_header {
-    font-size: 14px;
+  font-size: 14px;
 }
 
 .comment_name {
-    font-weight: bold;
-    margin-right: 5px;
-    color: black;
+  font-weight: bold;
+  margin-right: 5px;
+  color: black;
 }
 
 .comment_name:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .comment_date {
-    color: #8c8c8c;
+  color: #8c8c8c;
 }
 
 .comment_content {
-    font-size: 14px;
-    margin: 5px 0 15px;
+  font-size: 14px;
+  margin: 5px 0 15px;
+  width: 100%; /* 親要素の幅に合わせる */
+  max-width: 100%; /* 親要素を超えない */
+  box-sizing: border-box; /* パディングやボーダーを含めたサイズ計算 */
+  white-space: pre-wrap; /* 改行を維持しつつテキストを折り返す */
+  overflow-wrap: break-word; /* 長い単語も折り返す */
 }
 
 .comment_input {
-    height: 150px;
-    width: 100%;
-    padding: 15px;
+  height: 150px;
+  width: 100%;
+  padding: 15px;
 }
 
 .button_container {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .button_margin {
-    margin-right: 80px;
+  margin-right: 80px;
 }
