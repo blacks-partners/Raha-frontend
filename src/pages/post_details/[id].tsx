@@ -115,7 +115,7 @@ export default function PostDetails({ postData, loginUserId, token }: Props) {
     }
   };
 
-  // テキストエリアの onChange ハンドラー（入力値を更新するだけ）
+  // テキストエリアの onChange ハンドラー
   const handleOnChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.value;
 
@@ -123,6 +123,8 @@ export default function PostDetails({ postData, loginUserId, token }: Props) {
 
     if (value.length > 500) {
       setCommentError("コメントは500文字以内で入力してください");
+    } else if (value.length == 0) {
+      setCommentError("コメントを入力してください");
     } else {
       setCommentError("");
     }
