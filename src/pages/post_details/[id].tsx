@@ -16,11 +16,17 @@ import remarkGfm from "remark-gfm";
 import Link from "next/link";
 
 const formatDate = (dateString: string): string => {
-  const date = new Date(dateString);
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, "0");
-  const day = String(date.getDate()).padStart(2, "0");
-  return `${year}/${month}/${day}`;
+  // "Z"を付与するなどで明示的にUTCとして扱う
+  const date = new Date(
+    dateString.endsWith("Z") ? dateString : dateString + "Z"
+  );
+  const options: Intl.DateTimeFormatOptions = {
+    timeZone: "Asia/Tokyo",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  };
+  return date.toLocaleString("ja-JP", options);
 };
 
 interface User {
@@ -57,6 +63,7 @@ export default function PostDetails({ postData, loginUserId, token }: Props) {
   const postUserId = user.userId;
   const posterName = user.name;
   const postDate = formatDate(createdAt);
+  const updateDate = formatDate(updatedAt);
 
   const [newComment, setNewComment] = useState("");
   const [commentError, setCommentError] = useState("");
@@ -205,7 +212,7 @@ export default function PostDetails({ postData, loginUserId, token }: Props) {
                     作成日 <span>{postDate}</span>
                   </p>
                   <p className={styles.label}>
-                    更新日 <span>{postDate}</span>
+                    更新日 <span>{updateDate}</span>
                   </p>
                 </div>
               </div>
@@ -230,19 +237,13 @@ export default function PostDetails({ postData, loginUserId, token }: Props) {
           <>
             {commentList
               .sort((a, b) => {
-                // updatedAt の昇順で比較
-                const updatedA = new Date(a.updatedAt).getTime();
-                const updatedB = new Date(b.updatedAt).getTime();
-                if (updatedA !== updatedB) {
-                  return updatedA - updatedB;
-                }
-                // updatedAt が同じ場合、createdAt の昇順で比較
+                // createdAt の昇順で比較
                 const createdA = new Date(a.createdAt).getTime();
                 const createdB = new Date(b.createdAt).getTime();
                 if (createdA !== createdB) {
                   return createdA - createdB;
                 }
-                // さらに、両者が同じ場合は commentId の昇順で比較
+                //createdAtが同じ場合は commentId の昇順で比較
                 return a.commentId - b.commentId;
               })
               .map((comment) => (

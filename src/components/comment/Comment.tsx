@@ -8,13 +8,23 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Toast from "../toast/Toast";
 
 const formatDate = (dateString: string): string => {
-  const date = new Date(dateString);
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, "0");
-  const day = String(date.getDate()).padStart(2, "0");
-  return `${year}/${month}/${day}`;
+  // "Z"を付与するなどで明示的にUTCとして扱う
+  const date = new Date(
+    dateString.endsWith("Z") ? dateString : dateString + "Z"
+  );
+  const options: Intl.DateTimeFormatOptions = {
+    timeZone: "Asia/Tokyo",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  };
+  return date.toLocaleString("ja-JP", options).replace(/,/g, "");
 };
 
 interface User {
@@ -118,12 +128,14 @@ export default function Comment({ comment, loginUserId, token }: CommentProps) {
       }
     );
     showToastFor2Seconds(() => {
-      window.location.reload();
+      router.push(`/${pathname}`);
     });
   };
 
   return (
     <>
+      {showToast && <Toast toastText="削除しました" />}
+
       {/* 削除ダイアログ（コメント用） */}
       {showDeleteCommentDialog && (
         <Dialog
