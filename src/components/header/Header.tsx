@@ -51,6 +51,9 @@ export default function Header() {
           <Toast toastClass={toastStyle.toastArea} toastText={toast}></Toast>
         )}
         <div className={HeaderStyle.headerIcons} onClick={changeShape}>
+          <Link href="/" className={HeaderStyle.logo}>
+            <Image src="/common/logo.png" alt="logo" width={41} height={19} />
+          </Link>
           {hamburger ? (
             <div className={HeaderStyle.hamburger}>
               <Image
@@ -110,6 +113,9 @@ export default function Header() {
           </ul>
         )}
         <ul className={HeaderStyle.pcUl}>
+          <Link href="/">
+            <Image src="/common/logo.png" alt="logo" width={41} height={19} />
+          </Link>
           {loginStatus ? (
             <>
               <li>
