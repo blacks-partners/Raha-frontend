@@ -2,7 +2,7 @@ import RoundFrame from "@/components/roundFrame/RoundFrame";
 
 import ColorLink from "@/components/colorLink/ColorLink";
 import Style from "../lists/lists.module.css";
-import { JSX } from "react";
+import { JSX, useState } from "react";
 import { useRouter } from "next/router";
 
 // 日付をスラッシュ形式にフォーマットする関数
@@ -42,7 +42,17 @@ interface Props {
 }
 
 export default function Lists({ pagedata }: Props) {
+  const [currentPage, setCurrentPage] = useState(1);
+  const perPage = 8;
   const router = useRouter();
+
+  const totalPage = Math.ceil((pagedata || []).length / perPage);
+
+  const sliceData = pagedata.slice(
+    currentPage * perPage - perPage,
+    currentPage * perPage
+  );
+
   const splitAndLimitByHeadings = (content: string): JSX.Element[] => {
     // ### ごとに分割して配列化
     const sections = content.split("###");
@@ -55,38 +65,62 @@ export default function Lists({ pagedata }: Props) {
     ));
   };
 
-  const sortedData = [...pagedata].sort(
+  const sortedData = [...sliceData].sort(
     (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
   );
 
   return (
-    <ul className={Style.ul}>
-      {sortedData.map((post) => (
-        <li
-          key={post.articleId}
-          onClick={(e) => {
-            router.push(`/post_details/${post.articleId}`);
-          }}
-        >
-          <RoundFrame>
-            <div>
-              <p>作成日: {formatDate(post.createdAt)}</p>
-            </div>
-            <span>作成者:</span>
-            <ColorLink
-              url={`/user/${post.user.userId}`}
-              colorLinkText={post.user.name}
-              onClick={(e) => {
-                e.stopPropagation(); // これで親へのイベント伝播を防ぐ
-                router.push(`/user/${post.user.userId}`);
-              }}
-            ></ColorLink>
+    <>
+      <ul className={Style.ul}>
+        {sortedData.map((post) => (
+          <li
+            key={post.articleId}
+            onClick={(e) => {
+              router.push(`/post_details/${post.articleId}`);
+            }}
+          >
+            <RoundFrame>
+              <div>
+                <p>作成日: {formatDate(post.createdAt)}</p>
+              </div>
+              <span>作成者:</span>
+              <ColorLink
+                url={`/user/${post.user.userId}`}
+                colorLinkText={post.user.name}
+                onClick={(e) => {
+                  e.stopPropagation(); // これで親へのイベント伝播を防ぐ
+                  router.push(`/user/${post.user.userId}`);
+                }}
+              ></ColorLink>
 
-            <h3>「{post.title}」</h3>
-            {splitAndLimitByHeadings(post.content)}
-          </RoundFrame>
-        </li>
-      ))}
-    </ul>
+              <h3>「{post.title}」</h3>
+              {splitAndLimitByHeadings(post.content)}
+            </RoundFrame>
+          </li>
+        ))}
+      </ul>
+
+      <div className={Style.pageNation}>
+        <div>
+          <button
+            onClick={() => currentPage > 1 && setCurrentPage(currentPage - 1)}
+          >
+            前へ
+          </button>
+        </div>
+        <p>
+          {currentPage}/{totalPage}
+        </p>
+        <div>
+          <button
+            onClick={() =>
+              currentPage < totalPage && setCurrentPage(currentPage + 1)
+            }
+          >
+            次へ
+          </button>
+        </div>
+      </div>
+    </>
   );
 }

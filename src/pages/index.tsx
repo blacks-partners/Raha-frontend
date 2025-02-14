@@ -1,5 +1,6 @@
 import Layout from "@/components/layout/Layout";
 import Lists from "@/components/lists/Lists";
+import { useState } from "react";
 import useSWR from "swr";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
@@ -12,6 +13,7 @@ export default function Home() {
 
   if (error) return <div>failed to load</div>;
   if (isLoading) return <div>loading...</div>;
+
   return (
     <>
       <Layout
