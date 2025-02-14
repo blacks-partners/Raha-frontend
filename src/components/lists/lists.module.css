@@ -4,3 +4,24 @@
     gap: 20px;
     list-style: none;
 }
+
+.pageNation{
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+}
+
+.pageNation button{
+    padding: 0.5rem;
+}
+.pageNation button:hover{
+    color: var(--whiteColor);
+    background-color: var(--foreground)
+
+}
+
+.pageNation p{
+    letter-spacing: 0.5rem;
+}
