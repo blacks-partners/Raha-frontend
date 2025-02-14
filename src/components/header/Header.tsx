@@ -52,7 +52,12 @@ export default function Header() {
         )}
         <div className={HeaderStyle.headerIcons} onClick={changeShape}>
           <Link href="/" className={HeaderStyle.logo}>
-            <Image src="/common/logo.png" alt="logo" width={41} height={19} />
+            <Image
+              src="/common/413230410-7dd2405c-e5e0-43c1-8ffb-5fd48fdbe508.png"
+              alt="logo"
+              width={41}
+              height={19}
+            />
           </Link>
           {hamburger ? (
             <div className={HeaderStyle.hamburger}>
@@ -114,7 +119,12 @@ export default function Header() {
         )}
         <ul className={HeaderStyle.pcUl}>
           <Link href="/">
-            <Image src="/common/logo.png" alt="logo" width={41} height={19} />
+            <Image
+              src="/common/413230410-7dd2405c-e5e0-43c1-8ffb-5fd48fdbe508.png"
+              alt="logo"
+              width={41}
+              height={19}
+            />
           </Link>
           {loginStatus ? (
             <>
