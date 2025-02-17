@@ -4,6 +4,12 @@ import ColorLink from "@/components/colorLink/ColorLink";
 import Style from "../lists/lists.module.css";
 import { JSX, useState } from "react";
 import { useRouter } from "next/router";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import rehypeRaw from "rehype-raw";
+import remarkDirective from "remark-directive";
+import "highlight.js/styles/github.css"; // コードブロックのスタイル
+import rehypeHighlight from "rehype-highlight";
 
 // 日付をスラッシュ形式にフォーマットする関数
 const formatDate = (dateString: string): string => {
@@ -53,26 +59,10 @@ export default function Lists({ pagedata }: Props) {
     currentPage * perPage
   );
 
-  const splitAndLimitByHeadings = (content: string): JSX.Element[] => {
-    // ### ごとに分割して配列化
-    const sections = content.split("###");
-    // 最初の3行を取得
-    return sections.slice(0, 3).map((section, index) => (
-      <div key={index}>
-        {index > 0 && <strong>###</strong>} {/* 先頭以外に ### を追加 */}
-        <p>{section.trim()}</p>
-      </div>
-    ));
-  };
-
-  const sortedData = [...sliceData].sort(
-    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-  );
-
   return (
     <>
       <ul className={Style.ul}>
-        {sortedData.map((post) => (
+        {sliceData.map((post) => (
           <li
             key={post.articleId}
             onClick={(e) => {
@@ -94,7 +84,16 @@ export default function Lists({ pagedata }: Props) {
               ></ColorLink>
 
               <h3>「{post.title}」</h3>
-              {splitAndLimitByHeadings(post.content)}
+              <ReactMarkdown
+                remarkPlugins={[
+                  [remarkGfm, { listItemIndent: "one" }],
+                  remarkDirective,
+                ]}
+                rehypePlugins={[rehypeRaw, rehypeHighlight]}
+                className={Style.content}
+              >
+                {post.content.split("\n").slice(0, 3).join("\n")}
+              </ReactMarkdown>
             </RoundFrame>
           </li>
         ))}

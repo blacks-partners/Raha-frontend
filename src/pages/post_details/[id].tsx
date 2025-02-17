@@ -14,7 +14,11 @@ import { useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import Link from "next/link";
-
+import rehypeRaw from "rehype-raw";
+import remarkDirective from "remark-directive";
+import "highlight.js/styles/github.css"; // コードブロックのスタイル
+import rehypeHighlight from "rehype-highlight";
+import listStyle from "@/components/lists/lists.module.css";
 const formatDate = (dateString: string): string => {
   // "Z"を付与するなどで明示的にUTCとして扱う
   const date = new Date(
@@ -218,8 +222,12 @@ export default function PostDetails({ postData, loginUserId, token }: Props) {
               </div>
               <h1 className={styles.post_title}>{title}</h1>
               <ReactMarkdown
-                remarkPlugins={[remarkGfm]}
-                className={`markdown-body ${styles.post_content}`}
+                remarkPlugins={[
+                  [remarkGfm, { listItemIndent: "one" }],
+                  remarkDirective,
+                ]}
+                rehypePlugins={[rehypeRaw, rehypeHighlight]}
+                className={listStyle.content}
               >
                 {content}
               </ReactMarkdown>

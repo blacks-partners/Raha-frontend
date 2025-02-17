@@ -5,6 +5,10 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import Style from "../markDown/markDown.module.css";
 import Input from "../input/Input";
+import rehypeRaw from "rehype-raw";
+import remarkDirective from "remark-directive";
+import "highlight.js/styles/github.css"; // コードブロックのスタイル
+import rehypeHighlight from "rehype-highlight";
 
 interface Props {
   buttonText: string;
@@ -77,6 +81,7 @@ export default function MarkDown({
   const formatChange = () => {
     setTouch(!touch);
   };
+  console.log("プレビューの内容:", preview);
 
   return (
     <div>
@@ -137,7 +142,11 @@ export default function MarkDown({
                 />
               ) : (
                 <ReactMarkdown
-                  remarkPlugins={[remarkGfm]}
+                  remarkPlugins={[
+                    [remarkGfm, { listItemIndent: "one" }],
+                    remarkDirective,
+                  ]}
+                  rehypePlugins={[rehypeRaw, rehypeHighlight]}
                   className={Style.html}
                 >
                   {preview}
@@ -157,7 +166,14 @@ export default function MarkDown({
               value={preview}
               onChange={textChange}
             />
-            <ReactMarkdown remarkPlugins={[remarkGfm]} className={Style.html}>
+            <ReactMarkdown
+              remarkPlugins={[
+                [remarkGfm, { listItemIndent: "one" }],
+                remarkDirective,
+              ]}
+              rehypePlugins={[rehypeRaw, rehypeHighlight]}
+              className={Style.html}
+            >
               {preview}
             </ReactMarkdown>
           </div>
