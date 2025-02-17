@@ -7,12 +7,19 @@
 }
 
 .headerIcons {
+  position: relative;
   height: 70px;
   border-bottom: 1px solid var(--background);
-  display: flex;
-  justify-content: end;
+
+  justify-content: center;
   align-items: center;
-  padding-right: 1rem;
+  padding-right: 0;
+}
+.hamburger {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
 }
 .mobileUl {
   display: flex;
@@ -28,6 +35,13 @@
 
 .pcUl {
   display: none;
+}
+
+.logo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 @media screen and (min-width: 600px) {
