@@ -4,6 +4,7 @@ import UsersArticleList from "@/components/usersArticleList/UsersArticleList";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import useSWR from "swr";
 import style from "@/styles/mypage.module.css";
+import { Light } from "react-syntax-highlighter";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 // ↓cookie発火後コメントアウト解除
@@ -60,7 +61,7 @@ export default function Home({
       headTitle={`${user.name}さんの投稿一覧`}
     >
       <div className={style.emptyMessage}>{emptyMessage}</div>
-      <UsersArticleList pagedata={filteredData}></UsersArticleList>
+      <Lists pagedata={filteredData}></Lists>
     </Layout>
   );
 }
