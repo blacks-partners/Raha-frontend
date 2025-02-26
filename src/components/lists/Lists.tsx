@@ -92,7 +92,10 @@ export default function Lists({ pagedata }: Props) {
                 rehypePlugins={[rehypeRaw, rehypeHighlight]}
                 className={Style.content}
               >
-                {post.content.split("\n").slice(0, 3).join("\n")}
+                {post.content
+                  .split(/[\n。、]/)
+                  .slice(0, 4)
+                  .join("\n")}
               </ReactMarkdown>
             </RoundFrame>
           </li>
