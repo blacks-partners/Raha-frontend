@@ -134,3 +134,14 @@
   border-radius: 5px;
   overflow-x: auto;
 }
+.html a {
+  color: var(--blueColor);
+  border-bottom:0.1rem solid var(--blueColor);
+}
+
+.html a:hover{
+  color: var(--foreground);
+  border-bottom:0.1rem solid var(--foreground);
+
+
+}
